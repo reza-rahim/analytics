@@ -171,7 +171,7 @@ resource "google_compute_disk" "storage-disk-e-" {
 
 
 ########################### nodes ############################
-resource "google_compute_instance" "nodes" {
+resource "google_compute_instance" "node" {
   count        = var.nodes_machine_count
   name         = "${var.vpc}-nodes-${count.index}"
   machine_type = var.nodes_machine_type
