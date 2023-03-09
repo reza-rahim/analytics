@@ -1,1 +1,30 @@
-#- ansible.builtin.include_tasks: install.yml
+- name: Create mount point dit
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /mnt/disk1
+    - /mnt/disk2
+    - /mnt/disk3
+    - /mnt/disk4
+
+- name: Create a xfs filesystem on /dev/sd*
+  command: mkfs.xfs "{{ item.path }}" -f -L "{{ item.label }}"
+  with_items:
+    - { path: '/dev/sdb', label: 'DISK1'}
+    - { path: '/dev/sdc', label: 'DISK2'}
+    - { path: '/dev/sdd', label: 'DISK3'}
+    - { path: '/dev/sde', label: 'DISK4'}
+  ignore_errors: true         
+
+- name: Mount up device by label
+  mount:
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: xfs
+    state: present    
+  with_items:
+    - { path: '/mnt/disk1', src: 'LABEL=DISK1'}
+    - { path: '/mnt/disk2', src: 'LABEL=DISK2'}
+    - { path: '/mnt/disk3', src: 'LABEL=DISK3'}
+    - { path: '/mnt/disk4', src: 'LABEL=DISK4'}
