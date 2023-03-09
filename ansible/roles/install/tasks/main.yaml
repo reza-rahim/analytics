@@ -9,7 +9,7 @@
     - /mnt/disk4
 
 - name: Create a xfs filesystem on /dev/sd*
-  command: mkfs.xfs "{{ item.path }}" -f -L "{{ item.label }}"
+  command: mkfs.xfs "{{ item.path }}"  -L "{{ item.label }}"
   with_items:
     - { path: '/dev/sdb', label: 'DISK1'}
     - { path: '/dev/sdc', label: 'DISK2'}
@@ -28,3 +28,4 @@
     - { path: '/mnt/disk2', src: 'LABEL=DISK2'}
     - { path: '/mnt/disk3', src: 'LABEL=DISK3'}
     - { path: '/mnt/disk4', src: 'LABEL=DISK4'}
+  ignore_errors: true         
