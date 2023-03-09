@@ -29,3 +29,6 @@
     - { path: '/mnt/disk3', src: 'LABEL=DISK3'}
     - { path: '/mnt/disk4', src: 'LABEL=DISK4'}
   ignore_errors: true         
+
+- name: mount all the disks
+  command: mount -a
