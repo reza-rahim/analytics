@@ -169,12 +169,19 @@ resource "google_compute_disk" "storage-disk-e-" {
   size  = "1000"
 }
 
+resource "google_compute_disk" "storage-disk-f-" {
+  count = var.kube_storage_machine_count
+  name  = "${var.vpc}-storage-disk-f-${count.index}-data"
+  type  = "pd-standard"
+  zone  = var.zone
+  size  = "1000"
+}
 
-########################### nodes ############################
+########################### node ############################
 resource "google_compute_instance" "node" {
-  count        = var.nodes_machine_count
-  name         = "${var.vpc}-nodes-${count.index}"
-  machine_type = var.nodes_machine_type
+  count        = var.node_machine_count
+  name         = "${var.vpc}-node-${count.index}"
+  machine_type = var.node_machine_type
 
 
   boot_disk {
@@ -214,6 +221,10 @@ resource "google_compute_instance" "node" {
     device_name = element(google_compute_disk.storage-disk-e-.*.name, count.index)
   }
 
+  attached_disk {
+    source      = element(google_compute_disk.storage-disk-f-.*.self_link, count.index)
+    device_name = element(google_compute_disk.storage-disk-f-.*.name, count.index)
+  }
   metadata_startup_script = "sed -i 's/PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config; systemctl restart sshd; yum -y update; yum install -y wget bind-utils ;"
 }
 

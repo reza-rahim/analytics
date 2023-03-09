@@ -56,19 +56,19 @@ variable "bastion-ip-address-count" {
 
 
 ######  machine count ######
-variable "nodes_machine_count" {
-  default = 3
+variable "node_machine_count" {
+  default = 4
 }
 
 variable "kube_storage_machine_count" {
-  default = 3
+  default = 4
 }
 
 variable "bastion_machine_type" {
   default = "n1-standard-1"
 }
 
-variable "nodes_machine_type" {
+variable "node_machine_type" {
   default = "n2-standard-4"
 }
 
