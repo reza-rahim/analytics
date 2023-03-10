@@ -135,7 +135,7 @@ resource "google_compute_instance" "bastion" {
     scopes = ["compute-rw", "storage-ro", "service-management", "service-control", "logging-write", "monitoring"]
   }
 
-  metadata_startup_script = "sed -i 's/PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config; systemctl restart sshd; yum -y update; yum install -y git wget ansible; echo  'Host *\n \t StrictHostKeyChecking no' > ~/.ssh/config "
+  metadata_startup_script = "sed -i 's/PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config; systemctl restart sshd; yum -y update; yum install -y git wget ansible; echo  'Host *\n \t StrictHostKeyChecking no' > ~/.ssh/config; apt update; apt install -y ansible "
 
   metadata = {
     sshKeys = "${var.gce_ssh_user}:${file(var.gce_ssh_pub_key_file)}"
@@ -180,7 +180,7 @@ resource "google_compute_disk" "storage-disk-f-" {
 ########################### node ############################
 resource "google_compute_instance" "node" {
   count        = var.node_machine_count
-  name         = "${var.vpc}-node-${count.index}"
+  name         = "${var.vpc}-node-${count.index+1}"
   machine_type = var.node_machine_type
 
 
