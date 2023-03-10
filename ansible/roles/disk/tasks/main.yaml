@@ -1,12 +1,26 @@
+---
+- name: create group minio-user
+  group:
+    name: minio-user
+    state: present
+
+- name: Create user minio-user
+  user:
+    name: minio-user
+    group: minio-user
+    shell: /bin/bash
+
 - name: Create mount point dit
   file:
-    path: "{{ item }}"
+    path: "{{ item.path }}"
     state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.owner }}"
   with_items:
-    - /mnt/disk1
-    - /mnt/disk2
-    - /mnt/disk3
-    - /mnt/disk4
+    - { path: '/mnt/disk1', owner: 'minio-user'}
+    - { path: '/mnt/disk2', owner: 'minio-user'}
+    - { path: '/mnt/disk3', owner: 'minio-user'}
+    - { path: '/mnt/disk4', owner: 'minio-user'}
 
 - name: Create a xfs filesystem on /dev/sd*
   command: mkfs.xfs "{{ item.path }}"  -L "{{ item.label }}"
