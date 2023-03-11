@@ -23,7 +23,7 @@
     - { path: '/mnt/disk4', owner: 'minio-user'}
 
 - name: Create a xfs filesystem on /dev/sd*
-  command: mkfs.xfs "{{ item.path }}" -f  -L "{{ item.label }}"
+  command: mkfs.xfs "{{ item.path }}"  -L "{{ item.label }}"
   loop:
     - { path: '/dev/sdb', label: 'DISK1'}
     - { path: '/dev/sdc', label: 'DISK2'}
