@@ -23,3 +23,32 @@ conda install -c conda-forge jupyterhub -y
 conda install notebook -y
 jupyterhub --generate-config
 
+
+---
+
+## keyclocl
+
+https://cloudinfrastructureservices.co.uk/install-keycloak-sso-on-ubuntu-20-04/
+
+##Dowanload keyclock
+apt-get install default-jdk -y
+wget https://github.com/keycloak/keycloak/releases/download/21.0.1/keycloak-21.0.1.tar.gz
+tar -xvzf keycloak-15.0.2.tar.gz
+
+mv keycloak-21.0.1 /opt/keycloak/
+
+#user
+groupadd keycloak
+useradd -r -g keycloak -d /opt/keycloak -s /sbin/nologin keycloak
+
+chown -R keycloak: /opt/keycloak
+chmod o+x /opt/keycloak/bin/
+
+to start the keyclock server
+/opt/keycloak/bin/kc.sh start-dev
+
+
+https://medium.com/keycloak/secure-jupyterlab-using-keycloak-56e60c369c5f
+
+
+
