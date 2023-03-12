@@ -1,0 +1,21 @@
+
+##### podman
+#- name: Check Dist Version
+# debug:
+#     msg: "{{ ansible_facts['lsb']['release'] }}"
+
+- name: Add buildah repository key
+  apt_key:
+    url: https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/Debian_10/Release.key
+    state: present
+
+- name: Enable buildah repository
+  apt_repository:
+    repo: deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/Debian_10/ /
+    update_cache: yes
+    filename: buildah
+
+- name: Install buildah package
+  apt:
+    name: ['buildah=100:1.22.3-2', 'podman=100:3.4.2-4']
+    update_cache: yes

@@ -10,3 +10,6 @@ journalctl -f -u minio.service
 
 
 ssh minio-node-2 -L 9001:localhost:9001
+
+
+curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
