@@ -1,0 +1,2 @@
+buildah_version: 100:1.22.3-2
+podman_version:  100:3.4.2-4

@@ -17,5 +17,5 @@
 
 - name: Install buildah package
   apt:
-    name: ['buildah=100:1.22.3-2', 'podman=100:3.4.2-4']
+    name: ['buildah={{ buildah_version }}', 'podman={{ podman_version }}']
     update_cache: yes
