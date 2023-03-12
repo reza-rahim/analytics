@@ -13,3 +13,13 @@ ssh minio-node-2 -L 9001:localhost:9001
 
 
 curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
+
+Conda
+
+https://gist.github.com/aksakalli/72d54b22ce4da2ee81eb1a58cbc67a0c
+
+
+conda install -c conda-forge jupyterhub -y
+conda install notebook -y
+jupyterhub --generate-config
+
