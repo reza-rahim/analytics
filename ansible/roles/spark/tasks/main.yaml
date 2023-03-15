@@ -51,6 +51,18 @@
     state: link
   when: not stat_result.stat.exists  
 
+- name: get extra jar files 
+  get_url:
+     url: '{{ item }}'
+     dest: /opt/spark/jars/
+     owner: spark
+     group: spark
+  loop:
+     - '{{ hadoop_aws }}'
+     - '{{ aws_java_sdk_bundle }}'
+     - '{{ iceberg_spark_runtime }}'
+  when: not stat_result.stat.exists  
+
 - name: copy  spark-master.service
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
