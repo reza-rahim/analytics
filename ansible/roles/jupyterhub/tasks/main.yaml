@@ -1,0 +1,31 @@
+---
+
+- name: check for nodejs
+  stat: 
+     path: /usr/bin/node 
+  register: stat_result   
+
+- name: install nodejs part 1
+  get_url:
+    url:  https://deb.nodesource.com/setup_19.x
+    dest: /tmp/
+  when: not stat_result.stat.exists  
+
+- name: install nodejs part 2
+  shell: bash /tmp/setup_19.x
+  when: not stat_result.stat.exists
+
+- name: Install nodeja and python3-pip 
+  apt:
+    name: '{{ item }}'
+    update_cache: yes
+  loop:
+    - nodejs
+    - python3-pip      
+
+- name: install jupyterhub and notebook
+  pip: 
+    name: '{{ item }}'
+  loop:
+    - jupyterhub      
+    - notebook      
