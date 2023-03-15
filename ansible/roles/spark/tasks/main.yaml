@@ -1,3 +1,11 @@
+---
+
+- name: Install jre
+  apt:
+    name: default-jre
+    update_cache: yes
+
+
 - name: Create a spark download directory if it does not exist
   file:
     path: '{{ spark_dowanload }}'
@@ -34,7 +42,6 @@
      remote_src: true
      owner: spark
      group: spark
-  #shell: tar -xvf {{ spark_dowanload }}/{{ spark_file }}.{{ spark_file_ext }} --directory /opt; 
   when: not stat_result.stat.exists  
 
 - name: create soft link to /opt/spark   
@@ -43,4 +50,23 @@
     dest: '/opt/spark'
     state: link
   when: not stat_result.stat.exists  
+
+- name: copy  spark-master.service
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-master.service.j2', dest: '/etc/systemd/system/spark-master.service'  }
+     - { src: 'spark-env.sh.j2', dest: '/opt/spark/conf/spark-env.sh'  }
+  when: >
+    inventory_hostname in groups['spark_master'] and
+    groups['spark_master'].index(inventory_hostname) == 0
+  notify: restart start_master
+
+- name: copy 
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-worker.service.j2', dest: '/etc/systemd/system/spark-worker.service'  }
+     - { src: 'spark-env.sh.j2', dest: '/opt/spark/conf/spark-env.sh'  }
+  when: >
+    inventory_hostname in groups['spark_worker']
+  notify: restart start_worker
 

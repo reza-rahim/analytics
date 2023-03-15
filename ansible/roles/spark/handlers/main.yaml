@@ -1,0 +1,5 @@
+- name: restart start_master
+  service: name=spark-master.service  state=restarted enabled=yes
+
+- name: restart start_worker
+  service: name=spark-worker.service  state=restarted enabled=yes

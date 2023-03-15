@@ -1,11 +1,11 @@
 [Unit]
-Description=Apache Spark Master
+Description=Apache Spark Master 
 After=network.target
 
 [Service]
 User=spark
 Group=spark
-ExecStart=/opt/spark/sbin/start-master.sh -h
+ExecStart=/opt/spark/sbin/start-master.sh -h {{ groups['spark_master'][0] }}
 ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure
 
