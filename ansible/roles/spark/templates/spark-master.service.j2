@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=spark
 Group=spark
-ExecStart=/opt/spark/sbin/start-worker.sh spark://minio-node-1:7077
-ExecStop=/opt/spark/sbin/start-worker.sh
+ExecStart=/opt/spark/sbin/start-master.sh -h
+ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure
 
 [Install]

@@ -1,0 +1,46 @@
+- name: Create a spark download directory if it does not exist
+  file:
+    path: '{{ spark_dowanload }}'
+    state: directory
+
+- name: Check that the spark_install_dir exists
+  stat:
+      path: '{{ spark_install_dir }}'
+  register: stat_result
+ 
+- name: create group spark
+  group:
+    name: spark
+    state: present
+  when: not stat_result.stat.exists
+
+- name: Create user spark
+  user:
+    name: spark
+    group: spark
+    shell: /bin/bash
+  when: not stat_result.stat.exists  
+
+
+#- name : extract spark zip
+# debug:
+#   msg: tar -xvf {{ spark_dowanload }}/{{ spark_file }} --directory /opt
+#
+
+- name : extract spark zip
+  unarchive:
+     src: '{{ spark_file_url }}'
+     dest: /opt
+     remote_src: true
+     owner: spark
+     group: spark
+  #shell: tar -xvf {{ spark_dowanload }}/{{ spark_file }}.{{ spark_file_ext }} --directory /opt; 
+  when: not stat_result.stat.exists  
+
+- name: create soft link to /opt/spark   
+  file:
+    src: '/opt/{{ spark_file }}'
+    dest: '/opt/spark'
+    state: link
+  when: not stat_result.stat.exists  
+

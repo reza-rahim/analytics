@@ -1,12 +1,12 @@
 apt update
-apt install default-jre
+apt install default-jre -y
 
 useradd spark
 chown -R spark:spark /opt/spark
 
 wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
 tar xvf spark-3.3.2-bin-hadoop3-scala2.13.tgz
-mv spark-3.3.2-bin-hadoop3-scala2.13.tgz /opt/spark 
+mv spark-3.3.2-bin-hadoop3-scala2.13 /opt/spark 
 
 
 wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar -O /opt/spark/jars/hadoop-aws-3.2.2.jar
