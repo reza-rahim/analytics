@@ -1,5 +1,10 @@
 ---
 
+- name: Create /etc/jupyterhub
+  file: 
+     path:  /etc/jupyterhub
+     state: directory
+
 - name: check for nodejs
   stat: 
      path: /usr/bin/node 
@@ -29,3 +34,19 @@
   loop:
     - jupyterhub      
     - notebook      
+    - pyspark==3.3.2
+
+
+- name: copy  service and config file
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'jupyterhub.service.j2', dest: '/etc/systemd/system/jupyterhub.service'  }      
+     - { src: 'jupyterhub_config_simple.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_simple.py'  }      
+     - { src: 'jupyterhub_config_keycloak.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_keycloak.py'  }      
+  notify: restart jupyterhub 
+
+- name: Reload jupyterhub.service
+  ansible.builtin.systemd:
+    name: jupyterhub.service
+    state: reloaded  
+

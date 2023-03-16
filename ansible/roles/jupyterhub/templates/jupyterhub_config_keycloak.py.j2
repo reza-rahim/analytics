@@ -1,6 +1,12 @@
 from oauthenticator.generic import GenericOAuthenticator
 
 c = get_config()  #noqa
+
+c.JupyterHub.port = 9080
+c.JupyterHub.proxy_api_ip = '{{ inventory_hostname }}'
+c.JupyterHub.proxy_api_port = 9081
+c.JupyterHub.hub_port = 9082
+
 c.JupyterHub.authenticator_class = GenericOAuthenticator
 
 c.GenericOAuthenticator.client_id = 'jy'

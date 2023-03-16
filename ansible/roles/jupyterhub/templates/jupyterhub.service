@@ -1,1 +1,0 @@
-jupyterhub -f ./jupyterhub_config.py

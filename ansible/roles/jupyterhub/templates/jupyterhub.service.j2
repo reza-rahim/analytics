@@ -1,0 +1,10 @@
+[Unit]
+Description=Jupyterhub service
+After=network.target
+
+[Service]
+ExecStart=jupyterhub -f /etc/jupyterhub/jupyterhub_config_simple.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
