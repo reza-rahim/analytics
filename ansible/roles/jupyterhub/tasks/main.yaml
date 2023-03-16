@@ -46,6 +46,14 @@
     - scikit-image
     - pymc
     - statsmodels  
+    - s3cmd
+    - ipython-sql
+    - sqlalchemy
+    - sparksql-magic  
+    - sqlalchemy-trino
+    - clickhouse-driver
+    - clickhouse-sqlalchemy
+    - tensorflow  
 
 
 - name: copy  service and config file
