@@ -34,7 +34,18 @@
   loop:
     - jupyterhub      
     - notebook      
-    - pyspark==3.3.2
+    - pyspark
+    - findspark
+    - numpy 
+    - pandas
+    - plotly 
+    - seaborn 
+    - matplotlib   
+    - pyarrow  
+    - scikit-learn 
+    - scikit-image
+    - pymc
+    - statsmodels  
 
 
 - name: copy  service and config file
@@ -50,8 +61,8 @@
     name: configurable-http-proxy      
     global: yes
 
-- name: Reload jupyterhub.service
-  ansible.builtin.systemd:
-    name: jupyterhub.service
-    state: reloaded  
+#- name: Reload jupyterhub.service
+#  ansible.builtin.systemd:
+#    name: jupyterhub.service
+#    state: reloaded  
 
