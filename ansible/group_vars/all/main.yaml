@@ -15,3 +15,7 @@ aws_java_sdk_bundle:  https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-
 iceberg_spark_runtime: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
 
 postgresql_version: 12
+hive_db_name: hive
+airflow_db_name: airflow
+db_user: postgres
+db_password: postgres

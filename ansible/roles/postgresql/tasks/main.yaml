@@ -1,19 +1,49 @@
----
-
 - name: install postgresql
   apt:
-     name: ['postgresql-{{ postgresql_version }}' , 'postgresql-client-{{ postgresql_version }}']     
+     name: ['postgresql-{{ postgresql_version }}' , 'python3-pip', 'python3-psycopg2']
      update_cache: yes
- 
+
+- name: "Start and enable services"
+  service: "name={{ item }} state=started enabled=yes"
+  with_items:
+     - postgresql
+
+- name: "Create app database"
+  postgresql_db:
+     state: present
+     name: "{{ hive_db_name }}"
+  become: yes
+  become_user: postgres
+
+- name: "Create db user"
+  postgresql_user:
+     state: present
+     name: "{{ db_user }}"
+     password: "{{ db_password }}"
+  become: yes
+  become_user: postgres
+
+
+- name: "Grant db user access to app db"
+  postgresql_privs:
+     type: database
+     database: "{{ hive_db_name }}"
+     roles: "{{ db_user }}"
+     grant_option: no
+     privs: all
+  become: yes
+  become_user: postgres
+
+- name: Update pg_hba.conf
+  lineinfile:
+     dest:  /etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf
+     line: "host    all     all             0.0.0.0/0            md5"
+  notify: restart postgresql.service
+
 - name: Update postgresql.conf
   lineinfile:
      dest:  /etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
      line: "listen_addresses = '*'"
   notify: restart postgresql.service
 
-      
-- name: Update bashrc for PythonBrew for foo user
-  lineinfile:
-     dest:  /etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf 
-     line: "host    replication     all             0.0.0.0/0            md5"
-  notify: restart postgresql.service
+  
