@@ -2,7 +2,8 @@
 
 - name: install postgresql
   apt:
-     name: postgresql-{{ postgresql_version }}      
+     name: ['postgresql-{{ postgresql_version }}' , 'postgresql-client-{{ postgresql_version }}']     
+     update_cache: yes
  
 - name: Update postgresql.conf
   lineinfile:
