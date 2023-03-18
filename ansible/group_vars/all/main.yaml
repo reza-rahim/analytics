@@ -38,15 +38,15 @@ fs_s3a_endpoint: http://127.0.0.1:9000
 fs_s3a_access_key: minioadmin
 fs_s3a_secret_key: minioadmin
 metastore_warehouse_dir: s3a://warehouse/
-javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
+##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
 
 hadoop_version: 3.2.0
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_file_name: hadoop-3.2.0
 hadoop_install_dir: /opt/hadoop
 
-hive_metastore_url: https://dlcdn.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz 
-hive_metastore_file_name: apache-hive-3.1.2-bin
-hive_metastore_install_dir: /opt/hive-metastore
+hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
+hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
+hive_metastore_install_dir: /opt/apache-hive-metastore
 
 

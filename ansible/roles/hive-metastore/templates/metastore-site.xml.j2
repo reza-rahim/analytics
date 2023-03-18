@@ -67,7 +67,7 @@ likely need to add a number of new values. -->
 
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:postgresql://postgres:5432/hive</value>
+    <value>jdbc:postgresql://{{ groups['postgresql'][0] }}:5432/{{ hive_db_name }}</value>
     <description>PostgreSQL JDBC driver connection URL</description>
   </property>
 
