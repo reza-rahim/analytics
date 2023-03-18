@@ -37,7 +37,9 @@
     src: '/opt/{{ hadoop_file_name }}'
     dest: '{{ hadoop_install_dir }}'
     state: link
-  when: not stat_result.stat.exists  
+    owner: '{{ hive_user}}'
+    group: '{{ hive_user }}'
+  when: not stat_result.stat.exists
 
 
 - name : extract hive-metastore  zip
@@ -49,9 +51,17 @@
      group: '{{ hive_user }}'
   when: not stat_result.stat.exists
 
-- name: create soft link to /opt/hadoop
+- name: create soft link to /opt/hive
   file:
     src: '/opt/{{ hive_metastore_file_name }}'
     dest: '{{ hive_metastore_install_dir }}'
     state: link
-  when: not stat_result.stat.exists
+    owner: '{{ hive_user}}'
+    group: '{{ hive_user }}'
+
+- name :  get postgresql connector
+  get_url:
+     url: '{{ postgresql_connector_url }}'
+     dest: '{{ hive_metastore_install_dir }}/lib'
+     owner: '{{ hive_user}}'
+     group: '{{ hive_user }}'

@@ -29,7 +29,7 @@ hive_db_name: hive
 airflow_db_name: airflow
 db_user: postgres
 db_password: postgres
-
+postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
 ######################  S3 ##############
 #
 hive_user: hive
@@ -42,10 +42,11 @@ javax.jdo.option.ConnectionURL: jdbc:postgresql://:5432/hive
 
 hadoop_version: 3.2.0
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
-hadoop_file_name: hadoop-3.2.0.tar.gz
-hadoop_install_dir: /opt/hadoop/
+hadoop_file_name: hadoop-3.2.0
+hadoop_install_dir: /opt/hadoop
 
 hive_metastore_url: https://dlcdn.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz 
-hive_metastore_file_name: apache-hive-3.1.2-bin.tar.gz
-hive_metastore_install_dir: /opt/hive-metastore/
+hive_metastore_file_name: apache-hive-3.1.2-bin
+hive_metastore_install_dir: /opt/hive-metastore
+
 
