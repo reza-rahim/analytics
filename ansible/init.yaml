@@ -1,7 +1,7 @@
 ---
-- hosts: hive_metastore
+- hosts: minio
   become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python3
   roles:
-     - hive-metastore
+     - init

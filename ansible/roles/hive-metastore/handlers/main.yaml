@@ -1,0 +1,2 @@
+- name: restart hive_metastore
+  service: name=hive-metastore.service state=restarted enabled=yes

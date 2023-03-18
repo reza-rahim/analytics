@@ -1,6 +1,0 @@
-export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
-export HADOOP_HOME={{ hadoop_install_dir }}
-
-{{ hive_metastore_install_dir}}/bin/schematool -initSchema -dbType postgres
-
-{{ hive_metastore_install_dir}}/bin/start-metastore

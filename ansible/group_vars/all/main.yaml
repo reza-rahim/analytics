@@ -1,7 +1,11 @@
 
 ####################   JDK ##########################
 java_jdk: openjdk-11-jdk-headless
-
+#$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+# There may be better way to find JAVA_HOME
+java_home: /usr/lib/jvm/java-11-openjdk-amd64
+tmpfs_dir: /mnt/tmpfs
+tmpfs_size: 1M
 
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
