@@ -58,6 +58,7 @@
     state: link
     owner: '{{ hive_user}}'
     group: '{{ hive_user }}'
+  when: not stat_result.stat.exists
 
 - name :  get postgresql connector
   get_url:
@@ -65,3 +66,10 @@
      dest: '{{ hive_metastore_install_dir }}/lib'
      owner: '{{ hive_user}}'
      group: '{{ hive_user }}'
+  when: not stat_result.stat.exists
+
+- name: copy hive files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'  mode='{{ item.mode }}' owner='{{ hive_user }}' group='{{ hive_user }}'
+  loop:
+     - { src: 'metastore-site.xml.j2', dest: '{{ hive_metastore_install_dir }}/conf/metastore-site.xml', mode: '0644'  }
+     - { src: 'start_hive_metastore.sh.j2', dest: '{{ hive_metastore_install_dir }}/bin/start_hive_metastore.sh', mode: '0755'  }
