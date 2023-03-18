@@ -1,0 +1,57 @@
+---
+
+- name: Install jre
+  apt:
+    name: '{{ java_jdk }}'
+    update_cache: yes
+
+- name: Check that the hive_install_dir exists
+  stat:
+      path: '{{ hive_metastore_install_dir }}'
+  register: stat_result
+
+- name: create group hive
+  group:
+    name: '{{ hive_user }}'
+    state: present
+  when: not stat_result.stat.exists
+
+- name: Create user hive
+  user:
+    name: '{{ hive_user }}'
+    group: '{{ hive_user }}'
+    shell: /bin/bash
+  when: not stat_result.stat.exists   
+
+- name : extract hadoop  zip
+  unarchive:
+     src: '{{ hadoop_url }}'
+     dest: /opt
+     remote_src: true
+     owner: '{{ hive_user}}'
+     group: '{{ hive_user }}'
+  when: not stat_result.stat.exists  
+
+- name: create soft link to /opt/hadoop
+  file:
+    src: '/opt/{{ hadoop_file_name }}'
+    dest: '{{ hadoop_install_dir }}'
+    state: link
+  when: not stat_result.stat.exists  
+
+
+- name : extract hive-metastore  zip
+  unarchive:
+     src: '{{ hive_metastore_url }}'
+     dest: /opt
+     remote_src: true
+     owner: '{{ hive_user}}'
+     group: '{{ hive_user }}'
+  when: not stat_result.stat.exists
+
+- name: create soft link to /opt/hadoop
+  file:
+    src: '/opt/{{ hive_metastore_file_name }}'
+    dest: '{{ hive_metastore_install_dir }}'
+    state: link
+  when: not stat_result.stat.exists

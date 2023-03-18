@@ -1,6 +1,15 @@
+
+####################   JDK ##########################
+java_jdk: openjdk-11-jdk-headless
+
+
+######################## podman #########################
 buildah_version: 100:1.22.3-2
 podman_version:  100:3.4.2-4
 
+
+
+################### Spark #################
 spark_install_dir: /opt/spark/
 spark_dowanload: /tmp/spark_dowanload/
 spark_file: spark-3.3.2-bin-hadoop3-scala2.13
@@ -14,8 +23,29 @@ hadoop_aws: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/ha
 aws_java_sdk_bundle:  https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
 iceberg_spark_runtime: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
 
+#####################   Postgresql   ##################
 postgresql_version: 12
 hive_db_name: hive
 airflow_db_name: airflow
 db_user: postgres
 db_password: postgres
+
+######################  S3 ##############
+#
+hive_user: hive
+
+fs.s3a.endpoint: http://127.0.0.1:9000
+fs.s3a.access.key: minioadmin
+fs.s3a.secret.key: minioadmin
+metastore.warehouse.dir: s3a://warehouse/
+javax.jdo.option.ConnectionURL: jdbc:postgresql://:5432/hive
+
+hadoop_version: 3.2.0
+hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
+hadoop_file_name: hadoop-3.2.0.tar.gz
+hadoop_install_dir: /opt/hadoop/
+
+hive_metastore_url: https://dlcdn.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz 
+hive_metastore_file_name: apache-hive-3.1.2-bin.tar.gz
+hive_metastore_install_dir: /opt/hive-metastore/
+

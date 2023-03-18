@@ -2,9 +2,8 @@
 
 - name: Install jre
   apt:
-    name: default-jre
+    name: '{{ java_jdk }}'
     update_cache: yes
-
 
 - name: Create a spark download directory if it does not exist
   file:

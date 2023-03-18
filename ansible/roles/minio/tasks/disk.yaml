@@ -1,0 +1,62 @@
+---
+- name: create group minio-user
+  group:
+    name: minio-user
+    state: present
+
+- name: Create user minio-user
+  user:
+    name: minio-user
+    group: minio-user
+    shell: /bin/bash
+
+- name: Create mount point dir
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.owner }}"
+  loop:
+    - { path: '/mnt/disk1', owner: 'minio-user'}
+    - { path: '/mnt/disk2', owner: 'minio-user'}
+    - { path: '/mnt/disk3', owner: 'minio-user'}
+    - { path: '/mnt/disk4', owner: 'minio-user'}
+
+- name: Create a xfs filesystem on /dev/sd*
+  command: mkfs.xfs "{{ item.path }}"  -L "{{ item.label }}"
+  loop:
+    - { path: '/dev/sdb', label: 'DISK1'}
+    - { path: '/dev/sdc', label: 'DISK2'}
+    - { path: '/dev/sdd', label: 'DISK3'}
+    - { path: '/dev/sde', label: 'DISK4'}
+  ignore_errors: true         
+
+- name: Mount up device by label
+  mount:
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: xfs
+    state: present    
+  loop:
+    - { path: '/mnt/disk1', src: 'LABEL=DISK1'}
+    - { path: '/mnt/disk2', src: 'LABEL=DISK2'}
+    - { path: '/mnt/disk3', src: 'LABEL=DISK3'}
+    - { path: '/mnt/disk4', src: 'LABEL=DISK4'}
+  ignore_errors: true         
+
+- name: mount all the disks
+  command: mount -a
+
+- name: Create minio dir for each mount point
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.owner }}"
+  loop:
+    - { path: '/mnt/disk1/minio', owner: 'minio-user'}
+    - { path: '/mnt/disk2/minio', owner: 'minio-user'}
+    - { path: '/mnt/disk3/minio', owner: 'minio-user'}
+    - { path: '/mnt/disk4/minio', owner: 'minio-user'}
+
+
