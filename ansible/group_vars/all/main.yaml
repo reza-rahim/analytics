@@ -47,6 +47,7 @@ airflow_db_name: airflow
 db_user: postgres
 db_password: postgres
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
+postgresql_connector_file_name: postgresql-42.2.19.jar
 
 
 ######################  S3 ##############
@@ -64,6 +65,7 @@ metastore_warehouse_dir: s3a://warehouse/
 
 ####################### hive metastore ##################
 hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
+hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_home: /opt/apache-hive-metastore
 

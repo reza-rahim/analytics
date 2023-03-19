@@ -37,6 +37,16 @@ likely need to add a number of new values. -->
     <value>{{ fs_s3a_endpoint }}</value>
   </property>
   <property>
+    <name>fs.s3a.access.key</name>
+    <description>AWS access key ID.</description>
+    <value>{{ fs_s3a_access_key }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.secret.key</name>
+    <description>AWS secret key.</description>
+    <value>{{ fs_s3a_secret_key }}</value>
+  </property>
+  <property>
     <name>fs.s3a.path.style.access</name>
     <value>true</value>
     <description>Enable S3 path style access.</description>

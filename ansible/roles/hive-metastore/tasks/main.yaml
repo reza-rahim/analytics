@@ -1,18 +1,7 @@
 ---
-
-- name: Install jre
-  apt:
-    name: '{{ java_jdk }}'
-    update_cache: yes
-
-- name: Check that the hadoop_install_dir exists
+- name: Check that the hive home exists
   stat:
-      path: '{{ hadoop_install_dir }}'
-  register: hadoop_stat_result
-
-- name: Check that the hive_install_dir exists
-  stat:
-      path: '{{ hive_metastore_install_dir }}'
+      path: '{{ hive_metastore_home }}'
   register: hive_metastore_stat_result
 
 - name: create group hive
@@ -26,31 +15,9 @@
     group: '{{ hive_user }}'
     shell: /bin/bash
 
-- name : extract hadoop  zip
-  unarchive:
-     src: '{{ hadoop_url }}'
-     dest: /opt
-     remote_src: true
-     owner: '{{ hive_user}}'
-     group: '{{ hive_user }}'
-  when: not hadoop_stat_result.stat.exists
-
-- name: create soft link to /opt/hadoop
-  file:
-    src: '/opt/{{ hadoop_file_name }}'
-    dest: '{{ hadoop_install_dir }}'
-    state: link
-    owner: '{{ hive_user}}'
-    group: '{{ hive_user }}'
-  when: not hadoop_stat_result.stat.exists
-
-- name: create link for aws jar file
-  shell: 'ln -s {{ hadoop_install_dir }}/share/hadoop/tools/lib/hadoop-aws* /opt/hadoop/share/hadoop/common/lib/ && ln -s {{ hadoop_install_dir }}/share/hadoop/tools/lib/aws-java-sdk* /opt/hadoop/share/hadoop/common/lib/'
-  when: not hadoop_stat_result.stat.exists
-
 - name : extract hive-metastore  zip
   unarchive:
-     src: '{{ hive_metastore_url }}'
+     src: "http://{{ groups['repo'][0] }}/download/{{ hive_metastore_url_file_name }}"
      dest: /opt
      remote_src: true
      owner: '{{ hive_user}}'
@@ -59,7 +26,7 @@
 
 - name :  get postgresql connector
   get_url:
-     url: '{{ postgresql_connector_url }}'
+     url: "http://{{ groups['repo'][0] }}/download/{{ postgresql_connector_file_name }}"
      dest: '/opt/{{ hive_metastore_file_name }}/lib'
      owner: '{{ hive_user}}'
      group: '{{ hive_user }}'
@@ -68,21 +35,21 @@
 - name: create soft link to /opt/hive
   file:
     src: '/opt/{{ hive_metastore_file_name }}'
-    dest: '{{ hive_metastore_install_dir }}'
+    dest: '{{ hive_metastore_home }}'
     state: link
     owner: '{{ hive_user}}'
     group: '{{ hive_user }}'
   when: not hive_metastore_stat_result.stat.exists
 
-- name: copy hive files
+- name: copy hive metastore config files
   template: src='{{ item.src }}' dest='{{ item.dest }}'  mode='{{ item.mode }}' owner='{{ hive_user }}' group='{{ hive_user }}'
   loop:
-     - { src: 'metastore-site.xml.j2', dest: '{{ hive_metastore_install_dir }}/conf/metastore-site.xml', mode: '0644'  }
-     - { src: 'init-hive-metastore.sh.j2', dest: '{{ hive_metastore_install_dir }}/bin/init-hive-metastore.sh', mode: '0755'  }
+     - { src: 'metastore-site.xml.j2', dest: '{{ hive_metastore_home }}/conf/metastore-site.xml', mode: '0644'  }
+     - { src: 'init-hive-metastore.sh.j2', dest: '{{ hive_metastore_home }}/bin/init-hive-metastore.sh', mode: '0755'  }
   notify: restart hive_metastore
 
 
-- name: copy hive metstote service files
+- name: copy hive metstore service files
   template: src='{{ item.src }}' dest='{{ item.dest }}'  
   loop:
      - { src: 'hive-metastore.service.j2', dest: '/etc/systemd/system/hive-metastore.service' }
