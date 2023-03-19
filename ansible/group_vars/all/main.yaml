@@ -7,25 +7,29 @@ java_home: /usr/lib/jvm/java-11-openjdk-amd64
 tmpfs_dir: /mnt/tmpfs
 tmpfs_size: 1M
 passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
+
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
 podman_version:  100:3.4.2-4
 
 
-
 ################### Spark #################
 spark_install_dir: /opt/spark/
 spark_dowanload: /tmp/spark_dowanload/
-spark_file: spark-3.3.2-bin-hadoop3-scala2.13
 spark_file_ext: tgz
+
 spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
+spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
 
 spark_worker_memory: 8gb
 spark_worker_cores: 3
 
-hadoop_aws: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
-aws_java_sdk_bundle:  https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
-iceberg_spark_runtime: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
+hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
+hadoop_aws_file_name: hadoop-aws-3.3.2.jar
+aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
+aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-1.12.99.jar 
+iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
+iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
 
 #####################   Postgresql   ##################
 postgresql_version: 12
@@ -34,11 +38,14 @@ airflow_db_name: airflow
 db_user: postgres
 db_password: postgres
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
+
+
 ######################  S3 ##############
 #
 hive_user: hive
 minio_root_user: minioadmin
 minio_root_password: minioadmin
+minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
 
 fs_s3a_endpoint: http://127.0.0.1:9000
 fs_s3a_access_key: minioadmin
@@ -46,7 +53,6 @@ fs_s3a_secret_key: minioadmin
 metastore_warehouse_dir: s3a://warehouse/
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
 
-remote_hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_version: 3.2.0
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_file_name: hadoop-3.2.0
@@ -55,5 +61,4 @@ hadoop_install_dir: /opt/hadoop
 hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_install_dir: /opt/apache-hive-metastore
-
 
