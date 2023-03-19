@@ -83,12 +83,11 @@ likely need to add a number of new values. -->
     <description>the username for the DB instance</description>
   </property>
 
-  <property>
-    <name>javax.jdo.option.ConnectionPassword</name>
-    <value>{{ db_password }}</value>
-    <description>the password for the DB instance</description>
+   <property>
+    <name>hadoop.security.credential.provider.path</name>
+    <value>jceks://file/javax/jdo/option/ConnectionPassword.jceks</value>
   </property>
-  <property>     
+
  <name>datanucleus.schema.autoCreateAll</name>     
  <value>false</value>
 </property>

@@ -37,6 +37,8 @@ postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgres
 ######################  S3 ##############
 #
 hive_user: hive
+minio_root_user: minioadmin
+minio_root_password: minioadmin
 
 fs_s3a_endpoint: http://127.0.0.1:9000
 fs_s3a_access_key: minioadmin
@@ -44,6 +46,7 @@ fs_s3a_secret_key: minioadmin
 metastore_warehouse_dir: s3a://warehouse/
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
 
+remote_hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_version: 3.2.0
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_file_name: hadoop-3.2.0

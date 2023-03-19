@@ -77,18 +77,9 @@
 - name: copy hive files
   template: src='{{ item.src }}' dest='{{ item.dest }}'  mode='{{ item.mode }}' owner='{{ hive_user }}' group='{{ hive_user }}'
   loop:
-     - { src: 'metastore-site.xml.j2', dest: '{{ tmpfs_dir }}/hive-metastore-site.xml', mode: '0644'  }
+     - { src: 'metastore-site.xml.j2', dest: '{{ hive_metastore_install_dir }}/conf/metastore-site.xml', mode: '0644'  }
      - { src: 'init-hive-metastore.sh.j2', dest: '{{ hive_metastore_install_dir }}/bin/init-hive-metastore.sh', mode: '0755'  }
-     - { src: 'encript_hive_metastore.sh.j2', dest: '{{ hive_metastore_install_dir }}/bin/encript_hive_metastore.sh', mode: '0755'  }
   notify: restart hive_metastore
-
-- name: encrypt the hive conf file
-  command: '{{ hive_metastore_install_dir }}/bin/encript_hive_metastore.sh'
-  ignore_errors: True
-
-- name: init hive metastore  
-  command: '{{ hive_metastore_install_dir }}/bin/init-hive-metastore.sh'
-  ignore_errors: True
 
 
 - name: copy hive metstote service files

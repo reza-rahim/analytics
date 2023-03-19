@@ -1,0 +1,20 @@
+- name: install nginx
+  apt:
+     name: nginx      
+  notify: restart nginx
+
+- name: copy  spark-master.service
+  template: src='static-file-server.conf.j2' dest='/etc/nginx/conf.d/static-file-server.conf'
+  notify: restart nginx
+
+- name: create a java dir
+  file:
+     path: /var/data/java      
+     state: directory
+     
+- name : download  hadoop  zip
+  get_url:
+     url: '{{ item }}'
+     dest: /var/data/java
+  loop:
+     - '{{ remote_hadoop_url }}'      

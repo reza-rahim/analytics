@@ -13,3 +13,38 @@
 
 - name: create tmpfs mount point  
   command: mount -a 
+
+
+- name: Install jre
+  apt:
+    name: '{{ java_jdk }}'
+    update_cache: yes
+
+- name: Check that the hadoop_install_dir exists
+  stat:
+      path: '{{ hadoop_install_dir }}'
+  register: hadoop_stat_result  
+
+- name : extract hadoop  zip
+  unarchive:
+     src: '{{ hadoop_url }}'
+     dest: /opt
+     remote_src: true
+     owner: '{{ hive_user}}'
+     group: '{{ hive_user }}'
+  when: not hadoop_stat_result.stat.exists
+
+- name: create soft link to /opt/hadoop
+  file:
+    src: '/opt/{{ hadoop_file_name }}'
+    dest: '{{ hadoop_install_dir }}'
+    state: link
+    owner: '{{ hive_user}}'
+    group: '{{ hive_user }}'
+  when: not hadoop_stat_result.stat.exists
+
+- name:  create  jceks password
+  command: '/opt/hadoop/bin/hadoop credential create  {{ item }}' 
+    loop:
+       - 'javax: javax.jdo.option.ConnectionPassword -value {{ db_password }} -provider jceks://file/usr/lib/postgres.jceks'
+

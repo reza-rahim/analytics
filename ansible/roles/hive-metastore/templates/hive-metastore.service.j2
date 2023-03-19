@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 User={{ hive_user }}
-Environment=JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-Environment=HADOOP_HOME=/opt/hadoop
+Environment=JAVA_HOME={{ java_home }}
+Environment=HADOOP_HOME={{ hadoop_install_dir }}
 ExecStart=/opt/apache-hive-metastore/bin/start-metastore
 Restart=on-failure
 

@@ -1,0 +1,12 @@
+server {
+    listen       80;
+    server_name  {{ groups['repo'][0] }}; # Change to your domain name
+
+    root /var/data; # Change to your static file directory
+
+    autoindex on; # Enable directory listing
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
