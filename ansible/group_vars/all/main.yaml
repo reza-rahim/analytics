@@ -6,7 +6,7 @@ java_jdk: openjdk-11-jdk-headless
 java_home: /usr/lib/jvm/java-11-openjdk-amd64
 tmpfs_dir: /mnt/tmpfs
 tmpfs_size: 1M
-
+passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
 podman_version:  100:3.4.2-4
