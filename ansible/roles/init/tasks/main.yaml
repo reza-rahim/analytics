@@ -14,37 +14,49 @@
 - name: create tmpfs mount point  
   command: mount -a 
 
-
 - name: Install jre
   apt:
     name: '{{ java_jdk }}'
     update_cache: yes
 
-- name: Check that the hadoop_install_dir exists
+- name: create group hadoop
+  group:
+    name: '{{ hadoop_user }}'
+    state: present
+
+- name: Create user hadoop
+  user:
+    name: '{{ hadoop_user }}'
+    group: '{{ hadoop_user }}'
+    shell: /bin/bash
+
+- name: Check that the hadoop home exists
   stat:
-      path: '{{ hadoop_install_dir }}'
+      path: '{{ hadoop_home }}'
   register: hadoop_stat_result  
 
 - name : extract hadoop  zip
   unarchive:
-     src: '{{ hadoop_url }}'
+     src: "http://{{ groups['repo'][0] }}/download/{{ hadoop_file_name }}.tar.gz"
      dest: /opt
      remote_src: true
-     owner: '{{ hive_user}}'
-     group: '{{ hive_user }}'
+     owner: '{{ hadoop_user }}'
+     group: '{{ hadoop_user }}'
   when: not hadoop_stat_result.stat.exists
 
 - name: create soft link to /opt/hadoop
   file:
     src: '/opt/{{ hadoop_file_name }}'
-    dest: '{{ hadoop_install_dir }}'
+    dest: '{{ hadoop_home }}'
     state: link
-    owner: '{{ hive_user}}'
-    group: '{{ hive_user }}'
+    owner: '{{ hadoop_user }}'
+    group: '{{ hadoop_user }}'
   when: not hadoop_stat_result.stat.exists
 
 - name:  create  jceks password
-  command: '/opt/hadoop/bin/hadoop credential create  {{ item }}' 
-    loop:
-       - 'javax: javax.jdo.option.ConnectionPassword -value {{ db_password }} -provider jceks://file/usr/lib/postgres.jceks'
+  shell: 'export JAVA_HOME={{ java_home }}; /opt/hadoop/bin/hadoop credential create  {{ item }}' 
+  loop:
+       - 'javax.jdo.option.ConnectionPassword -value {{ db_password }} -provider {{ jceks_provider }}'
+       - 'fs.3a.access.key -value {{ fs_s3a_access_key }} -provider {{ jceks_provider }}'
+       - 'fs.3a.secret.key -value {{ fs_s3a_secret_key }} -provider {{ jceks_provider }}'
 
