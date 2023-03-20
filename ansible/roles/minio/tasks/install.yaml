@@ -1,32 +1,28 @@
+---
 
-- name: Create {{ tmpfs_dir }}/{{ minio_dir }} dir endpoint
-  file:
-    path: "{{ tmpfs_dir }}/{{ minio_dir }}"
-    state: directory
-    owner: "{{ minio_user }}"
-    group: "{{ minio_user }}"
+- name: create {{ minio_dir }}
+  file:    
+     path: '{{ minio_dir }}'
+     state: directory
+     owner: '{{ minio_user }}'
+     group: '{{ application_group }}'
 
-- name: Create {{ minio_dir }} dir
-  file:
-    path: "{{ minio_dir }}"
-    state: directory
-    owner: "{{ minio_user }}"
-    group: "{{ minio_user }}"
 
 - name: download the minio binary
   get_url:
-    url: "http://{{ groups['repo'][0] }}/download/minio" 
-    dest: /usr/local/bin/minio 
-    mode: '0555'
+     url: "http://{{ groups['repo'][0] }}/download/minio" 
+     dest: /usr/local/bin/minio 
+     mode: '0555'
+
   notify: restart minio     
 
 
 - name: copy  minio env files
-  template: src='{{ item.src }}' dest='{{ item.dest }}' mode='{{ item.mode }}' owner='{{ minio_user }}' group='{{ minio_user }}'
+  template: src='{{ item.src }}' dest='{{ item.dest }}' mode='{{ item.mode }}' owner='{{ minio_user }}' group='{{ application_group }}'
   loop:
      - { src: 'minio.j2', dest: '/etc/default/minio', mode: 0644 }
-     - { src: 'minio.service.j2', dest: '/etc/systemd/system/minio.service', mode: 0644}
-     - { src: 'minio.env.j2', dest: '{{ tmpfs_dir }}{{ minio_dir }}/minio.env' , mode: 0644} 
+     - { src: 'minio.service.j2', dest: '/etc/systemd/system/minio.service', mode: 644}
+     - { src: 'minio.env.j2', dest: '{{ tmpfs_dir }}/minio.env' , mode: 660} 
      - { src: 'encrypt_minio_env.sh.j2', dest: '{{ minio_dir }}/encrypt_minio_env.sh',  mode: 755}
      - { src: 'decrypt_minio_env.sh.j2', dest: '{{ minio_dir }}/decrypt_minio_env.sh',  mode: 755}
   notify: restart minio     

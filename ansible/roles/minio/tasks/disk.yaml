@@ -7,7 +7,7 @@
 - name: Create user minio-user
   user:
     name: '{{ minio_user }}'
-    group: '{{ minio_user }}'
+    group: '{{ application_group }}'
     shell: /bin/bash
 
 - name: Create mount point dir

@@ -9,7 +9,6 @@
   file:
      path: '{{ tmpfs_dir }}'
      state: directory 
-     mode: 0777
 
 - name: create  fstab entry 
   lineinfile: 
@@ -19,13 +18,12 @@
 - name: create tmpfs mount point  
   command: mount -a 
 
-- name: create {{ tmpfs_dir }}/cache
+- name: create tmpfs mount directory
   file:
-     path: '{{ tmpfs_dir }}/cache'
-     state: directory
-     mode: '0660'
+     path: '{{ tmpfs_dir }}'
+     state: directory 
+     mode: '0770'
      group: '{{ application_group }}'
-
 
 - name: Install jre
   apt:
@@ -55,7 +53,7 @@
 - name: create soft link to /opt/hadoop
   file:
     src: '/opt/{{ hadoop_file_name }}'
-    dest: '{{ application_group }}'
+    dest: '{{ hadoop_home }}'
     state: link
     owner: '{{ hadoop_user }}'
     group: '{{ application_group }}'
