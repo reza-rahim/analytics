@@ -63,8 +63,8 @@
   shell: 'export JAVA_HOME={{ java_home }}; /opt/hadoop/bin/hadoop credential create  {{ item }}' 
   loop:
        - 'javax.jdo.option.ConnectionPassword -value {{ db_password }} -provider {{ jceks_provider }}'
-       - 'fs.3a.access.key -value {{ fs_s3a_access_key }} -provider {{ jceks_provider }}'
-       - 'fs.3a.secret.key -value {{ fs_s3a_secret_key }} -provider {{ jceks_provider }}'
+       - 'fs.s3a.access.key -value {{ fs_s3a_access_key }} -provider {{ jceks_provider }}'
+       - 'fs.s3a.secret.key -value {{ fs_s3a_secret_key }} -provider {{ jceks_provider }}'
   ignore_errors: yes       
          
 - name: adjust secret.jceks
