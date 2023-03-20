@@ -5,16 +5,11 @@
       path: '{{ spark_home }}'
   register: stat_result
  
-- name: create group spark
-  group:
-    name: '{{ spark_user }}'
-    state: present
-  when: not stat_result.stat.exists
 
 - name: Create user spark
   user:
     name: '{{ spark_user }}'
-    group: '{{ hadoop_user }}']
+    group: '{{ application_group }}'
     shell: /bin/bash
   when: not stat_result.stat.exists  
 
@@ -24,7 +19,7 @@
      dest: /opt
      remote_src: true
      owner: '{{ spark_user }}'
-     group: '{{ spark_user }}'
+     group: '{{ application_group }}'
   when: not stat_result.stat.exists  
 
 
@@ -34,7 +29,7 @@
      dest: '/opt/spark'
      state: link
      owner: '{{ spark_user }}'
-     group: '{{ spark_user }}'
+     group: '{{ application_group }}'
   when: not stat_result.stat.exists  
 
 - name: get extra jar files 
@@ -42,7 +37,7 @@
      url: '{{ item }}'
      dest: '{{ spark_home }}/jars'
      owner: '{{ spark_user }}'
-     group: '{{ spark_user }}'
+     group: '{{ application_group }}'
   loop:
      - "http://{{ groups['repo'][0] }}/download/{{ hadoop_aws_file_name }}" 
      - "http://{{ groups['repo'][0] }}/download/{{ aws_java_sdk_bundle_file_name }}" 

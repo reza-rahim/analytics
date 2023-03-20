@@ -3,8 +3,8 @@ Description=Apache Spark Master
 After=network.target
 
 [Service]
-User=spark
-Group=spark
+User={{ spark_user }}
+Group={{ application_group }}
 ExecStart=/opt/spark/sbin/start-master.sh -h {{ groups['spark_master'][0] }}
 ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure
