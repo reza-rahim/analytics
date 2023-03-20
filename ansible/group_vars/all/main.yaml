@@ -5,9 +5,10 @@ java_jdk: openjdk-11-jdk-headless
 # There may be better way to find JAVA_HOME
 java_home: /usr/lib/jvm/java-11-openjdk-amd64
 jceks_provider: jceks://file/usr/lib/java/secret.jceks
-tmpfs_dir: /mnt/tmpfs
+tmpfs_dir: /mnt/tmpfs/
 tmpfs_size: 1M
 passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
+
 
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
@@ -50,13 +51,15 @@ postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgres
 postgresql_connector_file_name: postgresql-42.2.19.jar
 
 
-######################  S3 ##############
-hive_user: hive
+######################  minio ##############
 minio_root_user: minioadmin
 minio_root_password: minioadmin
 minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
 minio_file_name: minio
 
+minio_dir: /opt/minio
+
+minio_user: minio-user
 fs_s3a_endpoint: http://127.0.0.1:9000
 fs_s3a_access_key: minioadmin
 fs_s3a_secret_key: minioadmin
@@ -64,6 +67,7 @@ metastore_warehouse_dir: s3a://warehouse/
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
 
 ####################### hive metastore ##################
+hive_user: hive
 hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin

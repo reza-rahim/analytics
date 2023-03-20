@@ -1,0 +1,14 @@
+#!/bin/bash
+
+passphrase=`{{ passphrase }}`
+
+gpg --passphrase $passphrase --batch --quiet --yes  -c  {{ tmpfs_dir }}{{ minio_dir }}/minio.env
+
+rm -f {{ tmpfs_dir }}{{ minio_dir }}/minio.env
+
+mv {{ tmpfs_dir }}{{ minio_dir }}/minio.env.gpg  {{ minio_dir }} 
+
+
+
+
+
