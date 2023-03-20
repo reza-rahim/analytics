@@ -5,7 +5,7 @@
     path: "{{ item.path }}"
     state: directory
     owner: "{{ item.owner }}"
-    group: "{{ item.owner }}"
+    group: "{{ application_group }}"
   loop:
     - { path: '/mnt/disk1', owner: 'minio-user'}
     - { path: '/mnt/disk2', owner: 'minio-user'}
@@ -42,7 +42,7 @@
     path: "{{ item.path }}"
     state: directory
     owner: "{{ item.owner }}"
-    group: "{{ item.owner }}"
+    group: "{{ application_group }}"
   loop:
     - { path: '/mnt/disk1/minio', owner: 'minio-user'}
     - { path: '/mnt/disk2/minio', owner: 'minio-user'}
