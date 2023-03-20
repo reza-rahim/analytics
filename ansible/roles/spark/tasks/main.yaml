@@ -47,7 +47,8 @@
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: 'spark-master.service.j2', dest: '/etc/systemd/system/spark-master.service'  }
-     - { src: 'spark-env.sh.j2', dest: '/opt/spark/conf/spark-env.sh'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
   when: >
     inventory_hostname in groups['spark_master'] and
     groups['spark_master'].index(inventory_hostname) == 0
@@ -57,7 +58,8 @@
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: 'spark-worker.service.j2', dest: '/etc/systemd/system/spark-worker.service'  }
-     - { src: 'spark-env.sh.j2', dest: '/opt/spark/conf/spark-env.sh'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
   when: >
     inventory_hostname in groups['spark_worker']
   notify: restart start_worker

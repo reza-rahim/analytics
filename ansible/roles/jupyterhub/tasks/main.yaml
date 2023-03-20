@@ -1,5 +1,12 @@
 ---
 
+- name: Create user jupyterhub_user
+  user:
+    name: '{{ jupyterhub_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+
 - name: Create /etc/jupyterhub
   file: 
      path:  /etc/jupyterhub
@@ -55,6 +62,10 @@
     - clickhouse-sqlalchemy
     - tensorflow  
 
+- name: install configurable-http-proxy
+  npm:
+    name: configurable-http-proxy      
+    global: yes
 
 - name: copy  service and config file
   template: src='{{ item.src }}' dest='{{ item.dest }}'
@@ -64,10 +75,6 @@
      - { src: 'jupyterhub_config_keycloak.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_keycloak.py'  }      
   notify: restart jupyterhub 
 
-- name: install configurable-http-proxy
-  npm:
-    name: configurable-http-proxy      
-    global: yes
 
 #- name: Reload jupyterhub.service
 #  ansible.builtin.systemd:
