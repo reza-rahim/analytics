@@ -24,6 +24,7 @@
      group: '{{ hive_user }}'
   when: not hive_metastore_stat_result.stat.exists
 
+               
 - name :  get postgresql connector
   get_url:
      url: "http://{{ groups['repo'][0] }}/download/{{ postgresql_connector_file_name }}"
@@ -48,6 +49,13 @@
      - { src: 'init-hive-metastore.sh.j2', dest: '{{ hive_metastore_home }}/bin/init-hive-metastore.sh', mode: '0755'  }
   notify: restart hive_metastore
 
+- name: linking hadoop-aws* 
+  shell: 'ln -s /opt/hadoop/share/hadoop/tools/lib/hadoop-aws* /opt/hadoop/share/hadoop/common/lib/'
+  ignore_errors: yes
+
+- name: linking aws-java-sdk*
+  shell: 'ln -s /opt/hadoop/share/hadoop/tools/lib/aws-java-sdk* /opt/hadoop/share/hadoop/common/lib/'
+  ignore_errors: yes
 
 - name: copy hive metstore service files
   template: src='{{ item.src }}' dest='{{ item.dest }}'  
@@ -55,3 +63,4 @@
      - { src: 'hive-metastore.service.j2', dest: '/etc/systemd/system/hive-metastore.service' }
   notify: restart hive_metastore
   
+
