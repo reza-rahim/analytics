@@ -8,6 +8,7 @@ jceks_provider: jceks://file/usr/lib/java/secret.jceks
 tmpfs_dir: /mnt/tmpfs/
 tmpfs_size: 1M
 passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
+application_group: application
 
 
 ######################## podman #########################

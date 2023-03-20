@@ -14,7 +14,7 @@
 - name: Create user spark
   user:
     name: '{{ spark_user }}'
-    group: '{{ spark_user }}'
+    group: '{{ hadoop_user }}']
     shell: /bin/bash
   when: not stat_result.stat.exists  
 

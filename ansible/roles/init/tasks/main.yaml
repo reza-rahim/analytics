@@ -1,5 +1,10 @@
 ---
 
+- name: create group application
+  group:
+    name: '{{ application_group }}'
+    state: present
+
 - name: create tmpfs mount directory
   file:
      path: '{{ tmpfs_dir }}'
@@ -14,20 +19,23 @@
 - name: create tmpfs mount point  
   command: mount -a 
 
+- name: create {{ tmpfs_dir }}/cache
+  file:
+     path: '{{ tmpfs_dir }}/cache'
+     state: directory
+     mode: '0660'
+     group: '{{ application_group }}'
+
+
 - name: Install jre
   apt:
     name: '{{ java_jdk }}'
     update_cache: yes
 
-- name: create group hadoop
-  group:
-    name: '{{ hadoop_user }}'
-    state: present
-
 - name: Create user hadoop
   user:
     name: '{{ hadoop_user }}'
-    group: '{{ hadoop_user }}'
+    group: '{{ application_group }}'
     shell: /bin/bash
 
 - name: Check that the hadoop home exists
@@ -41,16 +49,16 @@
      dest: /opt
      remote_src: true
      owner: '{{ hadoop_user }}'
-     group: '{{ hadoop_user }}'
+     group: '{{ application_group }}'
   when: not hadoop_stat_result.stat.exists
 
 - name: create soft link to /opt/hadoop
   file:
     src: '/opt/{{ hadoop_file_name }}'
-    dest: '{{ hadoop_home }}'
+    dest: '{{ application_group }}'
     state: link
     owner: '{{ hadoop_user }}'
-    group: '{{ hadoop_user }}'
+    group: '{{ application_group }}'
   when: not hadoop_stat_result.stat.exists
 
 - name:  create  jceks password
@@ -64,6 +72,6 @@
 - name: adjust secret.jceks
   file:
      path: /usr/lib/java/secret.jceks
-     group: '{{ hadoop_user }}'
+     group: '{{ application_group }}'
      mode: '0640'
      
