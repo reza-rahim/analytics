@@ -3,7 +3,8 @@ Description=Apache Hive Metastore
 After=network.target
 
 [Service]
-User=hive
+User={{ hive_user }}
+Group={{ application_group }}
 Environment=JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 Environment=HADOOP_HOME=/opt/hadoop
 ExecStart=/opt/apache-hive-metastore/bin/start-metastore

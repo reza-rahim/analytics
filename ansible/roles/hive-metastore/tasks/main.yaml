@@ -4,15 +4,10 @@
       path: '{{ hive_metastore_home }}'
   register: hive_metastore_stat_result
 
-- name: create group hive
-  group:
-    name: '{{ hive_user }}'
-    state: present
-
 - name: Create user hive
   user:
     name: '{{ hive_user }}'
-    group: '{{ hive_user }}'
+    group: '{{ application_group }}'
     shell: /bin/bash
 
 - name : extract hive-metastore  zip
@@ -21,7 +16,7 @@
      dest: /opt
      remote_src: true
      owner: '{{ hive_user}}'
-     group: '{{ hive_user }}'
+     group: '{{ application_group }}'
   when: not hive_metastore_stat_result.stat.exists
 
                
@@ -30,7 +25,7 @@
      url: "http://{{ groups['repo'][0] }}/download/{{ postgresql_connector_file_name }}"
      dest: '/opt/{{ hive_metastore_file_name }}/lib'
      owner: '{{ hive_user}}'
-     group: '{{ hive_user }}'
+     group: '{{ application_group }}'
   when: not hive_metastore_stat_result.stat.exists
 
 - name: create soft link to /opt/hive
@@ -39,11 +34,11 @@
     dest: '{{ hive_metastore_home }}'
     state: link
     owner: '{{ hive_user}}'
-    group: '{{ hive_user }}'
+    group: '{{ application_group }}'
   when: not hive_metastore_stat_result.stat.exists
 
 - name: copy hive metastore config files
-  template: src='{{ item.src }}' dest='{{ item.dest }}'  mode='{{ item.mode }}' owner='{{ hive_user }}' group='{{ hive_user }}'
+  template: src='{{ item.src }}' dest='{{ item.dest }}'  mode='{{ item.mode }}' owner='{{ hive_user }}' group='{{ application_group }}'
   loop:
      - { src: 'metastore-site.xml.j2', dest: '{{ hive_metastore_home }}/conf/metastore-site.xml', mode: '0644'  }
      - { src: 'init-hive-metastore.sh.j2', dest: '{{ hive_metastore_home }}/bin/init-hive-metastore.sh', mode: '0755'  }
@@ -51,10 +46,15 @@
 
 - name: linking hadoop-aws* 
   shell: 'ln -s /opt/hadoop/share/hadoop/tools/lib/hadoop-aws* /opt/hadoop/share/hadoop/common/lib/'
+
   ignore_errors: yes
 
 - name: linking aws-java-sdk*
   shell: 'ln -s /opt/hadoop/share/hadoop/tools/lib/aws-java-sdk* /opt/hadoop/share/hadoop/common/lib/'
+  ignore_errors: yes
+
+- name: initialize the hive-metastore
+  shell: 'export HADOOP_HOME={{ hadoop_home }}; export JAVA_HOME={{ java_home }};{{ hive_metastore_home }}/bin/schematool -initSchema -dbType postgres'
   ignore_errors: yes
 
 - name: copy hive metstore service files
