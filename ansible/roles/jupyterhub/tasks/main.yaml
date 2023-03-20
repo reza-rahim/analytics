@@ -1,12 +1,5 @@
 ---
 
-- name: Create user jupyterhub_user
-  user:
-    name: '{{ jupyterhub_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-
 - name: Create /etc/jupyterhub
   file: 
      path:  /etc/jupyterhub

@@ -36,6 +36,32 @@
     group: '{{ application_group }}'
     shell: /bin/bash
 
+- name: Create user minio-user
+  user:
+    name: '{{ minio_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash  
+
+- name: Create user spark
+  user:
+    name: '{{ spark_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user jupyterhub_user
+  user:
+    name: '{{ jupyterhub_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user hive
+  user:
+    name: '{{ hive_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+
+
 - name: Check that the hadoop home exists
   stat:
       path: '{{ hadoop_home }}'
@@ -57,7 +83,7 @@
     state: link
     owner: '{{ hadoop_user }}'
     group: '{{ application_group }}'
-  when: not hadoop_stat_result.stat.exists
+
 
 - name:  create  jceks password
   shell: 'export JAVA_HOME={{ java_home }}; /opt/hadoop/bin/hadoop credential create  {{ item }}' 

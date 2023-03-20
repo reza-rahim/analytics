@@ -1,14 +1,4 @@
 ---
-- name: create group minio-user
-  group:
-    name: '{{ minio_user }}'
-    state: present
-
-- name: Create user minio-user
-  user:
-    name: '{{ minio_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
 
 - name: Create mount point dir
   file:

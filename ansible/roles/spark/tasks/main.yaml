@@ -5,14 +5,6 @@
       path: '{{ spark_home }}'
   register: stat_result
  
-
-- name: Create user spark
-  user:
-    name: '{{ spark_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-  when: not stat_result.stat.exists  
-
 - name : extract spark zip
   unarchive:
      src: "http://{{ groups['repo'][0] }}/download/{{ spark_file_name }}.tgz"

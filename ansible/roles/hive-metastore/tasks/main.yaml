@@ -4,11 +4,6 @@
       path: '{{ hive_metastore_home }}'
   register: hive_metastore_stat_result
 
-- name: Create user hive
-  user:
-    name: '{{ hive_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
 
 - name : extract hive-metastore  zip
   unarchive:
