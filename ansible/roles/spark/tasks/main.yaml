@@ -1,66 +1,52 @@
 ---
 
-- name: Install jre
-  apt:
-    name: '{{ java_jdk }}'
-    update_cache: yes
-
-- name: Create a spark download directory if it does not exist
-  file:
-    path: '{{ spark_dowanload }}'
-    state: directory
-
 - name: Check that the spark_install_dir exists
   stat:
-      path: '{{ spark_install_dir }}'
+      path: '{{ spark_home }}'
   register: stat_result
  
 - name: create group spark
   group:
-    name: spark
+    name: '{{ spark_user }}'
     state: present
   when: not stat_result.stat.exists
 
 - name: Create user spark
   user:
-    name: spark
-    group: spark
+    name: '{{ spark_user }}'
+    group: '{{ spark_user }}'
     shell: /bin/bash
   when: not stat_result.stat.exists  
 
-
-#- name : extract spark zip
-# debug:
-#   msg: tar -xvf {{ spark_dowanload }}/{{ spark_file }} --directory /opt
-#
-
 - name : extract spark zip
   unarchive:
-     src: '{{ spark_file_url }}'
+     src: "http://{{ groups['repo'][0] }}/download/{{ spark_file_name }}.tgz"
      dest: /opt
      remote_src: true
-     owner: spark
-     group: spark
+     owner: '{{ spark_user }}'
+     group: '{{ spark_user }}'
   when: not stat_result.stat.exists  
+
 
 - name: create soft link to /opt/spark   
   file:
-    src: '/opt/{{ spark_file }}'
-    dest: '/opt/spark'
-    state: link
+     src: '/opt/{{ spark_file_name }}'
+     dest: '/opt/spark'
+     state: link
+     owner: '{{ spark_user }}'
+     group: '{{ spark_user }}'
   when: not stat_result.stat.exists  
 
 - name: get extra jar files 
   get_url:
      url: '{{ item }}'
-     dest: /opt/spark/jars/
-     owner: spark
-     group: spark
+     dest: '{{ spark_home }}/jars'
+     owner: '{{ spark_user }}'
+     group: '{{ spark_user }}'
   loop:
-     - '{{ hadoop_aws }}'
-     - '{{ aws_java_sdk_bundle }}'
-     - '{{ iceberg_spark_runtime }}'
-  when: not stat_result.stat.exists  
+     - "http://{{ groups['repo'][0] }}/download/{{ hadoop_aws_file_name }}" 
+     - "http://{{ groups['repo'][0] }}/download/{{ aws_java_sdk_bundle_file_name }}" 
+     - "http://{{ groups['repo'][0] }}/download/{{ iceberg_spark_runtime_file_name }}" 
 
 - name: copy  spark-master.service
   template: src='{{ item.src }}' dest='{{ item.dest }}'

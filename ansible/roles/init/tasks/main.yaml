@@ -1,10 +1,4 @@
 ---
-- name: create {{ encrypt_dir }} directory
-  file:
-     path: '{{ encrypt_dir }}'
-     state: directory 
-     mode: 0777
-  ignore_errors: True   
 
 - name: create tmpfs mount directory
   file:

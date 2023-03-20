@@ -24,3 +24,4 @@
      - '{{ hive_metastore_url }}'      
      - '{{ postgresql_connector_url }}'
      - '{{ minio_url }}'
+     - '{{ spark_file_url }}'
