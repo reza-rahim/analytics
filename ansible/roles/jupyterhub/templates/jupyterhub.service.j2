@@ -3,8 +3,8 @@ Description=Jupyterhub service
 After=network.target
 
 [Service]
-User={{ jupyterhub_user }}
-Group={{ application_group }}
+#User={{ jupyterhub_user }}
+#Group={{ application_group }}
 
 ExecStart=jupyterhub -f /etc/jupyterhub/jupyterhub_config_simple.py
 Restart=on-failure

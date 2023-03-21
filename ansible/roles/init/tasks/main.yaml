@@ -95,7 +95,10 @@
          
 - name: adjust secret.jceks
   file:
-     path: /usr/lib/java/secret.jceks
+     path: '{{ item }}'
      group: '{{ application_group }}'
      mode: '0640'
+  loop:
+     - /usr/lib/java/secret.jceks
+     - /usr/lib/java/.secret.jceks.crc      
      
