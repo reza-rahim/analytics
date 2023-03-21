@@ -6,6 +6,10 @@ After=network.target
 #User={{ jupyterhub_user }}
 #Group={{ application_group }}
 
+Environment=JAVA_HOME={{ java_home }}
+Environment=HADOOP_HOME={{ hadoop_home }}
+Environment=SPARK_HOME={{ spark_home }}
+
 ExecStart=jupyterhub -f /etc/jupyterhub/jupyterhub_config_simple.py
 Restart=on-failure
 

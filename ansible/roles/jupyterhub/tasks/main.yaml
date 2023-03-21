@@ -33,7 +33,7 @@
     name: '{{ item }}'
   loop:
     - jupyterhub      
-    - notebook      
+    - JupyterLab
     - pyspark
     - findspark
     - numpy 
