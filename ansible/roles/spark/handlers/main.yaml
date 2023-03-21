@@ -3,3 +3,6 @@
 
 - name: restart start_worker
   service: name=spark-worker.service  state=restarted enabled=yes
+
+- name: restart start_history
+  service: name=spark-history.service  state=restarted enabled=yes

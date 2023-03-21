@@ -1,0 +1,13 @@
+[Unit]
+Description=Apache Spark Master 
+After=network.target
+
+[Service]
+User={{ spark_user }}
+Group={{ application_group }}
+ExecStart=/opt/spark/sbin/start-history-server.sh
+ExecStop=/opt/spark/sbin/stop-history-server.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

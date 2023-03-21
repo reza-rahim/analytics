@@ -36,6 +36,10 @@ spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
 spark_worker_memory: 8gb
 spark_worker_cores: 3
 
+
+spark_history_location: s3a://spark/
+
+
 hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
 hadoop_aws_file_name: hadoop-aws-3.3.2.jar
 aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
@@ -57,6 +61,7 @@ postgresql_connector_file_name: postgresql-42.2.19.jar
 minio_root_user: minioadmin
 minio_root_password: minioadmin
 minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
+minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
 minio_file_name: minio
 
 minio_dir: /opt/minio

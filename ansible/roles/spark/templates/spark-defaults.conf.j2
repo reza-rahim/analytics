@@ -26,7 +26,7 @@
 # spark.driver.memory              5g
 # spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
 
-spark.hadoop.fs.s3a.endpoint 					http://127.0.0.1:9000
+spark.hadoop.fs.s3a.endpoint 					{{ fs_s3a_endpoint }}
 spark.hadoop.hadoop.security.credential.provider.path  		{{ jceks_provider }}
 spark.sql.extensions 						org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions 
 spark.sql.catalog.spark_catalog 				org.apache.iceberg.spark.SparkSessionCatalog 
@@ -36,4 +36,15 @@ spark.hadoop.hive.metastore.warehouse.dir                       {{ metastore_war
 spark.hadoop.fs.s3a.attempts.maximum                            5
 spark.hadoop.fs.s3a.aws.credentials.provider                    org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider 
 
+spark.eventLog.enabled: 					true 
+spark.eventLog.dir: 						{{ spark_history_location }} 
+spark.history.fs.logDirectory: 					{{ spark_history_location }} 
 
+spark.serializer    						org.apache.spark.serializer.KryoSerializer
+spark.hadoop.fs.s3a.multiobjectdelete.enable  			false
+spark.hadoop.fs.s3a.fast.upload  				true
+spark.sql.parquet.filterPushdown 				true
+spark.hadoop.fs.s3a.aws.credentials.provider                    org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
+spark.sql.parquet.mergeSchema                                   false 
+
+spark.worker.cleanup.enabled					true
