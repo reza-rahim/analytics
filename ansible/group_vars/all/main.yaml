@@ -37,7 +37,7 @@ spark_worker_memory: 8gb
 spark_worker_cores: 3
 
 
-spark_history_location: s3a://spark/
+spark_history_location: s3a://spark/logs
 
 
 hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
