@@ -1,0 +1,13 @@
+[Unit]
+Description=Apache Spark Master
+After=network.target
+
+[Service]
+User=spark
+Group=spark
+ExecStart=/opt/spark/sbin/start-worker.sh spark://minio-node-1:7077
+ExecStop=/opt/spark/sbin/start-worker.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
