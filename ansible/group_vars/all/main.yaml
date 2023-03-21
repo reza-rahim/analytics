@@ -1,9 +1,9 @@
 
 ####################   JDK ##########################
-java_jdk: openjdk-11-jdk-headless
+java_jdk: openjdk-17-jdk 
 #$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
 # There may be better way to find JAVA_HOME
-java_home: /usr/lib/jvm/java-11-openjdk-amd64
+java_home: /usr/lib/jvm/java-1.17.0-openjdk-amd64
 jceks_provider: jceks://file/usr/lib/java/secret.jceks
 tmpfs_dir: /mnt/tmpfs/
 tmpfs_size: 1M
@@ -33,8 +33,8 @@ spark_user: spark
 spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
 spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
 
-spark_worker_memory: 8gb
-spark_worker_cores: 3
+spark_worker_memory: 8gb                     ##  adjust it
+spark_worker_cores: 3                        ##  adjust it
 
 
 spark_history_location: s3a://spark/logs
@@ -51,8 +51,8 @@ iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar
 postgresql_version: 12
 hive_db_name: hive
 airflow_db_name: airflow
-db_user: postgres
-db_password: postgres
+db_user: postgres                            ## pass from env 
+db_password: postgres                        ## pass from env  
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
 postgresql_connector_file_name: postgresql-42.2.19.jar
 
@@ -68,8 +68,8 @@ minio_dir: /opt/minio
 
 minio_user: minio-user
 fs_s3a_endpoint: http://127.0.0.1:9000
-fs_s3a_access_key: minioadmin
-fs_s3a_secret_key: minioadmin
+fs_s3a_access_key: minioadmin                 ##  pass from env
+fs_s3a_secret_key: minioadmin                 ##  pass from env
 metastore_warehouse_dir: s3a://warehouse/
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
 
@@ -83,4 +83,26 @@ hive_metastore_home: /opt/apache-hive-metastore
 
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
+
+
+######################### Trino #####################
+trino_user: trino
+trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
+trino_file_name: trino-server-410
+trino_home: /opt/trino
+trino_jvm_mx: Xmx1G                           ##  adjust it
+trino_data_dir: /var/trino/data
+trino_port: 7080
+
+
+######################### airflow #####################
+airflow_user: airflow
+
+
+######################### superset  #####################
+superset_user: superset
+
+
+######################### keycloak  #####################
+keycloak_user:  keycloak
 

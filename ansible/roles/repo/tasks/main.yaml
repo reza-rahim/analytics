@@ -26,10 +26,11 @@
      - '{{ minio_url }}'
      - '{{ spark_file_url }}'
      - '{{ minio_cli_url }}'
+     - '{{ trino_url }}'  
 
 - name: Check that the spark_install_dir exists
   stat:
-      path: '/usr/local/sbin'
+      path: '/usr/local/sbin/mc'
   register: stat_result
 
 - name: set up the minio cli       

@@ -1,0 +1,2 @@
+- name: restart start_trino
+  service: name=trino.service  state=restarted enabled=yes

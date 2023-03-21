@@ -1,0 +1,48 @@
+---
+
+- name: Check that the  exists
+  stat:
+      path: '{{ trino_home }}'
+  register: stat_result
+
+- name : extract trino
+  unarchive:
+     src: "http://{{ groups['repo'][0] }}/download/{{ trino_file_name }}.tar.gz"
+     dest: /opt
+     remote_src: true
+     owner: '{{ trino_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists
+
+- name: create soft link to {{ trino_home }}
+  file:
+     src: '/opt/{{ trino_file_name }}'
+     dest: '{{ trino_home }}'
+     state: link
+     owner: '{{ trino_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists
+
+- name: Create {{ trino_home}}/etc
+  file: 
+     path: '{{ trino_home}}/etc'  
+     state: directory
+     owner: '{{ trino_user }}'
+     group: '{{ application_group }}'
+
+- name: Create  (( trino_data_dir }}
+  file: 
+     path: '{{ trino_data_dir }}'  
+     state: directory
+     owner: '{{ trino_user }}'
+     group: '{{ application_group }}'
+
+- name: copy trino config file 
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'trino.service.j2', dest: '/etc/systemd/system/trino.service'  }
+     - { src: 'config.properties.j2', dest: '{{ trino_home }}/etc/config.properties'  }
+     - { src: 'jvm.config.j2', dest: '{{ trino_home }}/etc/jvm.config'  }
+     - { src: 'node.properties.j2', dest: '{{ trino_home }}/etc/node.properties'  }
+  notify: restart start_trino    
+

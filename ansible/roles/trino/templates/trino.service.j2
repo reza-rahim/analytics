@@ -1,0 +1,12 @@
+[Unit]
+Description=Trino
+After=network.target
+
+[Service]
+User={{ trino_user }}
+Group={{ application_group }}
+ExecStart={{ trino_home }}/bin/launcher run
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

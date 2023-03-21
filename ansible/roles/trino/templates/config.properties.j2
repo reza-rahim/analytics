@@ -1,0 +1,4 @@
+coordinator=true
+node-scheduler.include-coordinator=true
+http-server.http.port={{ trino_port }}
+discovery.uri=http://{{ groups['trino'][0] }}:{{ trino_port }}
