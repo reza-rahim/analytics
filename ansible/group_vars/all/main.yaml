@@ -93,7 +93,8 @@ trino_home: /opt/trino
 trino_jvm_mx: Xmx1G                           ##  adjust it
 trino_data_dir: /var/trino/data
 trino_port: 7080
-
+trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
+trino_cli_file: trino-cli-410-executable.jar
 
 ######################### airflow #####################
 airflow_user: airflow

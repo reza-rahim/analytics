@@ -27,13 +27,23 @@
      - '{{ spark_file_url }}'
      - '{{ minio_cli_url }}'
      - '{{ trino_url }}'  
+     - '{{ trino_cli_url }}'  
 
-- name: Check that the spark_install_dir exists
+- name: Check that the  /usr/local/sbin/mc exists
   stat:
       path: '/usr/local/sbin/mc'
   register: stat_result
 
 - name: set up the minio cli       
   shell: 'cp /var/data/download/mc /usr/local/sbin/mc; chmod 755 /usr/local/sbin/mc; '
+  when: not stat_result.stat.exists
+
+- name: Check that the /usr/local/sbin/trino exists
+  stat:
+      path: '/usr/local/sbin/trino'
+  register: stat_result
+
+- name: set up the minio cli
+  shell: 'cp /var/data/download/trino-cli-410-executable.jar /usr/local/sbin/trino; chmod 755 /usr/local/sbin/trino; '
   when: not stat_result.stat.exists
 

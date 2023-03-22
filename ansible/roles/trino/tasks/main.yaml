@@ -30,6 +30,13 @@
      owner: '{{ trino_user }}'
      group: '{{ application_group }}'
 
+- name: Create {{ trino_home}}/etc/catalog
+  file: 
+     path: '{{ trino_home}}/etc/catalog'  
+     state: directory
+     owner: '{{ trino_user }}'
+     group: '{{ application_group }}'
+     
 - name: Create  (( trino_data_dir }}
   file: 
      path: '{{ trino_data_dir }}'  
@@ -44,5 +51,14 @@
      - { src: 'config.properties.j2', dest: '{{ trino_home }}/etc/config.properties'  }
      - { src: 'jvm.config.j2', dest: '{{ trino_home }}/etc/jvm.config'  }
      - { src: 'node.properties.j2', dest: '{{ trino_home }}/etc/node.properties'  }
+     - { src: 'iceberg.properties.j2', dest: '{{ trino_home }}/etc/catalog/iceberg.properties'  }
   notify: restart start_trino    
+
+- name: get trino cli files
+  get_url:
+     url: "http://{{ groups['repo'][0] }}/download/{{ trino_cli_file }}"
+     dest: '{{ trino_home }}/bin/trino'
+     owner: '{{ trino_user }}'
+     group: '{{ application_group }}'
+     mode: 755
 
