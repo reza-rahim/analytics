@@ -1,17 +1,15 @@
-
 ### https://dgu2000.medium.com/working-with-self-signed-certificates-in-chrome-walkthrough-edition-a238486e6858
 
 ##### Step 1: Becoming your own CA
 ```
 # Generate an RSA private key of size 2048
-openssl genrsa -des3 -out rootCA.key 2048
+openssl genrsa -des3 -out CA_cert.key 2048
 
 # Generate a root certificate valid for ten years
-openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.pem
+openssl req -x509 -new -nodes -key CA_cert.key -sha256 -days 3650 -out CA_cert.pem
 
 # To check just created root certificate:
-openssl x509 -in rootCA.pem -text -noout
-
+openssl x509 -in CA_cert.pem  -text -noout
 ```
 
 #### Step 2: Creating a certificate request
@@ -19,9 +17,10 @@ openssl x509 -in rootCA.pem -text -noout
 ```
 # First, create a private key to be used during the certificate signing process:
 
-openssl genrsa -out tls.key 2048
+openssl genrsa -out server.key 2048
 
 # Use the private key to create a certificate signing request:
+openssl req -new -key server.key -out server.csr
 
 ## create the openssl.cnf 
 
@@ -31,17 +30,17 @@ openssl genrsa -out tls.key 2048
 
 ``` 
 openssl x509 -req \
-    -in tls.csr \
-    -CA rootCA.pem \
-    -CAkey rootCA.key \
+    -in server.csr \
+    -CA CA_cert.pem \
+    -CAkey CA_cert.key \
     -CAcreateserial \
-    -out tls.crt \
+    -out server.crt \
     -days 730 \
     -sha256 \
     -extfile openssl.cnf
 
 ## To verify that the certificate is built correctly:
-openssl verify -CAfile rootCA.pem -verify_hostname none-1 tls.crt
+openssl verify -CAfile CA_cert.pem -verify_hostname node-1 server.crt
 ```
 
 #### Step 4: Adding CA as trusted store on mac
