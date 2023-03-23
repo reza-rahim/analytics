@@ -17,11 +17,11 @@ variable "zone" {
 variable "os" {
   # default = "rhel-cloud/rhel-8-v20210316"
   #default = "centos-cloud/centos-7-v20200205"
-  default = "ubuntu-os-cloud/ubuntu-1804-lts"
+  default = "ubuntu-os-cloud/ubuntu-2004-focal-v20230302"
 }
 
 variable "vpc" {
-  default = "minio"
+  default = "analytic"
 }
 
 variable "gce_ssh_user" {

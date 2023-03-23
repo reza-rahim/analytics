@@ -180,7 +180,7 @@ resource "google_compute_disk" "storage-disk-f-" {
 ########################### node ############################
 resource "google_compute_instance" "node" {
   count        = var.node_machine_count
-  name         = "${var.vpc}-node-${count.index+1}"
+  name         = "node-${count.index+1}"
   machine_type = var.node_machine_type
 
 
