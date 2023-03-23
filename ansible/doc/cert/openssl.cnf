@@ -1,0 +1,12 @@
+basicConstraints       = CA:FALSE
+authorityKeyIdentifier = keyid:always, issuer:always
+keyUsage               = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+subjectAltName         = @alt_names
+[ alt_names ]
+DNS.1 = *.mnbvcxz.com
+DNS.2 = node-1
+DNS.3 = node-2
+DNS.4 = node-3
+DNS.5 = node-4
+DNS.6 = node-5
+
