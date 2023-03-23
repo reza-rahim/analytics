@@ -1,0 +1,23 @@
+---
+- name: install haproxy
+  apt:
+     name: haproxy
+
+- name: create /etc/haproxy.cert.d dir      
+  file:
+     path: /etc/haproxy/cert.d     
+     state: directory 
+
+- name: copy  haproxy.cfg and server.crt
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'haproxy.cfg.j2', dest: '/etc/haproxy/haproxy.cfg'  }
+     - { src: '{{ server_cert_file_name }}', dest: '/etc/haproxy/cert.d/{{ server_cert_file_name }}'  }
+  notify: restart haproxy
+
+
+- name: copy  {{ ca_cert_file_name }} to /usr/local/share/ca-certificates/
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: '{{ ca_cert_file_name }}', dest: '/usr/local/share/ca-certificates/{{ ca_cert_file_name }}' }
+  notify: run ertificate

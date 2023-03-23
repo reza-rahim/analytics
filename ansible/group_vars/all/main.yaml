@@ -1,10 +1,12 @@
-
 #####################################################
-
 node_prefix: node-
+
+ca_cert_file_name: CA_cert.pem
+server_cert_file_name: server.crt
 
 ####################   JDK ##########################
 java_jdk: openjdk-17-jdk 
+
 #$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
 # There may be better way to find JAVA_HOME
 java_home: /usr/lib/jvm/java-1.17.0-openjdk-amd64
@@ -14,21 +16,17 @@ tmpfs_size: 1M
 passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
 application_group: application
 
-
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
 podman_version:  100:3.4.2-4
 
-
 ############################## hadoop ##################### 
-
 hadoop_user: hadoop
 hadoop_home: /opt/hadoop
 hadoop_version: 3.2.0
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_file_name: hadoop-3.2.0
 hadoop_install_dir: /opt/hadoop
-
 
 ################### Spark #################
 spark_home: /opt/spark/
@@ -40,9 +38,7 @@ spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
 spark_worker_memory: 8gb                     ##  adjust it
 spark_worker_cores: 3                        ##  adjust it
 
-
 spark_history_location: s3a://spark/logs
-
 
 hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
 hadoop_aws_file_name: hadoop-aws-3.3.2.jar
@@ -59,7 +55,6 @@ db_user: postgres                            ## pass from env
 db_password: postgres                        ## pass from env  
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
 postgresql_connector_file_name: postgresql-42.2.19.jar
-
 
 ######################  minio ##############
 minio_root_user: minioadmin
@@ -84,10 +79,8 @@ hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_home: /opt/apache-hive-metastore
 
-
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
-
 
 ######################### Trino #####################
 trino_user: trino
@@ -103,10 +96,8 @@ trino_cli_file: trino-cli-410-executable.jar
 ######################### airflow #####################
 airflow_user: airflow
 
-
 ######################### superset  #####################
 superset_user: superset
-
 
 ######################### keycloak  #####################
 keycloak_user:  keycloak

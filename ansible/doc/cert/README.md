@@ -51,3 +51,10 @@ openssl verify -CAfile CA_cert.pem -verify_hostname node-1 server.crt
 # go to the finder on mac and search the Keychain Access 
 
 ```
+
+##### Step 5: Adding CA to Ubuntu server
+```
+cp CA_cert.pem  /usr/local/share/ca-certificates/
+
+update-ca-certificates
+```
