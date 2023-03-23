@@ -1,4 +1,8 @@
 
+#####################################################
+
+node_prefix: node-
+
 ####################   JDK ##########################
 java_jdk: openjdk-17-jdk 
 #$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
