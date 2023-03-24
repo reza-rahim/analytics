@@ -8,13 +8,6 @@
   with_items:
      - postgresql
 
-- name: "Create app database"
-  postgresql_db:
-     state: present
-     name: "{{ hive_db_name }}"
-  become: yes
-  become_user: postgres
-
 - name: "Create db user"
   postgresql_user:
      state: present
@@ -23,7 +16,38 @@
   become: yes
   become_user: postgres
 
+#### create databases
+- name: "Create hive database"
+  postgresql_db:
+     state: present
+     name: "{{ hive_db_name }}"
+  become: yes
+  become_user: postgres
 
+- name: "Create  {{ keycloak_db_name }} database"
+  postgresql_db:
+     state: present
+     name: "{{ keycloak_db_name }}"
+  become: yes
+  become_user: postgres
+
+- name: "Create  {{ airflow_db_name }} database"
+  postgresql_db:
+     state: present
+     name: "{{ airflow_db_name }}"
+  become: yes
+  become_user: postgres
+
+
+- name: "Create  {{ superset_db_name }} database"
+  postgresql_db:
+     state: present
+     name: "{{ superset_db_name }}"
+  become: yes
+  become_user: postgres
+
+
+### Create db role
 - name: "Grant db user access to app db"
   postgresql_privs:
      type: database
@@ -33,6 +57,37 @@
      privs: all
   become: yes
   become_user: postgres
+
+- name: "Grant db user access to app db"
+  postgresql_privs:
+     type: database
+     database: "{{ keycloak_db_name }}"
+     roles: "{{ db_user }}"
+     grant_option: no
+     privs: all
+  become: yes
+  become_user: postgres
+
+- name: "Grant db user access to app db"
+  postgresql_privs:
+     type: database
+     database: "{{ airflow_db_name }}"
+     roles: "{{ db_user }}"
+     grant_option: no
+     privs: all
+  become: yes
+  become_user: postgres
+
+- name: "Grant db user access to app db"
+  postgresql_privs:
+     type: database
+     database: "{{ superset_db_name }}"
+     roles: "{{ db_user }}"
+     grant_option: no
+     privs: all
+  become: yes
+  become_user: postgres
+
 
 - name: Update pg_hba.conf
   lineinfile:
