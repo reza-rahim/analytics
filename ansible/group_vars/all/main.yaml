@@ -1,8 +1,9 @@
 #####################################################
 node_prefix: node-
 
-ca_cert_file_name: CA_cert.pem
+ca_cert_file_name: CA_cert.crt
 server_cert_file_name: server.crt
+server_key_file_name: server.key
 
 ####################   JDK ##########################
 java_jdk: openjdk-17-jdk 
@@ -95,10 +96,13 @@ trino_cli_file: trino-cli-410-executable.jar
 
 ######################### airflow #####################
 airflow_user: airflow
+airflow_db_name: airflow
 
 ######################### superset  #####################
 superset_user: superset
+superset_db_name: superset
 
 ######################### keycloak  #####################
 keycloak_user:  keycloak
+keycloak_db_name: keycloak
 
