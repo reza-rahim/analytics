@@ -1,0 +1,7 @@
+coordinator=true
+node-scheduler.include-coordinator=true
+http-server.http.port={{ trino_port }}
+discovery.uri=http://{{ groups['trino'][0] }}:{{ trino_port }}
+http-server.authentication.type=PASSWORD
+http-server.process-forwarded=true
+internal-communication.shared-secret=1234567890
