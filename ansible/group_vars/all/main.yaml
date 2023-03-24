@@ -4,6 +4,19 @@ node_prefix: node-
 ca_cert_file_name: CA_cert.crt
 server_cert_file_name: server.crt
 server_key_file_name: server.key
+server_cert_key_file_name: server_crt_key.pem
+keycloak_realms: application
+client_secret: ZkVCiNnsdJkSVjIMuxQFgrUIZremZBFS
+client_id: trino
+
+##########################   server name ##################
+virtual_ip: 192.168.1.4
+keyclock_server: keyclock.mnbvcxz.com
+postgres_server: postgres.mnbvcxz.com
+hive_metastore_server: metastore.mnbvcxz.com
+superset_server: superset.mnbvcxz.com
+airflow_server: airflow.mnbvcxz.com
+jupyterhub_server: jupyterhub.mnbvcxz.com
 
 ####################   JDK ##########################
 java_jdk: openjdk-17-jdk 
@@ -91,8 +104,10 @@ trino_home: /opt/trino
 trino_jvm_mx: Xmx1G                           ##  adjust it
 trino_data_dir: /var/trino/data
 trino_port: 7080
+trino_tls_port: 7443
 trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
 trino_cli_file: trino-cli-410-executable.jar
+shared_secret: bhujd3456ndswu5!&df
 
 ######################### airflow #####################
 airflow_user: airflow

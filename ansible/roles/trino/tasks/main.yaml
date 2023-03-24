@@ -57,8 +57,8 @@
 - name: get trino cli files
   get_url:
      url: "http://{{ groups['repo'][0] }}/download/{{ trino_cli_file }}"
-     dest: '{{ trino_home }}/bin/trino'
-     owner: '{{ trino_user }}'
-     group: '{{ application_group }}'
+     dest: '/usr/bin/trino'
+     #owner: '{{ trino_user }}'
+     #group: '{{ application_group }}'
      mode: 755
 

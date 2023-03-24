@@ -2,3 +2,16 @@ coordinator=true
 node-scheduler.include-coordinator=true
 http-server.http.port={{ trino_port }}
 discovery.uri=http://{{ groups['trino'][0] }}:{{ trino_port }}
+
+internal-communication.shared-secret={{ shared_secret }}
+
+http-server.https.enabled=true
+http-server.https.port={{ trino_tls_port }}
+http-server.https.keystore.path=/etc/cert.d/{{ server_cert_key_file_name }}
+
+#http-server.authentication.type=PASSWORD,oauth2
+http-server.authentication.type=oauth2
+web-ui.authentication.type=oauth2
+http-server.authentication.oauth2.issuer=https://{{ keyclock_server }}:6443/realms/{{ keycloak_realms }}
+http-server.authentication.oauth2.client-id={{ client_id }}
+http-server.authentication.oauth2.client-secret={{ client_secret }}

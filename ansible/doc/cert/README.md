@@ -6,10 +6,10 @@
 openssl genrsa -des3 -out CA_cert.key 2048
 
 # Generate a root certificate valid for ten years
-openssl req -x509 -new -nodes -key CA_cert.key -sha256 -days 3650 -out CA_cert.pem
+openssl req -x509 -new -nodes -key CA_cert.key -sha256 -days 3650 -out CA_cert.crt
 
 # To check just created root certificate:
-openssl x509 -in CA_cert.pem  -text -noout
+openssl x509 -in CA_cert.crt  -text -noout
 ```
 
 #### Step 2: Creating a certificate request
@@ -31,7 +31,7 @@ openssl req -new -key server.key -out server.csr
 ``` 
 openssl x509 -req \
     -in server.csr \
-    -CA CA_cert.pem \
+    -CA CA_cert.crt \
     -CAkey CA_cert.key \
     -CAcreateserial \
     -out server.crt \
@@ -40,7 +40,7 @@ openssl x509 -req \
     -extfile openssl.cnf
 
 ## To verify that the certificate is built correctly:
-openssl verify -CAfile CA_cert.pem -verify_hostname node-1 server.crt
+openssl verify -CAfile CA_cert.crt -verify_hostname node-1 server.crt
 ```
 
 #### Step 4: Adding CA as trusted store on mac
@@ -54,7 +54,7 @@ openssl verify -CAfile CA_cert.pem -verify_hostname node-1 server.crt
 
 ##### Step 5: Adding CA to Ubuntu server
 ```
-cp CA_cert.pem  /usr/local/share/ca-certificates/
+cp CA_cert.crt  /usr/local/share/ca-certificates/
 
 update-ca-certificates
 ```

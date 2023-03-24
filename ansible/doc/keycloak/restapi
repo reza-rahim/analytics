@@ -1,0 +1,6 @@
+NEW_REALM="dw"
+KEYCLOAK_REALM="master"
+KEYCLOAK_USER="admin"
+KEYCLOAK_SECRET="admin"
+REALM_FILE="realm.json";
+CURL_CMD="curl --silent --show-error"

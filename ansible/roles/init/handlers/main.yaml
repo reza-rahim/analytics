@@ -1,0 +1,3 @@
+
+- name: run certificates
+  shell:  /usr/sbin/update-ca-certificates

@@ -26,6 +26,19 @@
      dest: /etc/fstab
      line: tmpfs  /mnt/tmpfs  tmpfs   size={{ tmpfs_size }},mode=0777  0  0
 
+- name: create  /etc/hosts entry
+  lineinfile:
+     dest: /etc/hosts
+     line: '{{ item.ip }} {{ item.host }}'
+  loop:
+     - { ip: '{{ virtual_ip }}', host: '{{ keyclock_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ postgres_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ hive_metastore_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ superset_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ airflow_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ jupyterhub_server }}'  }
+          
+
 - name: create tmpfs mount point  
   command: mount -a 
 
@@ -95,11 +108,6 @@
     group: '{{ application_group }}'
     shell: /bin/bash    
 
-- name: Create user {{ proxy_user }} user
-  user:
-    name: '{{ proxy_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
 
 - name: Check that the hadoop home exists
   stat:
@@ -122,6 +130,25 @@
     state: link
     owner: '{{ hadoop_user }}'
     group: '{{ application_group }}'
+
+- name: create /etc/cert.d dir
+  file:
+     path: /etc/cert.d
+     state: directory
+
+- name: copy  cert files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: '{{ server_cert_file_name }}', dest: '/etc/cert.d/{{ server_cert_file_name }}'  }
+     - { src: '{{ server_key_file_name }}', dest: '/etc/cert.d/{{ server_key_file_name }}'  }
+     - { src: '{{ server_cert_key_file_name }}', dest: '/etc/cert.d/{{ server_cert_key_file_name }}'  }
+
+- name: copy  {{ ca_cert_file_name }} to /usr/local/share/ca-certificates/
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: '{{ ca_cert_file_name }}', dest: '/usr/local/share/ca-certificates/{{ ca_cert_file_name }}' }
+  notify: run certificates
+
 
 
 - name:  create  jceks password
