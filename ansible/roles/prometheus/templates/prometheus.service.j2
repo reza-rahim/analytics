@@ -9,9 +9,11 @@ User={{ prometheus_user }}
 Group={{ application_group }}
 Type=simple
 Restart=on-failure
-ExecStart=/usr/local/bin/prometheus \
-   --config.file /etc/prometheus/prometheus.yml \
-   --storage.tsdb.path /var/lib/prometheus/ 
+ExecStart={{ prometheus_home}}/prometheus \
+   --config.file {{ prometheus_home}}/prometheus.yaml \
+   --storage.tsdb.path  {{ prometheus_data_dir }}
+   --web.console.templates={{ prometheus_home}}/consoles \
+   --web.console.libraries={{ prometheus_home}}/console_libraries
 
 [Install]
 WantedBy=multi-user.target

@@ -10,8 +10,9 @@ Group={{ application_group }}
 Type=simple
 Restart=on-failure
 ExecStart=/opt/node_exporter/node_exporter  \
-  --web.listen-address=:9200
+  --web.listen-address=:{{ node_exporter_port }}
 
 [Install]
 WantedBy=multi-user.target
+
 

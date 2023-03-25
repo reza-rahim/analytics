@@ -132,20 +132,20 @@ keycloak_file_name: keycloak-21.0.1
 ############################### prometheus  #########################
 prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
 prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
+prometheus_filanme: prometheus-2.43.0.linux-amd64
 prometheus_user: prometheus
 prometheus_home: /opt/prometheus
-
+prometheus_data_dir: /var/lib/prometheus/
 
 ############################### prometheus  #########################
 node_exporter_user: node_exporter
 node_exporter_home: /opt/node_exporter
 node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
 node_exporter_file_name: node_exporter-1.5.0.linux-amd64
-
+node_exporter_port: 9200
 
 #############
 loki_user: loki
-
 
 ############
 promtail_user: promtail

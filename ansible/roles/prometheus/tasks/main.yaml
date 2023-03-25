@@ -1,31 +1,39 @@
 ---
 
-- name: Check that the {{  node_exporter_home}} exists
+- name: create  {{ prometheus_data_dir }} 
+  file: 
+     path: '{{  prometheus_data_dir }}' 
+     state: directory
+     owner: '{{ prometheus_user }}'
+     group: '{{ application_group }}'
+
+- name: Check that the {{  prometheus_home }} exists
   stat:
-      path: '{{  node_exporter_home}}'
+      path: '{{  prometheus_home }}'
   register: stat_result
  
 - name : extract node_exporter_file_name  zip
   unarchive:
-     src: "http://{{ groups['repo'][0] }}/download/{{ node_exporter_file_name  }}.tar.gz"
+     src: "http://{{ groups['repo'][0] }}/download/{{ prometheus_url_filanme }}"
      dest: /opt
      remote_src: true
-     owner: '{{ node_exporter_user }}'
+     owner: '{{ prometheus_user }}'
      group: '{{ application_group }}'
   when: not stat_result.stat.exists  
 
 
 - name: create soft link to /opt/spark   
   file:
-     src: '/opt/{{ node_exporter_file_name }}'
-     dest: '{{ node_exporter_home }}'
+     src: '/opt/{{ prometheus_filanme }}'
+     dest: '{{ prometheus_home }}'
      state: link
-     owner: '{{ node_exporter_user }}'
+     owner: '{{ prometheus_user }}'
      group: '{{ application_group }}'
   when: not stat_result.stat.exists  
 
 - name: copy  node_exporter.service.j2
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
-     - { src: 'node_exporter.service.j2', dest: '/etc/systemd/system/node_exporter.service'  }
-  notify: restart node_exporter
+     - { src: 'prometheus.service.j2', dest: '/etc/systemd/system/prometheus.service'  }
+     - { src: 'prometheus.yaml.j2', dest: '{{ prometheus_home }}/prometheus.yaml'  }
+  notify: restart prometheus
