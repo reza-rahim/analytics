@@ -1,0 +1,18 @@
+[Unit]
+Description=Prometheus
+Documentation=https://prometheus.io/docs/guides/node-exporter/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{ prometheus_user }} 
+Group={{ application_group }}
+Type=simple
+Restart=on-failure
+ExecStart=/usr/local/bin/prometheus \
+   --config.file /etc/prometheus/prometheus.yml \
+   --storage.tsdb.path /var/lib/prometheus/ 
+
+[Install]
+WantedBy=multi-user.target
+
