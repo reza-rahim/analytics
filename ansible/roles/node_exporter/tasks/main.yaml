@@ -1,0 +1,31 @@
+---
+
+- name: Check that the {{  node_exporter_home}} exists
+  stat:
+      path: '{{  node_exporter_home}}'
+  register: stat_result
+ 
+- name : extract node_exporter_file_name  zip
+  unarchive:
+     src: "http://{{ groups['repo'][0] }}/download/{{ node_exporter_file_name  }}.tar.gz"
+     dest: /opt
+     remote_src: true
+     owner: '{{ node_exporter_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists  
+
+
+- name: create soft link to /opt/spark   
+  file:
+     src: '/opt/{{ node_exporter_file_name }}'
+     dest: '{{ node_exporter_home }}'
+     state: link
+     owner: '{{ node_exporter_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists  
+
+- name: copy  node_exporter.service.j2
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'node_exporter.service.j2', dest: '/etc/systemd/system/node_exporter.service'  }
+  notify: restart node_exporter

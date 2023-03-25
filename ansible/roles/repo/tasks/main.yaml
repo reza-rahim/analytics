@@ -29,6 +29,8 @@
      - '{{ trino_url }}'  
      - '{{ trino_cli_url }}'  
      - '{{ keycloak_url }}'  
+     - '{{ prometheus_url }}'  
+     - '{{ node_exporter_url }}'  
 
 - name: Check that the  /usr/local/sbin/mc exists
   stat:

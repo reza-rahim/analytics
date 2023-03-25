@@ -115,6 +115,30 @@
     shell: /bin/bash    
 
 
+- name: Create user node_exporter
+  user:
+    name: '{{ node_exporter_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user prometheus_user
+  user:
+    name: '{{ prometheus_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user loki user
+  user:
+    name: '{{ loki_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user promtail user
+  user:
+    name: '{{ promtail_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
 - name: Check that the hadoop home exists
   stat:
       path: '{{ hadoop_home }}'
