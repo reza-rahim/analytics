@@ -12,7 +12,7 @@
       path: '{{  prometheus_home }}'
   register: stat_result
  
-- name : extract node_exporter_file_name  zip
+- name : extract prometheus  zip
   unarchive:
      src: "http://{{ groups['repo'][0] }}/download/{{ prometheus_url_filanme }}"
      dest: /opt
