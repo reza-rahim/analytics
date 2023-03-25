@@ -1,1 +1,31 @@
 ---
+
+- name: create  {{ superset_home }} 
+  file: 
+     path: '{{  superset_home }}' 
+     state: directory
+     owner: '{{ superset_user }}'
+     group: '{{ application_group }}'
+
+- name: create  {{ superset_home }}/pythonpath 
+  file: 
+     path: '{{  superset_home }}/pythonpath' 
+     state: directory
+     owner: '{{ superset_user }}'
+     group: '{{ application_group }}'
+
+ 
+
+- name: copy  superset files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'superset_config.py.j2', dest: '{{  superset_home }}/pythonpath/superset_config.py'  }
+
+- name: init superset
+  shell: '{{ item }}'  
+  loop: 
+    - 'podman run --restart unless-stopped -d --network host -v /opt/superset/pythonpath:/app/pythonpath --name superset docker.io/apache/superset'
+    - 'podman exec -it superset superset fab create-admin  --username demo  --firstname Superset  --lastname Admin  --email demo@superset.com  --password demo'
+    - 'podman  exec -it superset superset db upgrade'
+    - 'podman exec -it superset superset init'  
+  ignore_errors: true    

@@ -1,4 +1,4 @@
-podman run --restart unless-stopped -d --network host -v /opt/superset/pythonpath:/^Cp/pythonpath --name superset docker.io/apache/superset
+podman run --restart unless-stopped -d --network host -v /opt/superset/pythonpath:/app/pythonpath --name superset docker.io/apache/superset
 
 podman exec -it superset superset fab create-admin \
                --username demo \

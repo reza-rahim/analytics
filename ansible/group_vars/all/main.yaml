@@ -121,6 +121,7 @@ airflow_db_name: airflow
 ######################### superset  #####################
 superset_user: superset
 superset_db_name: superset
+superset_home: /opt/superset
 
 ######################### keycloak  #####################
 keycloak_user:  keycloak
