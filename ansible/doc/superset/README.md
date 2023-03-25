@@ -10,4 +10,7 @@ podman exec -it superset superset fab create-admin \
 podman  exec -it superset superset db upgrade
 podman exec -it superset superset init
 podman exec -u root -it superset  bash -c 'pip install  sqlalchemy-trino'
+#  podman  exec -it superset  bash
 
+
+#  podman kill superset ;  podman rm  superset;
