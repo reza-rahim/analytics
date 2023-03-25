@@ -136,6 +136,7 @@ prometheus_filanme: prometheus-2.43.0.linux-amd64
 prometheus_user: prometheus
 prometheus_home: /opt/prometheus
 prometheus_data_dir: /var/lib/prometheus/
+prometheus_port: 9090
 
 ############################### prometheus  #########################
 node_exporter_user: node_exporter
@@ -143,6 +144,16 @@ node_exporter_home: /opt/node_exporter
 node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
 node_exporter_file_name: node_exporter-1.5.0.linux-amd64
 node_exporter_port: 9200
+
+############################### Grafana  #########################
+grafana_user: grafana
+grafana_home: /opt/grafana
+grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
+grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
+grafana_file_name: grafana-9.4.3
+grafana_home: /opt/grafana
+
+
 
 #############
 loki_user: loki

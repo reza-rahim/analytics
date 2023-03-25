@@ -1,0 +1,31 @@
+---
+
+- name: Check that the {{  grafana_home }} exists
+  stat:
+      path: '{{  grafana_home }}'
+  register: stat_result
+ 
+- name : extract  {{ grafana_file_url_name }} 
+  unarchive:
+     src: "http://{{ groups['repo'][0] }}/download/{{ grafana_file_url_name }}"
+     dest: /opt
+     remote_src: true
+     owner: '{{ grafana_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists  
+
+
+- name: create soft link to  {{ grafana_home }} 
+  file:
+     src: '/opt/{{ grafana_file_name }}'
+     dest: '{{ grafana_home }}'
+     state: link
+     owner: '{{ grafana_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists  
+
+- name: copy  node_exporter.service.j2
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'grafana.service.j2', dest: '/etc/systemd/system/grafana.service'  }
+  notify: restart grafana

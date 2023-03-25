@@ -31,6 +31,7 @@
      - '{{ keycloak_url }}'  
      - '{{ prometheus_url }}'  
      - '{{ node_exporter_url }}'  
+     - '{{ grafana_url }}'  
 
 - name: Check that the  /usr/local/sbin/mc exists
   stat:

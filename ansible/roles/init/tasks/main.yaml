@@ -108,7 +108,7 @@
     group: '{{ application_group }}'
     shell: /bin/bash    
 
-- name: Create user keycloak_user
+- name: Create user keycloak
   user:
     name: '{{ keycloak_user }}'
     group: '{{ application_group }}'
@@ -121,13 +121,19 @@
     group: '{{ application_group }}'
     shell: /bin/bash    
 
-- name: Create user prometheus_user
+- name: Create user prometheus
   user:
     name: '{{ prometheus_user }}'
     group: '{{ application_group }}'
     shell: /bin/bash    
 
-- name: Create user loki user
+- name: Create user {{ grafana_user }}
+  user:
+    name: '{{ grafana_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user {{ loki_user }}
   user:
     name: '{{ loki_user }}'
     group: '{{ application_group }}'
