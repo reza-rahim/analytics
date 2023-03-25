@@ -14,3 +14,9 @@ podman exec -u root -it superset  bash -c 'pip install  sqlalchemy-trino'
 
 
 #  podman kill superset ;  podman rm  superset;
+
+
+## trino connection
+
+trino://admin:admin@trino.mnbvcxz.com:7443/iceberg?verify=false
+
