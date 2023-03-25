@@ -28,6 +28,7 @@
      - '{{ minio_cli_url }}'
      - '{{ trino_url }}'  
      - '{{ trino_cli_url }}'  
+     - '{{ keycloak_url }}'  
 
 - name: Check that the  /usr/local/sbin/mc exists
   stat:

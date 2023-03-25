@@ -1,6 +1,7 @@
 #####################################################
 node_prefix: node-
 
+cert_dir: /etc/cert.d/
 ca_cert_file_name: CA_cert.crt
 server_cert_file_name: server.crt
 server_key_file_name: server.key
@@ -120,4 +121,10 @@ superset_db_name: superset
 ######################### keycloak  #####################
 keycloak_user:  keycloak
 keycloak_db_name: keycloak
+keycloak_home: /opt/keycloak
+keycloak_http_port: 6080
+keycloak_https_port: 6443
 
+keycloak_url: https://github.com/keycloak/keycloak/releases/download/21.0.1/keycloak-21.0.1.tar.gz
+keycloak_url_file_name: keycloak-21.0.1.tar.gz
+keycloak_file_name: keycloak-21.0.1

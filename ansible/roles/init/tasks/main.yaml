@@ -96,6 +96,12 @@
     group: '{{ application_group }}'
     shell: /bin/bash
 
+- name: Create user {{ keycloak_user }}
+  user:
+    name: '{{ keycloak_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
 - name: Create user superset
   user:
     name: '{{ superset_user }}'
@@ -131,17 +137,17 @@
     owner: '{{ hadoop_user }}'
     group: '{{ application_group }}'
 
-- name: create /etc/cert.d dir
+- name: create {{ cert_dir }} dir
   file:
-     path: /etc/cert.d
+     path: '{{ cert_dir }}'
      state: directory
 
 - name: copy  cert files
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
-     - { src: '{{ server_cert_file_name }}', dest: '/etc/cert.d/{{ server_cert_file_name }}'  }
-     - { src: '{{ server_key_file_name }}', dest: '/etc/cert.d/{{ server_key_file_name }}'  }
-     - { src: '{{ server_cert_key_file_name }}', dest: '/etc/cert.d/{{ server_cert_key_file_name }}'  }
+     - { src: '{{ server_cert_file_name }}', dest: '{{ cert_dir }}/{{ server_cert_file_name }}'  }
+     - { src: '{{ server_key_file_name }}', dest: '{{ cert_dir }}/{{ server_key_file_name }}'  }
+     - { src: '{{ server_cert_key_file_name }}', dest: '{{ cert_dir }}/{{ server_cert_key_file_name }}'  }
 
 - name: copy  {{ ca_cert_file_name }} to /usr/local/share/ca-certificates/
   template: src='{{ item.src }}' dest='{{ item.dest }}'

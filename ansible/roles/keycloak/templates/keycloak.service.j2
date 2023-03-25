@@ -1,0 +1,15 @@
+[Unit]
+Description=keycloak
+After=network.target
+
+[Service]
+Environment=KEYCLOAK_ADMIN=admin
+Environment=KEYCLOAK_ADMIN_PASSWORD=admin
+
+User={{ keycloak_user }}
+Group={{ application_group }}
+ExecStart={{  keycloak_home }}/bin/kc.sh start --http-port={{ keycloak_http_port }} --https-port={{ keycloak_https_port }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
