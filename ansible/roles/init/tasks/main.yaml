@@ -37,6 +37,7 @@
      - { ip: '{{ virtual_ip }}', host: '{{ superset_server }}'  }
      - { ip: '{{ virtual_ip }}', host: '{{ airflow_server }}'  }
      - { ip: '{{ virtual_ip }}', host: '{{ jupyterhub_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ trino_server }}'  }
           
 
 - name: create tmpfs mount point  

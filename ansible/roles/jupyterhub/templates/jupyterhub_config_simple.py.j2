@@ -1,9 +1,9 @@
 
 c = get_config()  #noqa
 
-c.JupyterHub.port = 9080
+c.JupyterHub.port = {{ jupyterhub_port }}
 c.JupyterHub.proxy_api_ip = "{{ inventory_hostname }}"
-c.JupyterHub.proxy_api_port = 9081
-c.JupyterHub.hub_port = 9082
+c.JupyterHub.hub_port = {{ jupyterhub_hub_port }}
+c.JupyterHub.proxy_api_port = {{ JupyterHub_api_port }}
 
 

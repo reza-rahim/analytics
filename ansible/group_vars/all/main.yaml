@@ -7,7 +7,7 @@ server_cert_file_name: server.crt
 server_key_file_name: server.key
 server_cert_key_file_name: server_crt_key.pem
 keycloak_realms: application
-client_secret: ZkVCiNnsdJkSVjIMuxQFgrUIZremZBFS
+client_secret: Mfn4234D2cHizt5jUawUgqHMR9AxLuvn
 client_id: trino
 
 ##########################   server name ##################
@@ -18,6 +18,7 @@ hive_metastore_server: metastore.mnbvcxz.com
 superset_server: superset.mnbvcxz.com
 airflow_server: airflow.mnbvcxz.com
 jupyterhub_server: jupyterhub.mnbvcxz.com
+trino_server: trino.mnbvcxz.com
 
 ####################   JDK ##########################
 java_jdk: openjdk-17-jdk 
@@ -96,6 +97,9 @@ hive_metastore_home: /opt/apache-hive-metastore
 
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
+jupyterhub_port: 9080
+jupyterhub_hub_port: 9081
+JupyterHub_api_port: 9082
 
 ######################### Trino #####################
 trino_user: trino
