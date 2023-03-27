@@ -120,6 +120,7 @@ airflow_db_name: airflow
 airflow_home: /opt/airflow
 airflow_admin_username: demo                     # change it 
 airflow_admin_password: demo                     # chamge it
+airflow_port: 5080
 
 ######################### superset  #####################
 superset_user: superset
