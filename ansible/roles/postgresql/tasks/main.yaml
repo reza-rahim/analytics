@@ -14,7 +14,7 @@
      name: "{{ db_user }}"
      password: "{{ db_password }}"
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 #### create databases
 - name: "Create hive database"
@@ -22,21 +22,21 @@
      state: present
      name: "{{ hive_db_name }}"
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 - name: "Create  {{ keycloak_db_name }} database"
   postgresql_db:
      state: present
      name: "{{ keycloak_db_name }}"
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 - name: "Create  {{ airflow_db_name }} database"
   postgresql_db:
      state: present
      name: "{{ airflow_db_name }}"
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 
 - name: "Create  {{ superset_db_name }} database"
@@ -44,7 +44,7 @@
      state: present
      name: "{{ superset_db_name }}"
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 
 ### Create db role
@@ -56,7 +56,7 @@
      grant_option: no
      privs: all
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 - name: "Grant db user access to app db"
   postgresql_privs:
@@ -66,7 +66,7 @@
      grant_option: no
      privs: all
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 - name: "Grant db user access to app db"
   postgresql_privs:
@@ -76,7 +76,7 @@
      grant_option: no
      privs: all
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 - name: "Grant db user access to app db"
   postgresql_privs:
@@ -86,7 +86,7 @@
      grant_option: no
      privs: all
   become: yes
-  become_user: postgres
+  become_user: "{{ db_user }}"
 
 
 - name: Update pg_hba.conf
@@ -101,4 +101,11 @@
      line: "listen_addresses = '*'"
   notify: restart postgresql.service
 
-  
+- name: Create airflow__extra_conf table
+  postgresql_table:
+    name: airflow__extra_conf
+    columns:
+    - conf_name  VARCHAR (255) PRIMARY KEY
+    - conf_value VARCHAR (255) NOT NULL   
+  become_user: "{{ db_user }}"
+
