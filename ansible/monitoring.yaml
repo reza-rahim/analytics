@@ -1,0 +1,22 @@
+---
+- hosts: node_exporter
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+     - node_exporter
+
+- hosts: prometheus
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+     - prometheus      
+
+- hosts: grafana
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+     - grafana
+

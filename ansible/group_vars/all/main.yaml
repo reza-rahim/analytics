@@ -65,8 +65,6 @@ iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar
 
 #####################   Postgresql   ##################
 postgresql_version: 12
-hive_db_name: hive
-airflow_db_name: airflow
 db_user: postgres                            ## pass from env 
 db_password: postgres                        ## pass from env  
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
@@ -90,6 +88,7 @@ metastore_warehouse_dir: s3a://warehouse/
 
 ####################### hive metastore ##################
 hive_user: hive
+hive_db_name: hive
 hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
@@ -115,8 +114,12 @@ trino_cli_file: trino-cli-410-executable.jar
 shared_secret: bhujd3456ndswu5!&df
 
 ######################### airflow #####################
+airflow_version: 2.5.2
 airflow_user: airflow
 airflow_db_name: airflow
+airflow_home: /opt/airflow
+airflow_admin_username: demo                     # change it 
+airflow_admin_password: demo                     # chamge it
 
 ######################### superset  #####################
 superset_user: superset

@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache Airflow Webserver
+After=network.target airflow-scheduler.service 
+
+[Service]
+EnvironmentFile={{ airflow_home }}/airflow_env.sh
+User={{ airflow_user }}
+Group={{ application_group }}
+ExecStart= bash -c '/usr/local/bin/airflow webserver'
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

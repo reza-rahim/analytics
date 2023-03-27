@@ -1,0 +1,25 @@
+---
+
+- name:
+  file:
+     path: '{{ airflow_home }}'     
+     state: directory
+     owner: '{{ airflow_user }}'   
+     group: '{{ application_group }}'
+
+- name: install apache-airflow
+  pip:
+     name: '{{ item }}'      
+  loop:
+     - 'apache-airflow=={{ airflow_version }}'
+     - apache-airflow[crypto]       
+
+- name: copy  airflow config files
+  template: src='{{ item.src }}' dest='{{ item.dest }}' owner='{{ airflow_user }}'  group='{{ application_group }}'
+  loop:
+     - { src: 'airflow-scheduler.service.j2', dest: '/etc/systemd/system/airflow-scheduler.service'  }
+     - { src: 'airflow-webserver.service.j2', dest: '/etc/systemd/system/airflow-webserver.service'  }
+     - { src: 'airflow_env.sh.j2', dest: '{{ airflow_home }}/airflow_env.sh'  }
+  notify: 
+     - restart airflow_scheduler      
+     - restart airflow_webserver     

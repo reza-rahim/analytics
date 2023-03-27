@@ -1,0 +1,17 @@
+[Unit]
+Description=Apache Airflow Scheduler
+After=network.target 
+
+[Service]
+EnvironmentFile={{ airflow_home }}/airflow_env.sh
+User={{ airflow_user }}
+Group={{ application_group }}
+ExecStart= bash -c '/usr/local/bin/airflow db upgrade; \
+                   /usr/local/bin/airflow users create -r Admin -u "$SECURITY__ADMIN_USERNAME" -e "$SECURITY__ADMIN_EMAIL" \
+                   -f "$SECURITY__ADMIN_FIRSTNAME" -l "$SECURITY__ADMIN_LASTNAME" -p "$SECURITY__ADMIN_PASSWORD"; \
+                   /usr/local/bin/airflow scheduler'
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

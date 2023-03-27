@@ -1,0 +1,21 @@
+AIRFLOW__CORE__EXECUTOR=LocalExecutor   
+AIRFLOW__CORE__LOAD_EXAMPLES=False   
+AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL=60   
+SECURITY__ADMIN_USERNAME={{ airflow_admin_username }}  
+SECURITY__ADMIN_PASSWORD={{ airflow_admin_password }}  
+DB__HOST={{ groups['postgresql'][0] }}
+DB__PORT=5432  
+DB__USERNAME={{ db_user }} 
+DB__PASSWORD={{ db_password }}
+DB__NAME={{ airflow_db_name }}
+AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://$DB__USERNAME:$DB__PASSWORD@$DB__HOST:5432/$DB__NAME
+AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=15
+
+AIRFLOW__LOGGING__LOGGING_LEVEL=WARNING
+
+
+AIRFLOW_HOME={{ airflow_home }}
+
+### spark 
+SPARK_HOME={{ spark_home }}
+PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
