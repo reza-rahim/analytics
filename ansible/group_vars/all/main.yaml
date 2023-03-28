@@ -81,6 +81,8 @@ minio_file_name: minio
 minio_dir: /opt/minio
 
 minio_user: minio-user
+minio_home: /home/minio-user
+
 fs_s3a_endpoint: http://127.0.0.1:9000
 fs_s3a_access_key: minioadmin                 ##  pass from env
 fs_s3a_secret_key: minioadmin                 ##  pass from env

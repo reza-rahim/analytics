@@ -1,2 +1,6 @@
 - name: restart start_keycloak
   service: name=keycloak.service  state=restarted enabled=yes
+
+- name: build keycloak
+  shell: '{{  keycloak_home }}/bin/kc.sh  build'  
+

@@ -4,7 +4,7 @@
       path: '{{ keycloak_home }}'
   register: stat_result
 
-- name : extract keycloa zip
+- name : extract keycloak zip
   unarchive:
      src: "http://{{ groups['repo'][0] }}/download/{{ keycloak_url_file_name }}"
      dest: /opt
