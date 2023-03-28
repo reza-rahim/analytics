@@ -1,0 +1,50 @@
+- name: create {{ cert_dir }} dir
+  file:
+     path: '{{ cert_dir }}'
+     state: directory
+
+- name: copy  cert files
+  template: src='{{ item.src }}' dest='{{ item.dest }}' mode=0640
+  loop:
+     - { src: '{{ server_cert_file_name }}', dest: '{{ cert_dir }}/{{ server_cert_file_name }}'  }
+     - { src: '{{ server_key_file_name }}', dest: '{{ cert_dir }}/{{ server_key_file_name }}'  }
+     - { src: '{{ server_cert_key_file_name }}', dest: '{{ cert_dir }}/{{ server_cert_key_file_name }}'  }
+
+- name: copy  {{ ca_cert_file_name }} to /usr/local/share/ca-certificates/
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: '{{ ca_cert_file_name }}', dest: '/usr/local/share/ca-certificates/{{ ca_cert_file_name }}' }
+  notify: run certificates
+
+- name: create {{ minio_user }}/.minio
+  file:
+     path:  '/home/{{ minio_user }}/.minio'
+     state: directory
+     owner: '{{ minio_user }}'
+     group: '{{ application_group }}'
+     mode: 0550
+
+- name: create {{ minio_user }}/.minio/certs
+  file:
+     path:  '/home/{{ minio_user }}/.minio/certs'     
+     state: directory
+     owner: '{{ minio_user }}'
+     group: '{{ application_group }}'
+     mode: 0550
+
+
+- name: create soft link to {{ minio_user }}/.certs/public.crt
+  file:
+     src: '{{ cert_dir }}/{{ server_cert_file_name }}' 
+     dest: '/home/{{ minio_user }}/.minio/certs/public.crt'
+     state: link
+     owner: '{{ minio_user }}'
+     group: '{{ application_group }}'
+
+- name: create soft link to {{ minio_user }}/.cert/public.key
+  file:
+     src: '{{ cert_dir }}/{{ server_key_file_name }}' 
+     dest: '/home/{{ minio_user }}/.minio/certs/private.key'
+     state: link
+     owner: '{{ minio_user }}'
+     group: '{{ application_group }}'

@@ -19,6 +19,7 @@ superset_server: superset.mnbvcxz.com
 airflow_server: airflow.mnbvcxz.com
 jupyterhub_server: jupyterhub.mnbvcxz.com
 trino_server: trino.mnbvcxz.com
+minio_server: minio.mnbvcxz.com
 
 ####################   JDK ##########################
 java_jdk: openjdk-17-jdk 

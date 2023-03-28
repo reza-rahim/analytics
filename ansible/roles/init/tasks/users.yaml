@@ -1,0 +1,98 @@
+
+- name: create group application
+  group:
+    name: '{{ application_group }}'
+    state: present
+
+
+- name: Create user hadoop-user
+  user:
+    name: '{{ hadoop_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash  
+
+
+- name: Create user minio-user
+  user:
+    name: '{{ minio_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash  
+
+- name: Create user spark
+  user:
+    name: '{{ spark_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user jupyterhub_user
+  user:
+    name: '{{ jupyterhub_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user hive
+  user:
+    name: '{{ hive_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user trino
+  user:
+    name: '{{ trino_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user airflow
+  user:
+    name: '{{ airflow_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user {{ keycloak_user }}
+  user:
+    name: '{{ keycloak_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash
+
+- name: Create user superset
+  user:
+    name: '{{ superset_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user keycloak
+  user:
+    name: '{{ keycloak_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+
+- name: Create user node_exporter
+  user:
+    name: '{{ node_exporter_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user prometheus
+  user:
+    name: '{{ prometheus_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user {{ grafana_user }}
+  user:
+    name: '{{ grafana_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user {{ loki_user }}
+  user:
+    name: '{{ loki_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+
+- name: Create user promtail user
+  user:
+    name: '{{ promtail_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    

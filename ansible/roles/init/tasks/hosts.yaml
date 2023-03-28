@@ -1,0 +1,14 @@
+- name: create  /etc/hosts entry
+  lineinfile:
+     dest: /etc/hosts
+     line: '{{ item.ip }} {{ item.host }}'
+  loop:
+     - { ip: '{{ virtual_ip }}', host: '{{ keyclock_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ postgres_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ hive_metastore_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ superset_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ airflow_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ jupyterhub_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ trino_server }}'  }
+     - { ip: '{{ virtual_ip }}', host: '{{ minio_server }}'  }
+

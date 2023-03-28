@@ -1,0 +1,20 @@
+- name: create tmpfs mount directory
+  file:
+     path: '{{ tmpfs_dir }}'
+     state: directory
+
+- name: create  fstab entry
+  lineinfile:
+     dest: /etc/fstab
+     line: tmpfs  /mnt/tmpfs  tmpfs   size={{ tmpfs_size }},mode=0777  0  0
+
+
+- name: create tmpfs mount point
+  command: mount -a
+
+- name: create tmpfs mount directory
+  file:
+     path: '{{ tmpfs_dir }}'
+     state: directory
+     mode: '0770'
+     group: '{{ application_group }}'

@@ -7,7 +7,7 @@
 # The command includes the port that each MinIO server listens on
 # (default 9000)
 
-MINIO_VOLUMES="http://{{ node_prefix}}{1...4}:9000/mnt/disk{1...4}/minio"
+MINIO_VOLUMES="https://{{ node_prefix}}{1...4}:9000/mnt/disk{1...4}/minio"
 
 # Set all MinIO server options
 #
@@ -38,4 +38,4 @@ MINIO_OPTS="--console-address :9001"
 # MinIO hosts in the deployment as a temporary measure.
 #MINIO_SERVER_URL="https://minio:9000"
 #
-MINIO_SERVER_URL="http://{{ groups['minio'][0] }}:9000"
+MINIO_SERVER_URL="https://{{ minio_server }}:9000"
