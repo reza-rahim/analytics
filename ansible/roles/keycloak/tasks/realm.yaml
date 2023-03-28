@@ -1,0 +1,4 @@
+---
+
+- name: create 
+  shell: '/opt/keycloak/bin/kcadm.sh config credentials  --server https://keyclock.mnbvcxz.com:6443/ --realm master --user admin --password admin'

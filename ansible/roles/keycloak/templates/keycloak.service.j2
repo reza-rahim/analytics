@@ -3,7 +3,7 @@ Description=keycloak
 After=network.target
 
 [Service]
-Environment=KEYCLOAK_ADMIN=admin
+Environment=KEYCLOAK_ADMIN= {{ }}
 Environment=KEYCLOAK_ADMIN_PASSWORD=admin
 
 User={{ keycloak_user }}
