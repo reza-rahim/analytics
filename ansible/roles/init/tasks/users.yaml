@@ -96,3 +96,10 @@
     name: '{{ promtail_user }}'
     group: '{{ application_group }}'
     shell: /bin/bash    
+
+- name: Create user '{{ kcadm_user }}' user
+  user:
+    name: '{{ kcadm_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash    
+    home: '{{ tmpfs_dir }}/kcadm'
