@@ -1,8 +1,23 @@
-./bin/kc.sh start-dev --https-port=6443 --https-certificate-file=/etc/cert.d/server.crt. --https-certificate-key-file=/etc/cert.d/server.key
 
-## Welknown endpoint
-https://node-1:6443//realms/master/.well-known/openid-configuration
 
+#### https://gist.github.com/thomasdarimont/bb702bd1160eb200147cf1bee1c1f7ed
+## 	https://mytechnicallife.quora.com/Keycloak-how-to-work-with-admin-cli
+
+```
+login in
+/opt/keycloak/bin/kcadm.sh config credentials  --server https://keyclock.mnbvcxz.com:6443/ --realm master --user admin --password admin
+
+
+KC_REALM=
+
+```
+
+
+
+
+
+
+### REST API 
 KEYCLOAK_URL=https://keyclock.mnbvcxz.com:6443/
 #CURL_CMD="curl --silent --show-error"
 
