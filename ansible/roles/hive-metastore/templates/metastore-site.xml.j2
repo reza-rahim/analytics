@@ -34,7 +34,7 @@ likely need to add a number of new values. -->
   <property>
     <name>fs.s3a.endpoint</name>
     <description>AWS S3 endpoint to connect to.</description>
-    <value>{{ fs_s3a_endpoint }}</value>
+    <value>{{ s3_protocol }}://{{ fs_s3a_endpoint }}</value>
   </property>
   <property>
     <name>fs.s3a.path.style.access</name>
@@ -57,7 +57,7 @@ likely need to add a number of new values. -->
 
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:postgresql://{{ groups['postgresql'][0] }}:5432/{{ hive_db_name }}</value>
+    <value>jdbc:postgresql://{{ virtual_ip  }}:5432/{{ hive_db_name }}</value>
     <description>PostgreSQL JDBC driver connection URL</description>
   </property>
 
@@ -66,8 +66,7 @@ likely need to add a number of new values. -->
     <value>org.postgresql.Driver</value>
     <description>PostgreSQL metastore driver class name</description>
   </property>
-
-  <property>
+    <property>
     <name>javax.jdo.option.ConnectionUserName</name>
     <value>{{ db_user }}</value>
     <description>the username for the DB instance</description>

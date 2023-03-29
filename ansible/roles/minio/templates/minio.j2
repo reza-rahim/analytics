@@ -7,7 +7,7 @@
 # The command includes the port that each MinIO server listens on
 # (default 9000)
 
-MINIO_VOLUMES="https://{{ node_prefix}}{1...4}:9000/mnt/disk{1...4}/minio"
+MINIO_VOLUMES="{{ s3_protocol }}://{{ node_prefix}}{1...4}:9000/mnt/disk{1...4}/minio"
 
 # Set all MinIO server options
 #

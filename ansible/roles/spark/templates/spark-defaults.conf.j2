@@ -26,12 +26,12 @@
 # spark.driver.memory              5g
 # spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
 
-spark.hadoop.fs.s3a.endpoint 					{{ fs_s3a_endpoint }}
+spark.hadoop.fs.s3a.endpoint 					{{ s3_protocol }}://{{ fs_s3a_endpoint }}
 spark.hadoop.hadoop.security.credential.provider.path  		{{ jceks_provider }}
 spark.sql.extensions 						org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions 
 spark.sql.catalog.spark_catalog 				org.apache.iceberg.spark.SparkSessionCatalog 
 spark.sql.catalog.spark_catalog.type 				hive 
-spark.hadoop.hive.metastore.uris				thrift://{{ groups['hive_metastore'][0] }}:9083 
+spark.hadoop.hive.metastore.uris				thrift://{{ virtual_ip }}:9083 
 spark.hadoop.hive.metastore.warehouse.dir                       {{ metastore_warehouse_dir }}
 spark.hadoop.fs.s3a.attempts.maximum                            5
 spark.hadoop.fs.s3a.aws.credentials.provider                    org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider 

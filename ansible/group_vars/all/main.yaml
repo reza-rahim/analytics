@@ -88,7 +88,7 @@ minio_home: /home/minio-user
 
 minio_redirectUris: \"localhost:8080\"
 
-fs_s3a_endpoint: http://127.0.0.1:9000
+fs_s3a_endpoint: 127.0.0.1:9000
 metastore_warehouse_dir: s3a://warehouse/
 #fs_s3a_access_key: minioadmin                 ##  pass from env
 #fs_s3a_secret_key: minioadmin                 ##  pass from env
