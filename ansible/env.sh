@@ -34,6 +34,7 @@ export MINIO_ROOT_USER=minioadmin
 export MINIO_ROOT_PASSWORD=minioadmin
 export FS_S3A_SECRET_KEY=minioadmin
 export FS_S3A_ACCESS_KEY=minioadmin
+export MINIO_TLS=true
 
 #airflow
 export AIRFLOW_ADMIN_USERNAME=demo

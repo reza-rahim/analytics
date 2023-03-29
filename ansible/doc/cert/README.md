@@ -41,6 +41,7 @@ openssl x509 -req \
 
 ## To verify that the certificate is built correctly:
 openssl verify -CAfile CA_cert.crt -verify_hostname node-1 server.crt
+openssl verify -CAfile CA_cert.crt -verify_ip  127.0.0.1  server.crt
 ```
 
 #### Step 4: Adding CA as trusted store on mac

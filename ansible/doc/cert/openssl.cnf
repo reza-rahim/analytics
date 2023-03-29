@@ -4,9 +4,8 @@ keyUsage               = nonRepudiation, digitalSignature, keyEncipherment, data
 subjectAltName         = @alt_names
 [ alt_names ]
 DNS.1 = *.mnbvcxz.com
-DNS.2 = 127.0.0.1
-DNS.3 = node-1
-DNS.4 = node-2
-DNS.5 = node-3
-DNS.6 = node-4
-
+DNS.2 = node-1
+DNS.3 = node-2
+DNS.4 = node-3
+DNS.5 = node-4
+IP.1 = 127.0.0.1
