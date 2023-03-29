@@ -12,10 +12,10 @@ User={{ minio_user }}
 Group={{ application_group }}
 ProtectProc=invisible
 
-ExecStartPre={{ minio_dir }}/decrypt_minio_env.sh
+ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
 EnvironmentFile=-/etc/default/minio
 ExecStartPre=/bin/bash -c "if [ -z \"${MINIO_VOLUMES}\" ]; then echo \"Variable MINIO_VOLUMES not set in /etc/default/minio\"; exit 1; fi"
-ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/minio.env; /usr/local/bin/minio server $MINIO_OPTS $MINIO_VOLUMES"
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ; /usr/local/bin/minio server $MINIO_OPTS $MINIO_VOLUMES"
 
 
 # Let systemd restart this service always
