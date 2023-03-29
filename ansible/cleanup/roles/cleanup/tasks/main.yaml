@@ -1,0 +1,19 @@
+---
+- name: cleanup
+  shell: '{{ item }}'
+  loop:
+          #- rm /etc/systemd/system/minio.service       
+          #- rm /etc/systemd/system/keycloak.service       
+      - 'apt remove postgresql-{{ postgresql_version }} -y'  
+      - 'apt remove python3-pip -y' 
+      - 'apt remove python3-psycopg2 -y' 
+      - 'apt remove {{ java_jdk }} -y' 
+      - 'systemctl daemon-reload'
+      - 'rm -rf /opt/*'  
+      - 'rm -rf {{ cert_dir }}'
+      - 'rm -rf {{ lockbox_dir }}'
+      - 'rm -rf {{ minio_home }}/.minio'
+      - 'rm -rf /usr/local/share/ca-certificates/{{ ca_cert_file_name }}'  
+      - 'rm -rf /usr/sbin/update-ca-certificates'  
+
+  ignore_errors: True      
