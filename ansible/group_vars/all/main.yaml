@@ -86,6 +86,8 @@ minio_dir: /opt/minio
 minio_user: minio-user
 minio_home: /home/minio-user
 
+minio_redirectUris: \"localhost:8080\"
+
 fs_s3a_endpoint: http://127.0.0.1:9000
 metastore_warehouse_dir: s3a://warehouse/
 #fs_s3a_access_key: minioadmin                 ##  pass from env
@@ -150,13 +152,14 @@ kcadm_user: kcadm
 
 ## user uuidgen to generate uuid
 keycloak_realms_devel: devel
-keycloak_minio_client_id: d90e6f09-33a2-4344-af98-c9357495cf78
-keycloak_minio_client_secret: c7372fbd-2e82-41c2-aa4e-e2dd3420c807
+keycloak_realms_bi: bi
 
-keycloak_jupiter_client_id: cd40a46c-ea67-46fd-ab8f-5772633f6d17
-keycloak_jupiter_client_secret: d3439b37-e911-489c-9d28-5ee3c62141f4
+#keycloak_minio_client_id: d90e6f09-33a2-4344-af98-c9357495cf78
+#keycloak_minio_client_secret: c7372fbd-2e82-41c2-aa4e-e2dd3420c807
+
+#keycloak_jupiter_client_id: cd40a46c-ea67-46fd-ab8f-5772633f6d17
+#keycloak_jupiter_client_secret: d3439b37-e911-489c-9d28-5ee3c62141f4
         
-keycloak_realms_user: bi_application
 
 ############################### prometheus  #########################
 prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz

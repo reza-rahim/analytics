@@ -1,4 +1,15 @@
 ---
 
-- name: create 
-  shell: '/opt/keycloak/bin/kcadm.sh config credentials  --server https://keyclock.mnbvcxz.com:6443/ --realm master --user admin --password admin'
+- name: connect to kecloak
+  shell: ' {{ item }}'
+  loop:
+      - '/opt/keycloak/bin/kcadm.sh config credentials  --server https://{{ keyclock_server }}:6443/ --realm master --user {{ Keycloak_admin }} --password {{ keycloak_admin_psassword }}'   
+      - '/opt/keycloak/bin/kcadm.sh  create realms -s realm={{ keycloak_realms_devel }} -s enabled=true'
+      - '/opt/keycloak/bin/kcadm.sh  create realms -s realm={{ keycloak_realms_bi }} -s enabled=true'
+      - '/opt/keycloak/bin/kcadm.sh create clients -r {{ keycloak_realms_devel }}   -s clientId=minio -s  id={{ keycloak_minio_client_id }}  -s enabled=true -s clientAuthenticatorType=client-secret -s secret={{ keycloak_minio_client_secret }} -s "redirectUris=[{{ minio_redirectUris }}]"'  
+      - '/opt/keycloak/bin/kcadm.sh create users -r {{ keycloak_realms_devel }}  -s username={{ keycloak_devel_user }}'
+      - '/opt/keycloak/bin/kcadm.sh set-password -r {{ keycloak_realms_devel }}  --username {{ keycloak_devel_user }} --new-password {{ keycloak_devel_password }}'
+
+  become: yes
+  become_user: '{{ kcadm_user }}' 
+  ignore_errors: yes
