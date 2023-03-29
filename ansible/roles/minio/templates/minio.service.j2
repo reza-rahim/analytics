@@ -2,7 +2,7 @@
 Description=MinIO
 Documentation=https://min.io/docs/minio/linux/index.html
 Wants=network-online.target
-After=network-online.target
+After=network-online.target postgresql.service keycloak.service
 AssertFileIsExecutable=/usr/local/bin/minio
 
 [Service]
