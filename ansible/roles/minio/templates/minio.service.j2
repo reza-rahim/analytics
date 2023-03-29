@@ -8,6 +8,13 @@ AssertFileIsExecutable=/usr/local/bin/minio
 [Service]
 WorkingDirectory=/home/minio-user
 
+Environment=MINIO_IDENTITY_OPENID_CONFIG_URL_PRIMARY_IAM="https://keyclock.mnbvcxz.com:6443/realms/devel/.well-known/openid-configuration"
+Environment=MINIO_IDENTITY_OPENID_CLIENT_ID_PRIMARY_IAM="minio"
+Environment=MINIO_IDENTITY_OPENID_CLIENT_SECRET_PRIMARY_IAM="cTsjN7SHq3D7dHvPD88eX5z0vq1XyzNM"
+Environment=MINIO_IDENTITY_OPENID_DISPLAY_NAME_PRIMARY_IAM="SSO_IDENTIFIER"
+Environment=MINIO_IDENTITY_OPENID_SCOPES_PRIMARY_IAM="openid,email,preferred_username"
+Environment=MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC_PRIMARY_IAM="on"
+
 User={{ minio_user }}
 Group={{ application_group }}
 ProtectProc=invisible
