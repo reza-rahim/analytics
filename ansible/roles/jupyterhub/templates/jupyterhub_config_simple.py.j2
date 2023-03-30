@@ -1,9 +1,23 @@
+from oauthenticator.generic import GenericOAuthenticator
 
 c = get_config()  #noqa
 
 c.JupyterHub.port = {{ jupyterhub_port }}
-c.JupyterHub.proxy_api_ip = "{{ inventory_hostname }}"
+c.JupyterHub.proxy_api_ip = "{{ jupyterhub_server }}"
 c.JupyterHub.hub_port = {{ jupyterhub_hub_port }}
 c.JupyterHub.proxy_api_port = {{ JupyterHub_api_port }}
 
+c.JupyterHub.ssl_cert = '{{ cert_dir }}/{{ server_cert_file_name }}'
+c.JupyterHub.ssl_key = '{{ cert_dir }}/{{ server_key_file_name }}'
+
+c.JupyterHub.authenticator_class = GenericOAuthenticator
+
+c.GenericOAuthenticator.client_id='{{ keycloak_jupyter_client_id }}'
+c.GenericOAuthenticator.client_secret='{{ keycloak_jupyter_client_secret }}'
+c.GenericOAuthenticator.token_url = 'https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}/protocol/openid-connect/token'
+c.GenericOAuthenticator.userdata_url = 'https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}/protocol/openid-connect/userinfo'
+c.GenericOAuthenticator.userdata_params = {'state': 'state'}
+c.GenericOAuthenticator.username_key = 'preferred_username'
+c.GenericOAuthenticator.login_service = 'Keycloak'
+c.GenericOAuthenticator.scope = ['openid', 'profile']
 

@@ -62,3 +62,51 @@
 }
 EOF
 
+/opt/keycloak/bin/kcadm.sh create clients -r {{ keycloak_realms_devel }} -f - << EOF
+{
+  "id" : "{{ keycloak_jupyter_id }}",
+  "clientId" : "{{ keycloak_jupyter_client_id }}",
+  "name" : "",
+  "description" : "",
+  "rootUrl" : "",
+  "adminUrl" : "",
+  "baseUrl" : "",
+  "surrogateAuthRequired" : false,
+  "enabled" : true,
+  "alwaysDisplayInConsole" : true,
+  "clientAuthenticatorType" : "client-secret",
+  "secret" : "{{ keycloak_jupyter_client_secret }}",
+  "redirectUris" : [ "", "https://{{ jupyterhub_server }}:{{ jupyterhub_port }}/*" ],
+  "webOrigins" : [ "" ],
+  "notBefore" : 0,
+  "bearerOnly" : false,
+  "consentRequired" : false,
+  "standardFlowEnabled" : true,
+  "implicitFlowEnabled" : false,
+  "directAccessGrantsEnabled" : true,
+  "serviceAccountsEnabled" : false,
+  "publicClient" : false,
+  "frontchannelLogout" : true,
+  "protocol" : "openid-connect",
+  "attributes" : {
+    "oidc.ciba.grant.enabled" : "false",
+    "client.secret.creation.time" : "1680128019",
+    "backchannel.logout.session.required" : "true",
+    "display.on.consent.screen" : "false",
+    "oauth2.device.authorization.grant.enabled" : "false",
+    "backchannel.logout.revoke.offline.tokens" : "false"
+  },
+  "authenticationFlowBindingOverrides" : { },
+  "fullScopeAllowed" : true,
+  "nodeReRegistrationTimeout" : -1,
+  "defaultClientScopes" : [ "web-origins", "acr", "roles", "profile", "email" ],
+  "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ],
+  "access" : {
+    "view" : true,
+    "configure" : true,
+    "manage" : true
+  }
+}
+EOF
+
+

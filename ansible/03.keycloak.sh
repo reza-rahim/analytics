@@ -2,9 +2,9 @@ ansible-playbook -i inventory.ini \
 -e keycloak_minio_id=$KEYCLOAK_MINIO_ID \
 -e keycloak_minio_client_id=$KEYCLOAK_MINIO_CLIENT_ID \
 -e keycloak_minio_client_secret=$KEYCLOAK_MINIO_CLIENT_SECRET \
--e keycloak_jupiter_id=$KEYCLOAK_JUPITER_ID \
--e keycloak_jupiter_client_id=$KEYCLOAK_JUPITER_CLIENT_ID \
--e keycloak_jupiter_client_secret=$KEYCLOAK_JUPITER_CLIENT_SECRET \
+-e keycloak_jupyter_id=$KEYCLOAK_JUPYTER_ID \
+-e keycloak_jupyter_client_id=$KEYCLOAK_JUPYTER_CLIENT_ID \
+-e keycloak_jupyter_client_secret=$KEYCLOAK_JUPYTER_CLIENT_SECRET \
 -e keycloak_trino_id=$KEYCLOAK_TRINO_ID \
 -e keycloak_trino_client_id=$KEYCLOAK_TRINO_CLIENT_ID \
 -e keycloak_trino_client_secret=$KEYCLOAK_TRINO_CLIENT_SECRET \

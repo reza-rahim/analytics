@@ -7,6 +7,9 @@ https://www.youtube.com/watch?v=J0GWqfhs4ys&list=PLRTM7OTAxy3OcmFEZeIcRgyYBjFR9y
 #### 	https://mytechnicallife.quora.com/Keycloak-how-to-work-with-admin-cli
 
 ```
+## https://keyclock.mnbvcxz.com:6443/realms/devel/.well-known/openid-configuration
+
+
 ## login 
 /opt/keycloak/bin/kcadm.sh config credentials --server https://keyclock.mnbvcxz.com:6443/ --realm master --user admin --password admin
 

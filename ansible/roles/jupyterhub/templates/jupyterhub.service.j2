@@ -9,6 +9,7 @@ After=network.target
 Environment=JAVA_HOME={{ java_home }}
 Environment=HADOOP_HOME={{ hadoop_home }}
 Environment=SPARK_HOME={{ spark_home }}
+Environment=OAUTH2_AUTHORIZE_URL=https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}/protocol/openid-connect/auth
 
 ExecStart=jupyterhub -f /etc/jupyterhub/jupyterhub_config_simple.py
 Restart=on-failure

@@ -1,4 +1,4 @@
 ---
-#- include: install.yaml
-#- include: config.yaml
+- include: install.yaml
+- include: config.yaml
 - include:  realm.yaml 

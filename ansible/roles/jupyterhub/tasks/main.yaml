@@ -34,6 +34,7 @@
   loop:
     - jupyterhub      
     - JupyterLab
+    - oauthenticator
     - pyspark
     - findspark
     - numpy 
