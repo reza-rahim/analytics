@@ -6,9 +6,9 @@
      - { src: 'realm.sh.j2', dest: '{{ tmpfs_dir }}/kcadm/realm.sh'  }
   become: yes
   become_user: '{{ kcadm_user }}' 
-  ignore_errors: yes
 
 - name: run the srcipt
-  shell: '{{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh ; rm -rf {{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh ;'
+  shell: '{{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh; rm -f {{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh'
+  become: yes
   become_user: '{{ kcadm_user }}' 
   ignore_errors: yes
