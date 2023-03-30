@@ -4,6 +4,7 @@ ansible-playbook -i inventory.ini \
 -e keycloak_jupiter_client_id=$KEYCLOAK_JUPITER_CLIENT_ID \
 -e keycloak_jupiter_client_secret=$KEYCLOAK_JUPITER_CLIENT_SECRET \
 -e keycloak_trino_client_id=$KEYCLOAK_TRINO_CLIENT_ID \
+-e keycloak_trino_client_secret=$KEYCLOAK_TRINO_CLIENT_SECRET \
 -e keycloak_superset_client_id=$KEYCLOAK_SUPERSET_CLIENT_ID \
 -e keycloak_superset_client_secret=$KEYCLOAK_SUPERSET_CLIENT_SECREt \
 -e keycloak_airflow_client_id=$KEYCLOAK_AIRFLOW_CLIENT_ID \

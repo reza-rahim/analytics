@@ -1,7 +1,7 @@
 coordinator=true
 node-scheduler.include-coordinator=true
 http-server.http.port={{ trino_port }}
-discovery.uri=http://{{ groups['trino'][0] }}:{{ trino_port }}
+discovery.uri=http://{{ trino_server }}:{{ trino_port }}
 
 internal-communication.shared-secret={{ shared_secret }}
 
@@ -12,6 +12,6 @@ http-server.https.keystore.path={{ cert_dir }}/{{ server_cert_key_file_name }}
 #http-server.authentication.type=PASSWORD,oauth2
 http-server.authentication.type=oauth2
 web-ui.authentication.type=oauth2
-http-server.authentication.oauth2.issuer=https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_realms }}
-http-server.authentication.oauth2.client-id={{ client_id }}
-http-server.authentication.oauth2.client-secret={{ client_secret }}
+http-server.authentication.oauth2.issuer=https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}
+http-server.authentication.oauth2.client-id={{ keycloak_trino_client_id }}
+http-server.authentication.oauth2.client-secret={{ keycloak_trino_client_secret }}

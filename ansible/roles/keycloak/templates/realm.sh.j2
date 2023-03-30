@@ -1,0 +1,64 @@
+#!/bin/bash
+
+/opt/keycloak/bin/kcadm.sh config credentials  --server https://{{ keyclock_server }}:6443/ --realm master --user {{ Keycloak_admin }} --password {{ keycloak_admin_psassword }}
+
+## create realms
+/opt/keycloak/bin/kcadm.sh  create realms -s realm={{ keycloak_realms_devel }} -s enabled=true
+/opt/keycloak/bin/kcadm.sh  create realms -s realm={{ keycloak_realms_bi }} -s enabled=true
+
+#### users
+/opt/keycloak/bin/kcadm.sh create users -r {{ keycloak_realms_devel }}  -s username={{ keycloak_devel_user }} -s enabled=true
+/opt/keycloak/bin/kcadm.sh create users -r {{ keycloak_realms_bi }}  -s username={{ keycloak_bi_user }} -s enabled=true
+
+
+### create password
+/opt/keycloak/bin/kcadm.sh set-password -r  {{ keycloak_realms_devel }} --username {{ keycloak_devel_user }}  --new-password {{ keycloak_devel_password }}
+/opt/keycloak/bin/kcadm.sh set-password -r  {{ keycloak_realms_bi }} --username {{ keycloak_devel_user }}   --new-password {{ keycloak_bi_password }}
+
+/opt/keycloak/bin/kcadm.sh create clients -r {{ keycloak_realms_bi }} -f - << EOF
+{
+  "id" : "{{ keycloak_trino_id }}",
+  "clientId" : "{{ keycloak_trino_client_id }}",
+  "name" : "",
+  "description" : "",
+  "rootUrl" : "",
+  "adminUrl" : "",
+  "baseUrl" : "",
+  "surrogateAuthRequired" : false,
+  "enabled" : true,
+  "alwaysDisplayInConsole" : true,
+  "clientAuthenticatorType" : "client-secret",
+  "secret" : "{{ keycloak_trino_client_secret }}",
+  "redirectUris" : [ "", "https://{{ trino_server }}:{{ trino_tls_port }}/*" ],
+  "webOrigins" : [ "" ],
+  "notBefore" : 0,
+  "bearerOnly" : false,
+  "consentRequired" : false,
+  "standardFlowEnabled" : true,
+  "implicitFlowEnabled" : false,
+  "directAccessGrantsEnabled" : true,
+  "serviceAccountsEnabled" : false,
+  "publicClient" : false,
+  "frontchannelLogout" : true,
+  "protocol" : "openid-connect",
+  "attributes" : {
+    "oidc.ciba.grant.enabled" : "false",
+    "client.secret.creation.time" : "1680128019",
+    "backchannel.logout.session.required" : "true",
+    "display.on.consent.screen" : "false",
+    "oauth2.device.authorization.grant.enabled" : "false",
+    "backchannel.logout.revoke.offline.tokens" : "false"
+  },
+  "authenticationFlowBindingOverrides" : { },
+  "fullScopeAllowed" : true,
+  "nodeReRegistrationTimeout" : -1,
+  "defaultClientScopes" : [ "web-origins", "acr", "roles", "profile", "email" ],
+  "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ],
+  "access" : {
+    "view" : true,
+    "configure" : true,
+    "manage" : true
+  }
+}
+EOF
+

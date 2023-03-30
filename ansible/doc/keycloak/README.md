@@ -8,22 +8,26 @@ https://www.youtube.com/watch?v=J0GWqfhs4ys&list=PLRTM7OTAxy3OcmFEZeIcRgyYBjFR9y
 
 ```
 ## login 
-/opt/keycloak/bin/kcadm.sh config credentials  --server https://keyclock.mnbvcxz.com:6443/ --realm master --user admin --password admin
+/opt/keycloak/bin/kcadm.sh config credentials --server https://keyclock.mnbvcxz.com:6443/ --realm master --user admin --password admin
 
 export REALM=devel
 /opt/keycloak/bin/kcadm.sh  create realms -s realm=$REALM -s enabled=true
 
-/opt/keycloak/bin/kcadm.sh get  realms 
-/opt/keycloak/bin/kcadm.sh delete  realms/devel
-/opt/keycloak/bin/kcadm.sh get  realms/devel
+/opt/keycloak/bin/kcadm.sh get realms 
+/opt/keycloak/bin/kcadm.sh delete realms/devel
+/opt/keycloak/bin/kcadm.sh get realms/devel
 
-/opt/keycloak/bin/kcadm.sh create clients -r $REALM  -s clientId=minio \
-     -s  id=590d3a24-hf46-4ce2-9536-6d2d166d1b8d  -s enabled=true \
-     -s clientAuthenticatorType=client-secret -s secret=secret \
-     -s 'redirectUris=["localhost:8080"]'
+/opt/keycloak/bin/kcadm.sh create clients -r $REALM  -s clientId=trino \
+     -s  id=098bbefa-98c3-43fc-a4a7-f3b4322ef725  -s enabled=true \
+     -s clientAuthenticatorType=client-secret -s secret=55c5b0fa-a8a4-401c-932f-4a6d2eb572ef \
+     -s 'redirectUris=["https://trino.mnbvcxz.com:7443/oauth2/callback"]'
 
-/opt/keycloak/bin/kcadm.sh create users -r $REALM  -s username=demo
+/opt/keycloak/bin/kcadm.sh create users -r $REALM  -s username=demo -s enabled=true
 /opt/keycloak/bin/kcadm.sh set-password -r $REALM --username demo --new-password demo
+
+
+ /opt/keycloak/bin/kcadm.sh get -r bi clients
+
 
 ```
 
