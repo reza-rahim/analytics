@@ -201,3 +201,11 @@ loki_user: loki
 ############
 promtail_user: promtail
 
+
+############# Zookeeper ################
+zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
+zookeeper_url_file_name: apache-zookeeper-3.8.0-bin.tar.gz
+zookeeper_file_name: apache-zookeeper-3.8.0-bin        
+zookeeper_user: zookeeper
+zookeeper_home: /opt/zookeeper
+zookeeper_data_dir: /var/zookeeper/data/

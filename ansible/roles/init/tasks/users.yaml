@@ -103,3 +103,9 @@
     group: '{{ application_group }}'
     shell: /bin/bash    
     home: '{{ tmpfs_dir }}/kcadm'
+
+- name: Create user '{{ zookeeper_user }}' user
+  user:
+    name: '{{ zookeeper_user }}'
+    group: '{{ application_group }}'
+    shell: /bin/bash

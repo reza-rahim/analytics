@@ -3,7 +3,7 @@
      name: nginx      
   notify: restart nginx
 
-- name: copy  spark-master.service
+- name: copy  static-file-server.conf
   template: src='static-file-server.conf.j2' dest='/etc/nginx/conf.d/static-file-server.conf'
   notify: restart nginx
 
@@ -32,6 +32,7 @@
      - '{{ prometheus_url }}'  
      - '{{ node_exporter_url }}'  
      - '{{ grafana_url }}'  
+     - '{{ zookeeper_url }}'  
 
 - name: Check that the  /usr/local/sbin/mc exists
   stat:
