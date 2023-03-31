@@ -1,0 +1,4 @@
+spark.deploy.recoveryMode=ZOOKEEPER
+spark.deploy.zookeeper.url={% for host in groups['zookeeper'] -%} {{ host }}:{{ zookeeper_clientPort }}{% if not loop.last %},{% endif %} {%- endfor %}
+
+spark.deploy.zookeeper.dir=/spark

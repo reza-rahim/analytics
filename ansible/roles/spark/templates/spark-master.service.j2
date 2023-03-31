@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User={{ spark_user }}
 Group={{ application_group }}
-ExecStart=/opt/spark/sbin/start-master.sh -h {{ groups['spark_master'][0] }}
+ExecStart=/opt/spark/sbin/start-master.sh -h {{ inventory_hostname }} -p {{ spark_rpc_port }} --webui-port {{ spark_webui_port }} --properties-file {{ spark_home }}/conf/ha.conf
 ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure
 

@@ -41,9 +41,10 @@
      - { src: 'spark-master.service.j2', dest: '/etc/systemd/system/spark-master.service'  }
      - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
      - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+     - { src: 'ha.conf.j2', dest: '{{ spark_home }}/conf/ha.conf'  }
   when: >
-    inventory_hostname in groups['spark_master'] and
-    groups['spark_master'].index(inventory_hostname) == 0
+    inventory_hostname in groups['spark_master'] 
+    and ( groups['spark_master'].index(inventory_hostname) == 0 or groups['spark_master'].index(inventory_hostname) == 1 )
   notify: restart start_master
 
 - name: copy 
@@ -62,5 +63,5 @@
      - { src: 'spark-history.service.j2', dest: '/etc/systemd/system/spark-history.service'  }
   when: >
     inventory_hostname in groups['spark_master'] and
-    groups['spark_history'].index(inventory_hostname) == 0
+    (groups['spark_history'].index(inventory_hostname) == 0 or groups['spark_history'].index(inventory_hostname) == 1)
   notify: restart start_history
