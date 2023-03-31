@@ -34,5 +34,7 @@
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: '{{ ca_cert_file_name }}', dest: '/usr/local/share/ca-certificates/{{ ca_cert_file_name }}' }
-  notify: run certificates
+   #notify: run certificates
 
+- name:  run /usr/sbin/update-ca-certificates
+  shell: /usr/sbin/update-ca-certificates
