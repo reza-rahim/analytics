@@ -35,5 +35,6 @@
   loop:
      - { src: 'zoo.cfg.j2', dest: '{{ zookeeper_home }}/conf/zoo.cfg'  }
      - { src: 'myid.j2', dest: '{{ zookeeper_data_dir }}/myid'  }
-  #notify: restart zookeeper
+     - { src: 'zookeeper.service.j2', dest: '/etc/systemd/system/zookeeper.service'  }
+  notify: restart zookeeper
 

@@ -8,6 +8,7 @@ syncLimit=5
 autopurge.purgeInterval=24 
 autopurge.snapRetainCount=3 
 
+
 {% for host in groups['zookeeper'] %}
 server.{{ loop.index }}={{ host }}:2888:3888
 {% endfor %}
