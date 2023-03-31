@@ -1,0 +1,48 @@
+---
+
+- name: copy worker files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-worker-1.service.j2', dest: '/etc/systemd/system/spark-worker-1.service'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+  when: >
+    inventory_hostname in groups['spark_worker']
+    and  spark_worker_1  == 1
+  notify: restart start_worker_1
+
+
+- name: copy worker-2 files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-worker-2.service.j2', dest: '/etc/systemd/system/spark-worker-2.service'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+  when: >
+    inventory_hostname in groups['spark_worker']
+    and  spark_worker_2  == 1
+  notify: restart start_worker_2  
+
+- name: copy worker-3  files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-worker-3.service.j2', dest: '/etc/systemd/system/spark-worker-3.service'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+  when: >
+    inventory_hostname in groups['spark_worker']
+    and  spark_worker_3  == 1
+  notify: restart start_worker_3
+
+- name: copy worker-4 files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-worker-4.service.j2', dest: '/etc/systemd/system/spark-worker-4.service'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+  when: >
+    inventory_hostname in groups['spark_worker']
+    and  spark_worker_4  == 1
+  notify: restart start_worker_4
+
+

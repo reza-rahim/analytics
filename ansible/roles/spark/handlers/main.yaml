@@ -4,5 +4,17 @@
 - name: restart start_worker
   service: name=spark-worker.service  state=restarted enabled=yes
 
+- name: restart start_worker_1
+  service: name=spark-worker-1.service  state=restarted enabled=yes
+
+- name: restart start_worker_2
+  service: name=spark-worker-2.service  state=restarted enabled=yes
+
+- name: restart start_worker_3
+  service: name=spark-worker-3.service  state=restarted enabled=yes
+
+- name: restart start_worker_4
+  service: name=spark-worker-4.service  state=restarted enabled=yes
+
 - name: restart start_history
   service: name=spark-history.service  state=restarted enabled=yes

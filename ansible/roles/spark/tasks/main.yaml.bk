@@ -1,0 +1,67 @@
+---
+
+- name: Check that the spark_install_dir exists
+  stat:
+      path: '{{ spark_home }}'
+  register: stat_result
+ 
+- name : extract spark zip
+  unarchive:
+     src: "http://{{ groups['repo'][0] }}/download/{{ spark_file_name }}.tgz"
+     dest: /opt
+     remote_src: true
+     owner: '{{ spark_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists  
+
+
+- name: create soft link to /opt/spark   
+  file:
+     src: '/opt/{{ spark_file_name }}'
+     dest: '/opt/spark'
+     state: link
+     owner: '{{ spark_user }}'
+     group: '{{ application_group }}'
+  when: not stat_result.stat.exists  
+
+- name: get extra jar files 
+  get_url:
+     url: '{{ item }}'
+     dest: '{{ spark_home }}/jars'
+     owner: '{{ spark_user }}'
+     group: '{{ application_group }}'
+  loop:
+     - "http://{{ groups['repo'][0] }}/download/{{ hadoop_aws_file_name }}" 
+     - "http://{{ groups['repo'][0] }}/download/{{ aws_java_sdk_bundle_file_name }}" 
+     - "http://{{ groups['repo'][0] }}/download/{{ iceberg_spark_runtime_file_name }}" 
+
+- name: copy  spark-master.service
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-master.service.j2', dest: '/etc/systemd/system/spark-master.service'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+     - { src: 'ha.conf.j2', dest: '{{ spark_home }}/conf/ha.conf'  }
+  when: >
+    inventory_hostname in groups['spark_master'] 
+    and ( groups['spark_master'].index(inventory_hostname) == 0 or groups['spark_master'].index(inventory_hostname) == 1 )
+  notify: restart start_master
+
+- name: copy 
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-worker.service.j2', dest: '/etc/systemd/system/spark-worker.service'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
+  when: >
+    inventory_hostname in groups['spark_worker']
+  notify: restart start_worker
+
+- name: copy  spark-history.service
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'spark-history.service.j2', dest: '/etc/systemd/system/spark-history.service'  }
+  when: >
+    inventory_hostname in groups['spark_master'] and
+    (groups['spark_history'].index(inventory_hostname) == 0 or groups['spark_history'].index(inventory_hostname) == 1)
+  notify: restart start_history

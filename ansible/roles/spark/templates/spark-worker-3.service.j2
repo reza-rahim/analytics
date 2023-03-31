@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache Spark Master 
+After=network.target
+
+[Service]
+User={{ spark_user }}
+Group={{ application_group }}
+ExecStart=/opt/spark/sbin/start-worker.sh  spark://{% for host in groups['spark_master'] -%} {{ host }}:{{ spark_rpc_port }}{% if not loop.last %},{% endif %} {%- endfor %} 
+
+ExecStop=/opt/spark/sbin/start-worker.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
