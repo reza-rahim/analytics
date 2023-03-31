@@ -55,9 +55,6 @@ spark_user: spark
 spark_webui_port: 8080
 spark_rpc_port: 7077
 spark_history_ui_port: 18080
-## if value set to one, deploy that worker
-spark_worker_1: 1
-spark_worker_2: 1
 
 
 

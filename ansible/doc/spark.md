@@ -1,4 +1,6 @@
 
+### https://luminousmen.com/post/dive-into-spark-memory
+
 ## sparksql
 /opt/spark/bin/spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.1.0 \
  --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
