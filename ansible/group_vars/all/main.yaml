@@ -53,11 +53,20 @@ hadoop_install_dir: /opt/hadoop
 spark_home: /opt/spark/
 spark_user: spark
 
+
 spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
 spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
 
 spark_worker_memory: 8gb                     ##  adjust it
 spark_worker_cores: 3                        ##  adjust it
+spark_deploy_defaultCores: 2                ##  adjust it
+spark_cores_max: 4                          ##  adjust it
+spark_driver_cores: 1                      ##  adjust it
+spark_driver_memory: 1g
+spark_executor_memory: 2g
+spark_executor_cores: 2
+
+
 
 spark_history_location: s3a://spark/logs
 
