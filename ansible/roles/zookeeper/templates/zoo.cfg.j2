@@ -3,3 +3,11 @@ dataDir={{ zookeeper_data_dir }}
 clientPort={{ zookeeper_clientPort }}
 admin.enableServer=false
 maxClientCnxns=60
+initLimit=10
+syncLimit=5
+autopurge.purgeInterval=24 
+autopurge.snapRetainCount=3 
+
+{% for host in groups['zookeeper'] %}
+server.{{ loop.index }}={{ host }}:2888:3888
+{% endfor %}

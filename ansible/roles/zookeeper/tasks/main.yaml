@@ -34,5 +34,6 @@
   template: src='{{ item.src }}' dest='{{ item.dest }}'  owner='{{ zookeeper_user }}' group='{{ application_group }}'
   loop:
      - { src: 'zoo.cfg.j2', dest: '{{ zookeeper_home }}/conf/zoo.cfg'  }
+     - { src: 'myid.j2', dest: '{{ zookeeper_data_dir }}/myid'  }
   #notify: restart zookeeper
 
