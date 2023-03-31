@@ -48,6 +48,7 @@ spark.hadoop.fs.s3a.aws.credentials.provider                    org.apache.hadoo
 spark.sql.parquet.mergeSchema                                   false 
 
 spark.worker.cleanup.enabled					true
+
 spark.deploy.defaultCores                                       {{ spark_deploy_defaultCores }}
 spark.cores.max                                                 {{ spark_cores_max }}
 spark.driver.cores                                              {{ spark_driver_cores }}
@@ -57,7 +58,8 @@ spark.executor.cores                                            {{ spark_executo
 
 spark.dynamicAllocation.enabled					true
 spark.dynamicAllocation.shuffleTracking.enabled                 true
-#spark.shuffle.service.enabled                                   true
 
 spark.sql.execution.arrow.pyspark.enabled                       true
 spark.rdd.compress                                              true
+
+spark.scheduler.mode                                            FAIR
