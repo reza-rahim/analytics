@@ -1,0 +1,20 @@
+---
+
+- name: install s3fs
+  apt:
+     name: s3fs
+
+- name: Create {{ fuse_home }}
+  file: 
+     path: '{{ fuse_home }}' 
+     state: directory
+
+
+- name: copy fuse config files 
+  template: src='{{ item.src }}' dest='{{ item.dest }}' mode=750
+  loop:
+     #- { src: 'jupyterhub.service.j2', dest: '/etc/systemd/system/jupyterhub.service'  }      
+     - { src: 'mount_fuse.sh.j2', dest: '{{ fuse_home }}/mount_fuse.sh'  }      
+       #notify: restart  
+
+

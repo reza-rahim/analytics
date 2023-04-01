@@ -1,0 +1,14 @@
+#!/bin/bash
+
+/etc/lockbox/decrypt_lockbox.sh 
+
+source  /mnt/tmpfs/lockbox.env
+echo  $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY > /mnt/tmpfs/s3cred
+chmod 600 /mnt/tmpfs/s3cred 
+
+group=`id -g airflow`
+
+s3fs {{ jupyterhub_s3_bucket }} {{ jupyter_local_path }} -o passwd_file=/mnt/tmpfs/s3cred,umask=022,use_path_request_style,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
+s3fs {{ airflow_s3_bucket }}  {{ airflow_dag_path }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
+
+rm -f /mnt/tmpfs/s3cred

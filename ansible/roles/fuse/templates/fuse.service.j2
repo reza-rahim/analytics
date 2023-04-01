@@ -1,0 +1,13 @@
+[Unit]
+Description= fune service
+After=network.target
+
+[Service]
+
+Type=oneshot
+
+ExecStart=/opt/fuse/mount_fuse.sh
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

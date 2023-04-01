@@ -23,3 +23,10 @@
   notify: 
      - restart airflow_scheduler      
      - restart airflow_webserver     
+
+- name: create airflow dag directoru 
+  file:
+     path: '{{ airflow_dag_path }}'
+     state: directory
+     owner: '{{ airflow_user }}'   
+     group: '{{ application_group }}'

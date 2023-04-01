@@ -128,6 +128,8 @@ jupyterhub_user: jupyterhub
 jupyterhub_port: 9080
 jupyterhub_hub_port: 9081
 JupyterHub_api_port: 9082
+jupyterhub_s3_bucket: jupyterhub
+jupyter_local_path: /home/jupyterhub/s3
 
 ######################### Trino #####################
 trino_user: trino
@@ -150,6 +152,8 @@ airflow_home: /opt/airflow
 #airflow_admin_username: demo                     # change it 
 #airflow_admin_password: demo                     # chamge it
 airflow_port: 5080
+airflow_s3_bucket: airflow
+airflow_dag_path: /opt/airflow/dags
 
 ######################### superset  #####################
 superset_user: superset
@@ -221,3 +225,7 @@ zookeeper_home: /opt/zookeeper
 zookeeper_data_dir: /var/zookeeper/data/
 zookeeper_clientPort: 2181 
 
+
+######################## fuse ################
+
+fuse_home: /opt/fuse
