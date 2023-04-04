@@ -62,7 +62,6 @@ spark_worker_2: 1
 spark_worker_3: 0
 spark_worker_4: 0
 
-
 spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
 spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
 
@@ -75,8 +74,6 @@ spark_driver_cores: 1                      ##  adjust it
 spark_driver_memory: 1g
 spark_executor_memory: 2g
 spark_executor_cores: 2
-
-
 
 spark_history_location: s3a://spark/logs
 
@@ -181,8 +178,6 @@ kcadm_user: kcadm
 keycloak_realms_devel: devel
 keycloak_realms_bi: bi
 
-        
-
 ############################### prometheus  #########################
 prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
 prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
@@ -207,14 +202,11 @@ grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
 grafana_file_name: grafana-9.4.3
 grafana_home: /opt/grafana
 
-
-
 #############
 loki_user: loki
 
 ############
 promtail_user: promtail
-
 
 ############# Zookeeper ################
 zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
@@ -225,7 +217,12 @@ zookeeper_home: /opt/zookeeper
 zookeeper_data_dir: /var/zookeeper/data/
 zookeeper_clientPort: 2181 
 
-
 ######################## fuse ################
 
 fuse_home: /opt/fuse
+
+######################## patroni ################
+patroni_home: /opt/patroni
+patroni_data_dir: /var/data/patroni
+patroni_pgpass: /tmp/pgpass
+
