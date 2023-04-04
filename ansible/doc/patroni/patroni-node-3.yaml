@@ -1,6 +1,6 @@
 scope: patroni
 namespace: /service/
-name: postgresql0
+name: postgresql1
 
 restapi:
     listen: node-3:8008
