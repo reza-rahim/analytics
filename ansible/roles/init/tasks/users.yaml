@@ -60,9 +60,9 @@
     group: '{{ application_group }}'
     shell: /bin/bash    
 
-- name: Create user keycloak
+- name: Create user {{ db_user }}
   user:
-    name: '{{ keycloak_user }}'
+    name: '{{ db_user }}'
     group: '{{ application_group }}'
     shell: /bin/bash    
 

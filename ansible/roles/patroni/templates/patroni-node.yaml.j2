@@ -3,8 +3,8 @@ namespace: /db/
 name: postgresql-{{groups['patroni'].index(inventory_hostname)}}
 
 restapi:
-    listen: {{ inventory_hostname }}:8008
-    connect_address: {{ inventory_hostname }}:8008
+    listen: {{ inventory_hostname }}:{{ partoni_restapi_port }}
+    connect_address: {{ inventory_hostname }}:{{ partoni_restapi_port }}
 
 bootstrap:
     dcs:
@@ -29,14 +29,14 @@ bootstrap:
 zookeeper:
   hosts: 
     {% for host in groups['zookeeper'] %}
-   - {{ host }}:2181
+   - {{ host }}:{{ zookeeper_clientPort }}
     {% endfor %}
 
   use_ssl: false      
 
 postgresql:
-    listen: {{ inventory_hostname }}:5432
-    connect_address: {{ inventory_hostname }}:5432    
+    listen: {{ inventory_hostname }}:{{ postgresql_port }}
+    connect_address: {{ inventory_hostname }}:{{ postgresql_port }}   
     data_dir: {{ patroni_data_dir }}
     bin_dir: /usr/lib/postgresql/{{ postgresql_version }}/bin
     pgpass: {{ patroni_pgpass }}

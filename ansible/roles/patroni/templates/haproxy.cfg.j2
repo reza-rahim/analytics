@@ -1,0 +1,27 @@
+global
+	maxconn 100
+
+defaults
+	log global
+	mode tcp
+	retries 2
+	timeout client 30m
+	timeout connect 4s
+	timeout server 30m
+	timeout check 5s
+
+
+listen stats
+	mode http
+	bind *:7000
+	stats enable
+	stats uri /
+
+listen partoni
+	bind *:{{ partoni_haproxy_port }}
+	option httpchk
+	http-check expect status 200
+	default-server inter 3s fall 3 rise 2 on-marked-down shutdown-sessions
+        { % for host in groups['zookeeper'] %}
+    	server {{ host }}  {{ host }}:5432 maxconn 80 check port {{ partoni_restapi_port }}
+        {% endfor %}
