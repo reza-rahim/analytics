@@ -1,0 +1,11 @@
+- name: install postgresql
+  apt:
+     name: ['haproxy']
+     update_cache: yes
+
+- name: copy haproxy config file
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'haproxy.cfg.j2', dest: '/etc/haproxy/haproxy.cfg'  }
+  notify: restart haproxy
+

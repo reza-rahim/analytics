@@ -9,15 +9,14 @@
     dest: '/usr/bin/python'
     state: link
 
-- name: Install python3-pip
+- name: Install python3-pip, jre and postgresql-client
   apt:
-    name: python3-pip
+    name: '{{ item }}'
     update_cache: yes
-
-- name: Install jre
-  apt:
-    name: '{{ java_jdk }}'
-    update_cache: yes
+  loop:
+    - python3-pip
+    - postgresql-client-{{ postgresql_version }}     
+    - '{{ java_jdk }}'
 
 - name: Check that the hadoop home exists
   stat:

@@ -1,3 +1,6 @@
 
 - name: run certificates
   shell:  /usr/sbin/update-ca-certificates
+
+- name: restart haproxy
+  service: name=haproxy.service  state=restarted enabled=yes
