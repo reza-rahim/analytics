@@ -122,6 +122,9 @@ hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_home: /opt/apache-hive-metastore
 
+########################## iceberg ##################
+iceberg_db_name: iceberg
+
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
 jupyterhub_port: 9080

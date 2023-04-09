@@ -1,0 +1,18 @@
+---
+
+- name: sleep for 15 sec
+  shell: sleep 1   
+
+- name: Create databases
+  shell:  'export PGPASSWORD={{ db_password }};/usr/bin/psql -h 127.0.0.1 -p {{ partoni_haproxy_port  }}  -U {{ db_user }} -c "CREATE DATABASE {{ item }}"' 
+  loop: 
+     - '{{ hive_db_name }}'
+     - '{{ keycloak_db_name }}'
+     - '{{ airflow_db_name }}'
+     - '{{ superset_db_name }}' 
+     - '{{ iceberg_db_name }}'  
+  when: >
+     inventory_hostname in groups['patroni']
+     and  groups['patroni'].index(inventory_hostname) == 0 
+  ignore_errors: yes    
+    
