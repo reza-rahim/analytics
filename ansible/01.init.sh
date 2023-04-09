@@ -11,4 +11,8 @@ ansible-playbook -i inventory.ini \
 -e airflow_admin_password=${AIRFLOW_ADMIN_PASSWORD} \
 -e aws_access_key_id=$AWS_ACCESS_KEY_ID \
 -e aws_secret_access_key=$AWS_SECRET_ACCESS_KEY \
+-e patroni_superuser_username=${DB_USER} \
+-e patroni_replication_password=${DB_PASSWORD} \
+-e patroni_replication_user=${PATRONI_REPLICATION_USER} \
+-e patroni_replication_password=${PATRONI_REPLICATION_PASSWORD} \
 init.yaml

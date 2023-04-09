@@ -42,13 +42,6 @@ postgresql:
     pgpass: {{ patroni_pgpass }}
     parameters:
         unix_socket_directories: '.'
-    authentication:
-       replication:
-           username: {{ replication_user }}
-           password: {{ replication_password }}
-       superuser:
-           username: {{ db_user }}
-           password: {{ db_password }}     
 
 tags:
     nofailover: false
