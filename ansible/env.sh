@@ -2,6 +2,9 @@
 export DB_USER=postgres 
 export DB_PASSWORD=postgres
 
+#patroni
+export REPLICATION_USER=replicator
+export REPLICATION_PASSWORD=password
 
 #keycloak
 export KEYCLOAK_ADMIN=admin

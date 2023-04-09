@@ -22,7 +22,6 @@ listen partoni
 	option httpchk
 	http-check expect status 200
 	default-server inter 3s fall 3 rise 2 on-marked-down shutdown-sessions
-
-{% for host in groups['patroni'] %}
+        { % for host in groups['zookeeper'] %}
     	server {{ host }}  {{ host }}:5432 maxconn 80 check port {{ partoni_restapi_port }}
-{% endfor %}
+        {% endfor %}

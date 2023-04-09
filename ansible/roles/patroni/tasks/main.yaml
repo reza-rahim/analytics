@@ -1,15 +1,13 @@
 - name: install postgresql
   apt:
-     name: ['postgresql-{{ postgresql_version }}' , 'python3-pip', 'python3-psycopg2', 'haproxy]
+     name: ['postgresql-{{ postgresql_version }}' , 'python3-pip', 'python3-psycopg2', 'haproxy']
      update_cache: yes
   loop:
-
 
 - name: Stop postgresql
   systemd:
      name: postgresql
      state: stopped
-
           
 - name: install  patroni; 
   pip:
@@ -26,7 +24,6 @@
      group: '{{ application_group }}'
      mode: 0750
 
-
 - name: create {{ patroni_home }}  
   file:
      path: '{{ patroni_home }}'     
@@ -38,8 +35,11 @@
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: 'patroni-node.yaml.j2', dest: '{{ patroni_home }}/patroni-node.yaml'  }
+     - { src: 'patroni.service.j2', dest: '/etc/systemd/system/patroni.service'  }
+  notify:
+     -  restart patroni     
 
-- name: copy patroni config file
+- name: copy haproxy config file
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: 'haproxy.cfg.j2', dest: '/etc/haproxy/haproxy.cfg'  }

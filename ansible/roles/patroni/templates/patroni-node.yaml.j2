@@ -44,11 +44,11 @@ postgresql:
         unix_socket_directories: '.'
     authentication:
        replication:
-           username: replicator
-           password: password
+           username: {{ replication_user }}
+           password: {{ replication_password }}
        superuser:
-           username: postgres
-           password: password    
+           username: {{ db_user }}
+           password: {{ db_password }}     
 
 tags:
     nofailover: false
