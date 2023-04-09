@@ -1,7 +1,7 @@
 ---
 
 - name: sleep for 15 sec
-  shell: sleep 1   
+  shell: sleep 15   
 
 - name: Create databases
   shell:  'export PGPASSWORD={{ db_password }};/usr/bin/psql -h 127.0.0.1 -p {{ partoni_haproxy_port  }}  -U {{ db_user }} -c "CREATE DATABASE {{ item }}"' 

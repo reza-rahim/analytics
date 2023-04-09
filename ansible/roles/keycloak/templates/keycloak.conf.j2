@@ -12,7 +12,7 @@ db=postgres
 #db-password=
 
 # The full database JDBC URL. If not provided, a default URL is set based on the selected database vendor.
-db-url=jdbc:postgresql://{{ postgres_server }}/keycloak
+db-url=jdbc:postgresql://127.0.0.1:{{ partoni_haproxy_port }}/keycloak
 
 # Observability
 

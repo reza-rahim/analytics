@@ -1,5 +1,6 @@
 ---
 
+
 - name: connect to kecloak
   template: src='{{ item.src }}' dest='{{ item.dest }}' mode='0550'
   loop:
@@ -8,7 +9,7 @@
   become_user: '{{ kcadm_user }}' 
 
 - name: run the srcipt
-  shell: '{{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh;' #rm -f {{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh'
+  shell: '{{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh; rm -f {{ tmpfs_dir }}/{{ kcadm_user }}/realm.sh'
   become: yes
   become_user: '{{ kcadm_user }}' 
   ignore_errors: yes
