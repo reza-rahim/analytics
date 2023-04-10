@@ -28,13 +28,19 @@
 
 spark.hadoop.fs.s3a.endpoint 					{{ s3_protocol }}://{{ fs_s3a_endpoint }}
 spark.hadoop.hadoop.security.credential.provider.path  		{{ jceks_provider }}
+
 spark.sql.extensions 						org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions 
 spark.sql.catalog.spark_catalog 				org.apache.iceberg.spark.SparkSessionCatalog 
-spark.sql.catalog.spark_catalog.type 				hive 
-spark.hadoop.hive.metastore.uris				thrift://{{ virtual_ip }}:9083 
-spark.hadoop.hive.metastore.warehouse.dir                       {{ metastore_warehouse_dir }}
-spark.hadoop.fs.s3a.attempts.maximum                            5
-spark.hadoop.fs.s3a.aws.credentials.provider                    org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider 
+spark.sql.catalog.my_catalog                                    org.apache.iceberg.spark.SparkCatalog    
+spark.sql.defaultCatalog                                        my_catalog
+spark.sql.catalog.my_catalog.s3.endpoint                        {{ s3_protocol }}://{{ fs_s3a_endpoint }} 
+spark.sql.catalog.my_catalog.io-impl                            org.apache.iceberg.aws.s3.S3FileIO
+spark.sql.catalog.my_catalog.warehouse                          s3://warehouse 
+spark.sql.catalog.my_catalog.jdbc.user				postgres
+spark.sql.catalog.my_catalog.jdbc.password                      postgres
+spark.sql.catalog.my_catalog.uri                                jdbc:postgresql://127.0.0.1:5000/iceberg
+spark.sql.catalog.my_catalog.catalog-impl                       org.apache.iceberg.jdbc.JdbcCatalog
+spark.sql.catalogImplementation                                 in-memory
 
 spark.eventLog.enabled: 					true 
 spark.eventLog.dir: 						{{ spark_history_location }} 
@@ -66,3 +72,4 @@ spark.scheduler.mode                                            FAIR
 
 spark.history.ui.port						{{ spark_history_ui_port }}
 spark.history.fs.cleaner.enabled                                true
+

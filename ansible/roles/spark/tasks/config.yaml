@@ -34,4 +34,5 @@
      - "http://{{ groups['repo'][0] }}/download/{{ hadoop_aws_file_name }}" 
      - "http://{{ groups['repo'][0] }}/download/{{ aws_java_sdk_bundle_file_name }}" 
      - "http://{{ groups['repo'][0] }}/download/{{ iceberg_spark_runtime_file_name }}" 
+     - "http://{{ groups['repo'][0] }}/download/{{ postgresql_connector_file_name }}" 
 

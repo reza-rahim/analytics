@@ -1,11 +1,13 @@
 [Unit]
 Description=Apache Spark Master 
-After=network.target
+After=network.target zookeeper.service
 
 [Service]
 User={{ spark_user }}
 Group={{ application_group }}
-ExecStart=/opt/spark/sbin/start-master.sh -h {{ inventory_hostname }} -p {{ spark_rpc_port }} --webui-port {{ spark_webui_port }} --properties-file {{ spark_home }}/conf/ha.conf
+Environment="AWS_REGION=us-east-1"
+Environment="MINIO_REGION=us-east-1"
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;/opt/spark/sbin/start-master.sh -h {{ inventory_hostname }} -p {{ spark_rpc_port }} --webui-port {{ spark_webui_port }} --properties-file {{ spark_home }}/conf/ha.conf"
 ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure
 

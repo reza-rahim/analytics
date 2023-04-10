@@ -5,7 +5,9 @@ After=network.target
 [Service]
 User={{ spark_user }}
 Group={{ application_group }}
-ExecStart=/opt/spark/sbin/start-worker.sh  spark://{% for host in groups['spark_master'] -%} {{ host }}:{{ spark_rpc_port }}{% if not loop.last %},{% endif %} {%- endfor %} 
+Environment="AWS_REGION=us-east-1"
+Environment="MINIO_REGION=us-east-1"
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;/opt/spark/sbin/start-worker.sh  spark://{% for host in groups['spark_master'] -%} {{ host }}:{{ spark_rpc_port }}{% if not loop.last %},{% endif %} {%- endfor %} "
 
 ExecStop=/opt/spark/sbin/start-worker.sh
 Restart=on-failure
