@@ -5,8 +5,11 @@ After=network.target zookeeper.service
 [Service]
 User={{ spark_user }}
 Group={{ application_group }}
+Environment="AWS_S3_ENDPOINT={{ s3_protocol }}://{{ fs_s3a_endpoint }}"
 Environment="AWS_REGION=us-east-1"
 Environment="MINIO_REGION=us-east-1"
+Environment="AWS_SDK_VERSION=2.17.230"
+
 ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;/opt/spark/sbin/start-master.sh -h {{ inventory_hostname }} -p {{ spark_rpc_port }} --webui-port {{ spark_webui_port }} --properties-file {{ spark_home }}/conf/ha.conf"
 ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure

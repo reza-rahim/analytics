@@ -83,6 +83,8 @@ aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-s
 aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-1.12.99.jar 
 iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
 iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
+awssdk_bundle_url: https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.17.230/bundle-2.17.230.jar
+awssdk_bundle_filename: bundle-2.17.230.jar
 
 #####################   Postgresql   ##################
 postgresql_version: 12
