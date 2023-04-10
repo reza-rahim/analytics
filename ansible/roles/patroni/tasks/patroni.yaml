@@ -39,4 +39,5 @@
      - { src: 'patroni.service.j2', dest: '/etc/systemd/system/patroni.service'  }
   notify:
      -  restart patroni     
-
+- name: flush the handeler       
+  meta: flush_handlers

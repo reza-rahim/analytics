@@ -1,5 +1,6 @@
 ---
-
+- name: sleep for 15 sec
+  shell: sleep 15
 
 - name: connect to kecloak
   template: src='{{ item.src }}' dest='{{ item.dest }}' mode='0550'

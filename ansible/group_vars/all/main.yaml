@@ -93,6 +93,7 @@ postgresql_version: 12
 #db_password: postgres                        ## pass from env  
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
 postgresql_connector_file_name: postgresql-42.2.19.jar
+postgresql_port: 5432
 
 ######################  minio ##############
 #minio_root_user: minioadmin
