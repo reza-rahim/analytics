@@ -81,7 +81,7 @@ iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/ice
 iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
 awssdk_bundle_url: https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.20.8/bundle-2.20.8.jar
 awssdk_bundle_filename: bundle-2.20.8.jar
-url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar
+url_connection_clientUrl: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar
 url_connection_client_filename: url-connection-client-2.20.38.jar
 
 #####################   Postgresql   ##################

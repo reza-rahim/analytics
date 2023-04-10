@@ -91,3 +91,11 @@ spark-sql --packages $DEPENDENCIES \
 --conf spark.sql.defaultCatalog=my_catalog \
 --conf spark.sql.catalogImplementation=in-memory
 
+CREATE TABLE my_table ( id bigint ) USING iceberg;
+
+CREATE TABLE my_table (
+id bigint,
+data string,
+category string)
+USING iceberg
+PARTITIONED BY (category);

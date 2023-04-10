@@ -21,6 +21,7 @@
      - '{{ hadoop_aws_url }}'      
      - '{{ aws_java_sdk_bundle_url }}'      
      - '{{ awssdk_bundle_url }}'      
+     - '{{ url_connection_client_url }}'      
      - '{{ iceberg_spark_runtime_url }}'      
      - '{{ hive_metastore_url }}'      
      - '{{ postgresql_connector_url }}'
