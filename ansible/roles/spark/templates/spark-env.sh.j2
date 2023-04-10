@@ -75,3 +75,6 @@ SPARK_NO_DAEMONIZE=true #Run the proposed command in the foreground. It will not
 # You might get better performance to enable these options if using native BLAS (see SPARK-21305).
 # - MKL_NUM_THREADS=1        Disable multi-threading of Intel MKL
 # - OPENBLAS_NUM_THREADS=1   Disable multi-threading of OpenBLAS
+AWS_S3_ENDPOINT={{ s3_protocol }}://{{ fs_s3a_endpoint }}
+AWS_REGION=us-east-1
+MINIO_REGION=us-east-1

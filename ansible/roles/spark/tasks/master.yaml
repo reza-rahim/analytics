@@ -12,3 +12,5 @@
     and ( groups['spark_master'].index(inventory_hostname) == 0 or groups['spark_master'].index(inventory_hostname) == 1 )
   notify: restart start_master
 
+- name: flush the handeler
+  meta: flush_handlers

@@ -56,11 +56,7 @@ spark_webui_port: 8080
 spark_rpc_port: 7077
 spark_history_ui_port: 18080
 
-## worker to start on a given node
-spark_worker_1: 1
-spark_worker_2: 1
-spark_worker_3: 0
-spark_worker_4: 0
+number_of_spark_worker_per_node: 2
 
 spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
 spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
