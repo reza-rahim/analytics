@@ -51,7 +51,7 @@ spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.1.0  \
 
 
 
-CREATE TABLE my_catalog.my_table (
+CREATE TABLE my_table (
 id bigint,
 data string,
 category string)
@@ -65,7 +65,7 @@ export AWS_SECRET_ACCESS_KEY=minioadmin
 export AWS_S3_ENDPOINT=https://127.0.0.1:9000
 export AWS_REGION=us-east-1
 export MINIO_REGION=us-east-1
-export DEPENDENCIES="org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.1.0"
+export DEPENDENCIES="org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0"
 export AWS_SDK_VERSION=2.17.230
 export AWS_MAVEN_GROUP=software.amazon.awssdk
 export AWS_PACKAGES=(
