@@ -1,3 +1,4 @@
+source env.sh
 ansible-playbook -i inventory.ini \
 -e keycloak_trino_client_id=$KEYCLOAK_TRINO_CLIENT_ID \
 -e keycloak_trino_client_secret=$KEYCLOAK_TRINO_CLIENT_SECRET \
