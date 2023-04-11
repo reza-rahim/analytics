@@ -51,6 +51,7 @@ hadoop_install_dir: /opt/hadoop
 
 ################### Spark #################
 spark_home: /opt/spark/
+spark_mnaster_conf_dir: /opt/spark/master_conf
 spark_user: spark
 spark_webui_port: 8080
 spark_rpc_port: 7077

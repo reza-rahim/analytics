@@ -4,9 +4,9 @@
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: 'spark-master.service.j2', dest: '/etc/systemd/system/spark-master.service'  }
-     - { src: 'spark-env.sh.j2', dest: '{{ spark_home }}/conf/spark-env.sh'  }
-     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_home }}/conf/spark-defaults.conf'  }
-     - { src: 'ha.conf.j2', dest: '{{ spark_home }}/conf/ha.conf'  }
+     - { src: 'spark-env.sh.j2', dest: '{{ spark_mnaster_conf_dir }}/spark-env.sh'  }
+     - { src: 'spark-defaults.conf.j2', dest: '{{ spark_mnaster_conf_dir }}/spark-defaults.conf'  }
+     - { src: 'ha.conf.j2', dest: '{{ spark_mnaster_conf_dir }}/ha.conf'  }
   when: >
     inventory_hostname in groups['spark_master'] 
     and ( groups['spark_master'].index(inventory_hostname) == 0 or groups['spark_master'].index(inventory_hostname) == 1 )

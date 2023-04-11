@@ -7,7 +7,7 @@ User={{ spark_user }}
 Group={{ application_group }}
 
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
-ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;/opt/spark/sbin/start-master.sh -h {{ inventory_hostname }} -p {{ spark_rpc_port }} --webui-port {{ spark_webui_port }} --properties-file {{ spark_home }}/conf/ha.conf"
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;/opt/spark/sbin/start-master.sh -h {{ inventory_hostname }} -p {{ spark_rpc_port }} --webui-port {{ spark_webui_port }} --properties-file {{ spark_mnaster_conf_dir }}/ha.conf "
 ExecStop=/opt/spark/sbin/stop-master.sh
 Restart=on-failure
 
