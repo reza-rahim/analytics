@@ -127,11 +127,12 @@ iceberg_db_name: iceberg
 
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
+jupyterhub_user_group: jupyterhub
 jupyterhub_port: 9080
 jupyterhub_hub_port: 9081
 JupyterHub_api_port: 9082
 jupyterhub_s3_bucket: jupyterhub
-jupyter_local_path: /home/jupyterhub/s3
+jupyterhub_notebook_dir: /var/data/jupyterhub
 
 ######################### Trino #####################
 trino_user: trino

@@ -5,6 +5,7 @@ After=network.target
 [Service]
 User={{ spark_user }}
 Group={{ application_group }}
+
 ExecStart=/bin/bash -c "/opt/spark/sbin/start-worker.sh  spark://{% for host in groups['spark_master'] -%} {{ host }}:{{ spark_rpc_port }}{% if not loop.last %},{% endif %} {%- endfor %} "
 
 ExecStop=/opt/spark/sbin/start-worker.sh

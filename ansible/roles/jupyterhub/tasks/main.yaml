@@ -10,6 +10,14 @@
      path: /usr/bin/node 
   register: stat_result   
 
+- name: create {{ jupyterhub_notebook_dir }} 
+  file: 
+     path: '{{ jupyterhub_notebook_dir }}' 
+     state: directory
+     owner: '{{ jupyterhub_user }}'
+     group: '{{ application_group }}'   
+     mode: 0770
+
 - name: install nodejs part 1
   get_url:
     url:  https://deb.nodesource.com/setup_19.x
@@ -36,7 +44,6 @@
     - JupyterLab
     - oauthenticator
     - pyspark
-    - findspark
     - numpy 
     - pandas
     - plotly 
