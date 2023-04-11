@@ -62,3 +62,6 @@
      #group: '{{ application_group }}'
      mode: 755
 
+- name: Reload service files
+  systemd:
+    daemon_reload: true     

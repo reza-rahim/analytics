@@ -1,11 +1,14 @@
 [Unit]
 Description=Trino
-After=network.target
+After=network.target keycloak.service minio.service
 
 [Service]
 User={{ trino_user }}
 Group={{ application_group }}
-ExecStart={{ trino_home }}/bin/launcher run
+
+ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
+
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }}; {{ trino_home }}/bin/launcher run"
 Restart=on-failure
 
 [Install]
