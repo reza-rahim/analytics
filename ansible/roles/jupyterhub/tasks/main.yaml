@@ -10,6 +10,12 @@
      path: /usr/bin/node 
   register: stat_result   
 
+- name: create {{ jupyterhub_notebook_dir }}
+  file:
+     path: '{{ jupyterhub_notebook_dir }}'
+     state: directory
+     owner: '{{ jupyterhub_user }}'
+     group: '{{ application_group }}'
 
 - name: install nodejs part 1
   get_url:
