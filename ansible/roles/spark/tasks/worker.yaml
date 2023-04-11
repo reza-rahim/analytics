@@ -9,7 +9,8 @@
   when: >
     inventory_hostname in groups['spark_worker']
     and  number_of_spark_worker_per_node  == 1
-  notify: restart start_worker_1
+  notify: 
+     - restart start_worker_1
 
 
 - name: copy workers files

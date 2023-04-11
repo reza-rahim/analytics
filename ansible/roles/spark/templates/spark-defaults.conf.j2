@@ -33,8 +33,7 @@ spark.sql.extensions 						org.apache.iceberg.spark.extensions.IcebergSparkSessi
 spark.sql.catalog.spark_catalog 				org.apache.iceberg.spark.SparkSessionCatalog 
 spark.sql.catalog.my_catalog                                    org.apache.iceberg.spark.SparkCatalog    
 spark.sql.defaultCatalog                                        my_catalog
-spark.sql.catalog.my_catalog.jdbc.user                          postgres
-spark.sql.catalog.my_catalog.jdbc.password                      postgres
+spark.sql.catalog.my_catalog.jdbc.user                          {{ db_user }}
 spark.sql.catalog.my_catalog.s3.endpoint                        {{ s3_protocol }}://{{ fs_s3a_endpoint }} 
 spark.sql.catalog.my_catalog.io-impl                            org.apache.iceberg.aws.s3.S3FileIO
 spark.sql.catalog.my_catalog.warehouse                          s3://warehouse 
