@@ -1,0 +1,26 @@
+#!/bin/bash
+
+## check the mount mount, if exists then exit
+df {{ jupyterhub_notebook_dir }} |grep s3fs
+
+if [ $? -eq 0 ] 
+then 
+  echo "already mounted"	
+  exit 0
+fi
+
+## mount s3 bucket wuth fuse
+
+echo "Mounting ..."	
+#/etc/lockbox/decrypt_lockbox.sh 
+
+source  {{ tmpfs_dir }}/lockbox.env
+echo  $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY > {{ tmpfs_dir }}/s3cred
+chmod 600 {{ tmpfs_dir }}/s3cred 
+
+group=`id -g jupyterhub`
+
+s3fs {{ jupyterhub_s3_bucket }} {{ jupyterhub_notebook_dir }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,allow_other,url=https://127.0.0.1:9000
+
+rm -f {{ tmpfs_dir }}/s3cred
+#rm -f {{ tmpfs_dir }}/lockbox.env

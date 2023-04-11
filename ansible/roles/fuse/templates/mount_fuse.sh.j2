@@ -8,7 +8,7 @@ chmod 600 /mnt/tmpfs/s3cred
 
 group=`id -g airflow`
 
-s3fs {{ jupyterhub_s3_bucket }} {{ jupyter_local_path }} -o passwd_file=/mnt/tmpfs/s3cred,umask=022,use_path_request_style,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
-s3fs {{ airflow_s3_bucket }}  {{ airflow_dag_path }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
+s3fs {{ jupyterhub_s3_bucket }} {{ jupyterhub_notebook_dir }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
+s3fs {{ airflow_s3_bucket }}  {{ airflow_dag_dir }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
 
 rm -f /mnt/tmpfs/s3cred

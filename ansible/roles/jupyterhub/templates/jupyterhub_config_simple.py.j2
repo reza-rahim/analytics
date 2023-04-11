@@ -14,7 +14,7 @@ c.JupyterHub.ssl_key = '{{ cert_dir }}/{{ server_key_file_name }}'
 c.JupyterHub.authenticator_class = GenericOAuthenticator
 
 c.GenericOAuthenticator.client_id='{{ keycloak_jupyter_client_id }}'
-c.GenericOAuthenticator.client_secret='{{ keycloak_jupyter_client_secret }}'
+c.GenericOAuthenticator.client_secret=os.environ.get('KEYCLOAK_JUPYTER_CLIENT_SECRET')
 c.GenericOAuthenticator.token_url = 'https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}/protocol/openid-connect/token'
 c.GenericOAuthenticator.userdata_url = 'https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}/protocol/openid-connect/userinfo'
 c.GenericOAuthenticator.userdata_params = {'state': 'state'}

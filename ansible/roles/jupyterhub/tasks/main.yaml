@@ -10,13 +10,6 @@
      path: /usr/bin/node 
   register: stat_result   
 
-- name: create {{ jupyterhub_notebook_dir }} 
-  file: 
-     path: '{{ jupyterhub_notebook_dir }}' 
-     state: directory
-     owner: '{{ jupyterhub_user }}'
-     group: '{{ application_group }}'   
-     mode: 0770
 
 - name: install nodejs part 1
   get_url:
@@ -69,11 +62,11 @@
     global: yes
 
 - name: copy  service and config file
-  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  template: src='{{ item.src }}' dest='{{ item.dest }}' mode=0750 group='{{ application_group }}'
   loop:
      - { src: 'jupyterhub.service.j2', dest: '/etc/systemd/system/jupyterhub.service'  }      
      - { src: 'jupyterhub_config_simple.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_simple.py'  }      
-     - { src: 'jupyterhub_config_keycloak.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_keycloak.py'  }      
+     - { src: 'jupyterhub_fuse.sh.j2', dest: '/etc/jupyterhub/jupyterhub_fuse.sh'  }      
   notify: restart jupyterhub 
 
 - name: Reload service files

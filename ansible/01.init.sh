@@ -16,4 +16,8 @@ ansible-playbook -i inventory.ini \
 -e patroni_replication_password=${DB_PASSWORD} \
 -e patroni_replication_user=${PATRONI_REPLICATION_USER} \
 -e patroni_replication_password=${PATRONI_REPLICATION_PASSWORD} \
+-e keycloak_jupyter_client_secret=${KEYCLOAK_JUPYTER_CLIENT_SECRET} \
+-e keycloak_trino_client_secret=${KEYCLOAK_TRINO_CLIENT_SECRETi} \
+-e keycloak_superset_client_secret=${KEYCLOAK_SUPERSET_CLIENT_SECRET} \
+-e keycloak_airflow_client_secret=${KEYCLOAK_AIRFLOW_CLIENT_SECRET} \
 init.yaml

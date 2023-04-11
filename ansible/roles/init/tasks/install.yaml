@@ -17,6 +17,7 @@
     - python3-pip
     - postgresql-client-{{ postgresql_version }}     
     - '{{ java_jdk }}'
+    - s3fs
 
 - name: Check that the hadoop home exists
   stat:
@@ -39,3 +40,8 @@
     state: link
     owner: '{{ hadoop_user }}'
     group: '{{ application_group }}'
+
+- name: modify /etc/fuse.conf 
+  lineinfile:
+     dest: /etc/fuse.conf
+     line: user_allow_other    

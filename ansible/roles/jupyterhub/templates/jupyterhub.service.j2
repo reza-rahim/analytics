@@ -12,6 +12,8 @@ Environment=SPARK_HOME={{ spark_home }}
 Environment=OAUTH2_AUTHORIZE_URL=https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_devel_realm }}/protocol/openid-connect/auth
 
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
+ExecStartPre=/etc/jupyterhub/jupyterhub_fuse.sh
+
 ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }}; jupyterhub -f /etc/jupyterhub/jupyterhub_config_simple.py"
 
 Restart=on-failure

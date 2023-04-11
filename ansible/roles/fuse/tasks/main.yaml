@@ -9,11 +9,31 @@
      path: '{{ fuse_home }}' 
      state: directory
 
+- name: create {{ jupyterhub_notebook_dir }}
+  file:
+     path: '{{ jupyterhub_notebook_dir }}'
+     state: directory
+     owner: '{{ jupyterhub_user }}'
+     group: '{{ application_group }}'
+     mode: 0770
+
+- name: create {{ airflow_dag_dir }}
+  file:
+     path: '{{ airflow_dag_dir }}'
+     state: directory
+     owner: '{{ airflow_user }}'
+     group: '{{ application_group }}'
+     mode: 0770     
+
+- name: Create {{ fuse_home }}
+  file: 
+     path: '{{ fuse_home }}' 
+     state: directory
 
 - name: copy fuse config files 
   template: src='{{ item.src }}' dest='{{ item.dest }}' mode=750
   loop:
-     #- { src: 'jupyterhub.service.j2', dest: '/etc/systemd/system/jupyterhub.service'  }      
+     - { src: 'fuse.service.j2', dest: '/etc/systemd/system/fuse.service'  }      
      - { src: 'mount_fuse.sh.j2', dest: '{{ fuse_home }}/mount_fuse.sh'  }      
        #notify: restart  
 

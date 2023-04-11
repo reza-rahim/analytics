@@ -158,6 +158,7 @@ airflow_home: /opt/airflow
 airflow_port: 5080
 airflow_s3_bucket: airflow
 airflow_dag_path: /opt/airflow/dags
+airflow_dag_dir: /var/data/airflow
 
 ######################### superset  #####################
 superset_user: superset
