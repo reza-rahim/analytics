@@ -59,3 +59,7 @@
     - restart start_worker_2  
     - restart start_worker_3  
     - restart start_worker_4  
+
+- name: Reload service files
+  systemd:
+    daemon_reload: true

@@ -76,9 +76,8 @@
      - { src: 'jupyterhub_config_keycloak.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_keycloak.py'  }      
   notify: restart jupyterhub 
 
+- name: Reload service files
+  systemd:
+    daemon_reload: true  
 
-#- name: Reload jupyterhub.service
-#  ansible.builtin.systemd:
-#    name: jupyterhub.service
-#    state: reloaded  
 
