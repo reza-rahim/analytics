@@ -39,5 +39,9 @@
      - { src: 'patroni.service.j2', dest: '/etc/systemd/system/patroni.service'  }
   notify:
      -  restart patroni     
+
+- name: Reload service files
+  systemd:
+    daemon_reload: true       
 - name: flush the handeler       
   meta: flush_handlers
