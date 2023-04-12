@@ -21,4 +21,5 @@ ansible-playbook -i inventory.ini \
 -e keycloak_superset_client_secret=${KEYCLOAK_SUPERSET_CLIENT_SECRET} \
 -e keycloak_airflow_client_secret=${KEYCLOAK_AIRFLOW_CLIENT_SECRET} \
 -e trino_shared_secret=${TRINO_SHARED_SECRET} \
+-e trino_password=${TRINO_PASSWORD} \
 secret.yaml

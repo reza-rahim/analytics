@@ -146,7 +146,9 @@ trino_port: 7080
 trino_tls_port: 7443
 trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
 trino_cli_file: trino-cli-410-executable.jar
-shared_secret: bhujd3456ndswu5!&df
+#shared_secret: bhujd3456ndswu5!&df
+trino_password_dir: /etc/trino/
+trino_password_file: /etc/trino/passwdfile
 
 ######################### airflow #####################
 airflow_version: 2.5.2

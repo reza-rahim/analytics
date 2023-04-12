@@ -52,6 +52,7 @@
      - { src: 'jvm.config.j2', dest: '{{ trino_home }}/etc/jvm.config'  }
      - { src: 'node.properties.j2', dest: '{{ trino_home }}/etc/node.properties'  }
      - { src: 'iceberg.properties.j2', dest: '{{ trino_home }}/etc/catalog/iceberg.properties'  }
+     - { src: 'password-authenticator.properties.j2', dest: '{{ trino_home }}/etc/password-authenticator.properties'  }
   notify: restart start_trino    
 
 - name: get trino cli files

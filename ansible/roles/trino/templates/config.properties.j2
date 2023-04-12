@@ -9,8 +9,8 @@ http-server.https.enabled=true
 http-server.https.port={{ trino_tls_port }}
 http-server.https.keystore.path={{ cert_dir }}/{{ server_cert_key_file_name }}
 
-#http-server.authentication.type=PASSWORD,oauth2
-http-server.authentication.type=oauth2
+http-server.authentication.type=PASSWORD,oauth2
+#http-server.authentication.type=oauth2
 web-ui.authentication.type=oauth2
 http-server.authentication.oauth2.issuer=https://{{ keyclock_server }}:{{ keycloak_https_port }}/realms/{{ keycloak_bi_realm }}
 http-server.authentication.oauth2.client-id={{ keycloak_trino_client_id }}
