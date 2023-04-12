@@ -10,6 +10,7 @@
      - '{{ keycloak_db_name }}'
      - '{{ airflow_db_name }}'
      - '{{ superset_db_name }}' 
+     - '{{ hive_db_name }}'  
      - '{{ iceberg_db_name }}'  
   when: >
      inventory_hostname in groups['patroni']

@@ -1,0 +1,73 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# Default system properties included when running spark-submit.
+# This is useful for setting default environmental settings.
+
+# Example:
+# spark.master                     spark://master:7077
+# spark.eventLog.enabled           true
+# spark.eventLog.dir               hdfs://namenode:8021/directory
+# spark.serializer                 org.apache.spark.serializer.KryoSerializer
+# spark.driver.memory              5g
+# spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
+
+spark.hadoop.fs.s3a.endpoint 					{{ s3_protocol }}://{{ fs_s3a_endpoint }}
+spark.hadoop.hadoop.security.credential.provider.path  		{{ jceks_provider }}
+
+spark.sql.extensions 						org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions 
+spark.sql.catalog.spark_catalog 				org.apache.iceberg.spark.SparkSessionCatalog 
+spark.sql.catalog.my_catalog                                    org.apache.iceberg.spark.SparkCatalog    
+spark.sql.defaultCatalog                                        my_catalog
+spark.sql.catalog.my_catalog.s3.endpoint                        {{ s3_protocol }}://{{ fs_s3a_endpoint }} 
+spark.sql.catalog.my_catalog.io-impl                            org.apache.iceberg.aws.s3.S3FileIO
+spark.sql.catalog.my_catalog.warehouse                          s3://warehouse 
+spark.sql.catalog.my_catalog.uri                                jdbc:postgresql://127.0.0.1:5000/iceberg
+spark.sql.catalog.my_catalog.catalog-impl                       org.apache.iceberg.jdbc.JdbcCatalog
+spark.sql.catalogImplementation                                 in-memory
+spark.sql.catalog.my_catalog.jdbc.user	                        ****
+spark.sql.catalog.my_catalog.jdbc.password                      ****
+spark.eventLog.enabled: 					true 
+spark.eventLog.dir: 						{{ spark_history_location }} 
+spark.history.fs.logDirectory: 					{{ spark_history_location }} 
+
+spark.serializer    						org.apache.spark.serializer.KryoSerializer
+spark.hadoop.fs.s3a.multiobjectdelete.enable  			false
+spark.hadoop.fs.s3a.fast.upload  				true
+spark.sql.parquet.filterPushdown 				true
+spark.hadoop.fs.s3a.aws.credentials.provider                    org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
+spark.sql.parquet.mergeSchema                                   false 
+
+spark.worker.cleanup.enabled					true
+
+spark.deploy.defaultCores                                       {{ spark_deploy_defaultCores }}
+spark.cores.max                                                 {{ spark_cores_max }}
+spark.driver.cores                                              {{ spark_driver_cores }}
+spark.driver.memory                                             {{ spark_driver_memory }}
+spark.executor.memory                                           {{ spark_executor_memory }}
+spark.executor.cores                                            {{ spark_executor_cores }}
+
+spark.dynamicAllocation.enabled					true
+spark.dynamicAllocation.shuffleTracking.enabled                 true
+
+spark.sql.execution.arrow.pyspark.enabled                       true
+spark.rdd.compress                                              true
+
+spark.scheduler.mode                                            FAIR
+
+spark.history.ui.port						{{ spark_history_ui_port }}
+spark.history.fs.cleaner.enabled                                true

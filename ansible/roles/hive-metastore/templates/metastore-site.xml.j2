@@ -57,7 +57,7 @@ likely need to add a number of new values. -->
 
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:postgresql://{{ virtual_ip  }}:5432/{{ hive_db_name }}</value>
+    <value>jdbc:postgresql://{{ patroni_url }}:{{ partoni_haproxy_port }}/{{ hive_db_name }}</value>
     <description>PostgreSQL JDBC driver connection URL</description>
   </property>
 
@@ -66,7 +66,8 @@ likely need to add a number of new values. -->
     <value>org.postgresql.Driver</value>
     <description>PostgreSQL metastore driver class name</description>
   </property>
-    <property>
+
+  <property>
     <name>javax.jdo.option.ConnectionUserName</name>
     <value>{{ db_user }}</value>
     <description>the username for the DB instance</description>
