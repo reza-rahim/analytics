@@ -1,3 +1,2 @@
-- include: patroni_init.yaml 
 - include: patroni.yaml
-#- include: create_db.yaml
+- include: create_db.yaml

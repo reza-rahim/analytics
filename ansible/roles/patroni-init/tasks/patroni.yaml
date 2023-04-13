@@ -9,13 +9,13 @@
      name: postgresql
      state: stopped
      enabled: false
-
-- name: install  patroni;
+          
+- name: install  patroni; 
   pip:
     name: '{{ item }}'
   loop:
     - psycopg2-binary
-    - patroni[zookeeper]
+    - patroni[zookeeper]     
 
 - name: create {{ patroni_data_dir }}
   file:
@@ -23,30 +23,27 @@
      state: directory
      owner: '{{ db_user }}'
      group: '{{ application_group }}'
-     mode: 0750
+     mode: 0750      
 
 - name: Check that the python link exists
   stat:
       path: '{{ patroni_home }}'
   register: patroni_stat_result
 
-- name: create {{ patroni_home }}  
-  file:
-     path: '{{ patroni_home }}'     
-     state: directory
-     owner: '{{ db_user }}'
-     group: '{{ application_group }}'
-
 - name: copy patroni config file
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
-     - { src: 'patroni-node.yaml.j2', dest: '{{ patroni_home }}/patroni-node.yaml'  }
+     - { src: 'patroni-init-node.yaml.j2', dest: '{{ tmpfs_dir }}/patroni-node.yaml'  }
      - { src: 'patroni.service.j2', dest: '/etc/systemd/system/patroni.service'  }
   notify:
      -  restart patroni     
+  when: not patroni_stat_result.stat.exists     
 
 - name: Reload service files
   systemd:
     daemon_reload: true       
+
 - name: flush the handeler       
   meta: flush_handlers
+
+

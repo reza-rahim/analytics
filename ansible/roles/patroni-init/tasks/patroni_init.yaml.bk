@@ -52,7 +52,7 @@
      state: stopped
      enabled: false  
 
-  #- name: name remove the {{ tmpfs_dir }}/patroni-node.yaml
-  #shell: 'rm -rf {{ tmpfs_dir }}/patroni-node.yaml; rm /etc/systemd/system/patroni-init.service' 
-  #ignore_errors: yes
+- name: name remove the {{ tmpfs_dir }}/patroni-node.yaml
+  shell: 'rm -rf {{ tmpfs_dir }}/patroni-node.yaml; rm /etc/systemd/system/patroni-init.service' 
+  ignore_errors: yes
 
