@@ -1,0 +1,58 @@
+- name: install postgresql
+  apt:
+     name: ['postgresql-{{ postgresql_version }}' , 'python3-pip', 'python3-psycopg2']
+     update_cache: yes
+  loop:
+
+- name: Stop postgresql
+  systemd:
+     name: postgresql
+     state: stopped
+     enabled: false
+          
+- name: install  patroni; 
+  pip:
+    name: '{{ item }}'
+  loop:
+    - psycopg2-binary
+    - patroni[zookeeper]     
+
+- name: create {{ patroni_data_dir }}
+  file:
+     path: '{{ patroni_data_dir }}'
+     state: directory
+     owner: '{{ db_user }}'
+     group: '{{ application_group }}'
+     mode: 0750      
+
+- name: Check that the python link exists
+  stat:
+      path: '{{ patroni_home }}'
+  register: patroni_stat_result
+
+- name: copy patroni config file
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'patroni-init-node.yaml.j2', dest: '{{ tmpfs_dir }}/patroni-node.yaml'  }
+     - { src: 'patroni-init.service.j2', dest: '/etc/systemd/system/patroni-init.service'  }
+  notify:
+     -  restart patroni_init     
+  when: not patroni_stat_result.stat.exists     
+
+- name: Reload service files
+  systemd:
+    daemon_reload: true       
+
+- name: flush the handeler       
+  meta: flush_handlers
+
+- name: Stop patroni-init
+  systemd:
+     name: patroni-init
+     state: stopped
+     enabled: false  
+
+  #- name: name remove the {{ tmpfs_dir }}/patroni-node.yaml
+  #shell: 'rm -rf {{ tmpfs_dir }}/patroni-node.yaml; rm /etc/systemd/system/patroni-init.service' 
+  #ignore_errors: yes
+

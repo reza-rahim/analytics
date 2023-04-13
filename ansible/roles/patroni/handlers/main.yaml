@@ -1,5 +1,8 @@
 - name: restart patroni
   service: name=patroni.service  state=restarted enabled=yes
 
+- name: restart patroni_init
+  service: name=patroni-init state=restarted enabled=yes
+
 - name: restart haproxy
   service: name=haproxy.service  state=restarted enabled=yes
