@@ -7,7 +7,7 @@ User={{ spark_user }}
 Group={{ application_group }}
 
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
-ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }} ; /opt/spark/sbin/start-worker.sh  spark://{% for host in groups['spark_master'] -%} {{ host }}:{{ spark_rpc_port }}{% if not loop.last %},{% endif %} {%- endfor %} "
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  /usr/bin/rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }} ; /opt/spark/sbin/start-worker.sh  spark://{% for host in groups['spark_master'] -%} {{ host }}:{{ spark_rpc_port }}{% if not loop.last %},{% endif %} {%- endfor %} "
 
 
 ExecStop=/opt/spark/sbin/start-worker.sh
