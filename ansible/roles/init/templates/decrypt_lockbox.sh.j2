@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm -rf {{ tmpfs_dir }}/{{ lockbox_env }}
+rm -rr {{ tmpfs_dir }}/{{ patroni_lockbox_env }}
+
 gpg --passphrase  `{{ passphrase }}` --batch --quiet --yes  -d {{ lockbox_dir }}/{{ lockbox_env }}.gpg >  {{ tmpfs_dir }}/{{ lockbox_env }}
 gpg --passphrase  `{{ passphrase }}` --batch --quiet --yes  -d {{ lockbox_dir }}/{{ patroni_lockbox_env }}.gpg >  {{ tmpfs_dir }}/{{ patroni_lockbox_env }}
 
