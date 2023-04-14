@@ -12,7 +12,7 @@ ExecStartPre={{ airflow_home }}/airflow_fuse.sh
 User={{ airflow_user }}
 Group={{ application_group }}
 
-ExecStart= bash -c 'source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }}; \
+ExecStart= bash -c 'source {{ tmpfs_dir }}/{{ lockbox_env }};  /usr/bin/rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }}; \
                    /usr/local/bin/airflow db upgrade; \
                    /usr/local/bin/airflow users create -r Admin -u "$SECURITY__ADMIN_USERNAME" -e "$SECURITY__ADMIN_EMAIL" \
                    -f "$SECURITY__ADMIN_FIRSTNAME" -l "$SECURITY__ADMIN_LASTNAME" -p "$SECURITY__ADMIN_PASSWORD"; \

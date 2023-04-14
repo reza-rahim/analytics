@@ -1,15 +1,12 @@
 AIRFLOW__CORE__EXECUTOR=LocalExecutor   
 AIRFLOW__CORE__LOAD_EXAMPLES=False   
 AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL=60   
-SECURITY__ADMIN_USERNAME={{ airflow_admin_username }}  
-SECURITY__ADMIN_PASSWORD={{ airflow_admin_password }}  
 DB__HOST={{ patroni_url }}
 DB__PORT={{ partoni_haproxy_port }}  
-DB__USERNAME={{ db_user }} 
-DB__PASSWORD={{ db_password }}
 DB__NAME={{ airflow_db_name }}
 AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://$DB__USERNAME:$DB__PASSWORD@$DB__HOST:$DB__PORT/$DB__NAME
 AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=15
+
 
 AIRFLOW__LOGGING__LOGGING_LEVEL=WARNING
 AIRFLOW__WEBSERVER__BASE_URL=https://{{ airflow_server }}:{{ airflow_port }}
@@ -18,10 +15,9 @@ AIRFLOW__WEBSERVER__WEB_SERVER_SSL_CERT={{ cert_dir }}/{{ server_cert_file_name 
 AIRFLOW__WEBSERVER__WEB_SERVER_SSL_KEY={{ cert_dir }}/{{ server_key_file_name }}
 
 AIRFLOW__CORE__DAGS_FOLDER={{ airflow_dag_dir }}
-
 AIRFLOW_HOME={{ airflow_home }}
-
 ### spark 
 SPARK_HOME={{ spark_home }}
+PYTHONPATH={{ spark_home }}/python
 PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
