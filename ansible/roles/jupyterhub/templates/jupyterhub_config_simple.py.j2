@@ -28,7 +28,8 @@ c.Spawner.environment = {
         'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
         'PGUSER': os.environ.get('PGUSER'),
         'PGPASSWORD': os.environ.get('PGPASSWORD'),
-        'SPARK_HOME':  os.environ.get('SPARK_HOME')
+        'SPARK_HOME': os.environ.get('SPARK_HOME'),
+        'PYTHONPATH': '{{ spark_home }}/python'
 }
 
 c.Spawner.notebook_dir='{{ jupyterhub_notebook_dir }}'

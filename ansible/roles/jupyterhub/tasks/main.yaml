@@ -1,5 +1,18 @@
 ---
 
+- name: check for '{{ jupyterhub_notebook_dir }}'
+  stat:
+     path: '{{ jupyterhub_notebook_dir }}'
+  register: jupyterhub_notebook_dir_stat_result
+
+- name: create {{ jupyterhub_notebook_dir }}
+  file:
+     path: '{{ jupyterhub_notebook_dir }}'
+     state: directory
+     owner: '{{ jupyterhub_user }}'
+     group: '{{ application_group }}'
+  when: not jupyterhub_notebook_dir_stat_result.stat.exists
+
 - name: Create /etc/jupyterhub
   file: 
      path:  /etc/jupyterhub
@@ -10,12 +23,6 @@
      path: /usr/bin/node 
   register: stat_result   
 
-- name: create {{ jupyterhub_notebook_dir }}
-  file:
-     path: '{{ jupyterhub_notebook_dir }}'
-     state: directory
-     owner: '{{ jupyterhub_user }}'
-     group: '{{ application_group }}'
 
 - name: install nodejs part 1
   get_url:
@@ -35,6 +42,7 @@
     - nodejs
     - python3-pip      
 
+      
 - name: install jupyterhub and notebook
   pip: 
     name: '{{ item }}'
