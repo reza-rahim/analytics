@@ -1,6 +1,6 @@
 [Unit]
 Description=Jupyterhub service
-After=network.target keycloak.service minio.service
+After=network.target keycloak.service spark-master.service
 
 [Service]
 #User={{ jupyterhub_user }}

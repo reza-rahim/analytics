@@ -1,6 +1,6 @@
 [Unit]
 Description=Apache Hive Metastore 
-After=network.target postgresql.service
+After=network.target patroni.service  minio.service 
 
 [Service]
 User={{ hive_user }}

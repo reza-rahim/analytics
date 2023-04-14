@@ -7,7 +7,7 @@ After=network.target patroni.service
 User={{ keycloak_user }}
 Group={{ application_group }}
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
-ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;{{ keycloak_home }}/bin/kc.sh start --http-port={{ keycloak_http_port }} --https-port={{ keycloak_https_port }}"
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }} ;{{ keycloak_home }}/bin/kc.sh start --http-port={{ keycloak_http_port }} --https-port={{ keycloak_https_port }}"
 Restart=on-failure
 
 [Install]

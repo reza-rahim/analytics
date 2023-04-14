@@ -1,6 +1,6 @@
 [Unit]
 Description=Apache Airflow Scheduler
-After=network.target 
+After=network.target patroni.service trino.service
 
 [Service]
 EnvironmentFile={{ airflow_home }}/airflow_env.sh
