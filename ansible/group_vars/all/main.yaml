@@ -160,7 +160,6 @@ airflow_home: /opt/airflow
 #airflow_admin_username: demo                     # change it 
 #airflow_admin_password: demo                     # chamge it
 airflow_port: 5080
-airflow_s3_bucket: airflow
 airflow_dag_dir: /var/data/airflow
 airflow_s3_bucket: airflow
 
@@ -208,7 +207,6 @@ node_exporter_port: 9200
 
 ############################### Grafana  #########################
 grafana_user: grafana
-grafana_home: /opt/grafana
 grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
 grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
 grafana_file_name: grafana-9.4.3
