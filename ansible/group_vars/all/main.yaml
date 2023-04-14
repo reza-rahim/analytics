@@ -34,9 +34,9 @@ java_home: /usr/lib/jvm/java-1.17.0-openjdk-amd64
 jceks_provider: jceks://file/usr/lib/java/secret.jceks
 tmpfs_dir: /mnt/tmpfs/
 tmpfs_size: 1M
-#passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
-#passphrase: "cat /run/machine-id"
-passphrase: "blkid | grep UUID | grep sda | head -n 1 | awk -F' ' '{print $3}' |  awk -F'=' '{print $2}' | sed 's/.$//' | sed 's/^.//'"
+#passphrase: "/usr/bin/ip route | /usr/bin/sha1sum | /usr/bin/cut -f 1 -d ' '"
+#passphrase: "/usr/bin/cat /run/machine-id"
+passphrase: "/usr/sbin/blkid | /usr/bin/grep UUID | /usr/bin/grep sda | /usr/bin/head -n 1 | /usr/bin/awk -F' ' '{print $3}' |  /usr/bin/awk -F'=' '{print $2}' | /usr/bin/sed 's/.$//' | /usr/bin/sed 's/^.//'"
 application_group: application
 
 ######################## podman #########################
@@ -161,8 +161,8 @@ airflow_home: /opt/airflow
 #airflow_admin_password: demo                     # chamge it
 airflow_port: 5080
 airflow_s3_bucket: airflow
-airflow_dag_path: /opt/airflow/dags
 airflow_dag_dir: /var/data/airflow
+airflow_s3_bucket: airflow
 
 ######################### superset  #####################
 superset_user: superset

@@ -4,9 +4,16 @@ After=network.target patroni.service trino.service
 
 [Service]
 EnvironmentFile={{ airflow_home }}/airflow_env.sh
+Environment=SPARK_HOME={{ spark_home }}
+
+ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
+ExecStartPre={{ airflow_home }}/airflow_fuse.sh
+
 User={{ airflow_user }}
 Group={{ application_group }}
-ExecStart= bash -c '/usr/local/bin/airflow db upgrade; \
+
+ExecStart= bash -c 'source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }}; \
+                   /usr/local/bin/airflow db upgrade; \
                    /usr/local/bin/airflow users create -r Admin -u "$SECURITY__ADMIN_USERNAME" -e "$SECURITY__ADMIN_EMAIL" \
                    -f "$SECURITY__ADMIN_FIRSTNAME" -l "$SECURITY__ADMIN_LASTNAME" -p "$SECURITY__ADMIN_PASSWORD"; \
                    /usr/local/bin/airflow scheduler'
