@@ -1,7 +1,10 @@
 #!/bin/bash
 
 gpg --passphrase  `{{ passphrase }}` --batch --quiet --yes  -c  {{ tmpfs_dir }}/{{ lockbox_env }}
+gpg --passphrase  `{{ passphrase }}` --batch --quiet --yes  -c  {{ tmpfs_dir }}/{{  patroni_lockbox_env }}
 
 rm -f {{ tmpfs_dir }}/{{ lockbox_env }}
+rm -f {{ tmpfs_dir }}/{{ patroni_lockbox_env }}
 
 mv {{ tmpfs_dir }}/{{ lockbox_env }}.gpg  {{ lockbox_dir }} 
+mv {{ tmpfs_dir }}/{{ patroni_lockbox_env }}.gpg  {{ lockbox_dir }} 

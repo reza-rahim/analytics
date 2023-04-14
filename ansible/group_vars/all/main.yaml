@@ -2,6 +2,8 @@
 node_prefix: node-
 
 lockbox_env: lockbox.env 
+patroni_lockbox_env: patroni_lockbox.env
+
 lockbox_dir: /etc/lockbox
 
 cert_dir: /etc/cert.d/

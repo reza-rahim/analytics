@@ -3,7 +3,7 @@ export DB_USER=postgres
 export DB_PASSWORD=postgres
 
 #patroni
-export PATRONI_REPLICATION_USER=replicator
+export PATRONI_REPLICATION_USERNAME=replicator
 export PATRONI_REPLICATION_PASSWORD=password
 
 #keycloak

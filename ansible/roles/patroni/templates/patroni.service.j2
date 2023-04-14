@@ -7,7 +7,7 @@ After=network.target zookeeper.service
 User={{ db_user }}
 Group={{ application_group }}
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
-ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  rm -f  {{ tmpfs_dir }}/{{ lockbox_env }} ;/usr/local/bin/patroni  /opt/patroni/patroni-node.yaml"
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ patroni_lockbox_env }};  rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }} ;/usr/local/bin/patroni  /opt/patroni/patroni-node.yaml"
 Restart=on-failure
 
 [Install]

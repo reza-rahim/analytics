@@ -13,8 +13,8 @@ ansible-playbook -i inventory.ini \
 -e aws_access_key_id=$AWS_ACCESS_KEY_ID \
 -e aws_secret_access_key=$AWS_SECRET_ACCESS_KEY \
 -e patroni_superuser_username=${DB_USER} \
--e patroni_replication_password=${DB_PASSWORD} \
--e patroni_replication_user=${PATRONI_REPLICATION_USER} \
+-e patroni_superuser_password=${DB_PASSWORD} \
+-e patroni_replication_username=${PATRONI_REPLICATION_USERNAME} \
 -e patroni_replication_password=${PATRONI_REPLICATION_PASSWORD} \
 -e keycloak_jupyter_client_secret=${KEYCLOAK_JUPYTER_CLIENT_SECRET} \
 -e keycloak_trino_client_secret=${KEYCLOAK_TRINO_CLIENT_SECRET} \

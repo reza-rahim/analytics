@@ -1,2 +1,0 @@
-- name: restart patroni
-  service: name=patroni state=restarted enabled=yes
