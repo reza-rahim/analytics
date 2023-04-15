@@ -18,9 +18,8 @@ source  {{ tmpfs_dir }}/lockbox.env
 /usr/bin/echo  $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY > {{ tmpfs_dir }}/s3cred
 /usr/bin/chmod 600 {{ tmpfs_dir }}/s3cred 
 
-group=`/usr/bin/id -g airflow`
+group="$(/usr/bin/getent group {{ airflow_group }}  | /usr/bin/cut -d: -f3)"
 
 /usr/bin/s3fs {{ airflow_s3_bucket }} {{ airflow_dag_dir }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,allow_other,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
 
 /usr/bin/rm -f {{ tmpfs_dir }}/s3cred
-#rm -f {{ tmpfs_dir }}/lockbox.env

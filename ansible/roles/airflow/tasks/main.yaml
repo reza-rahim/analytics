@@ -5,7 +5,7 @@
      path: '{{ airflow_home }}'     
      state: directory
      owner: '{{ airflow_user }}'   
-     group: '{{ application_group }}'
+     group: '{{ airflow_group }}'
 
 - name: install apache-airflow
   pip:

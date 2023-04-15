@@ -22,7 +22,6 @@ c.GenericOAuthenticator.username_key = 'preferred_username'
 c.GenericOAuthenticator.login_service = 'Keycloak'
 c.GenericOAuthenticator.scope = ['openid', 'profile']
 
-
 c.Spawner.environment = {
         'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
         'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
@@ -33,4 +32,3 @@ c.Spawner.environment = {
 }
 
 c.Spawner.notebook_dir='{{ jupyterhub_notebook_dir }}'
-

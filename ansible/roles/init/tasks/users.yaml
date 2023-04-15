@@ -4,6 +4,15 @@
     name: '{{ application_group }}'
     state: present
 
+- name: create group jupyterhub_group
+  group:
+    name: '{{ jupyterhub_group }}'
+    state: present
+
+- name: create group airflow
+  group:
+    name: '{{ airflow_group }}'
+    state: present
 
 - name: Create user hadoop-user
   user:
