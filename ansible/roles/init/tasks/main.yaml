@@ -5,6 +5,5 @@
 - include: temfs.yaml
 - include: install.yaml
 - include: cert.yaml
-- include: secret.yaml
 - include: haproxy.yaml
   
