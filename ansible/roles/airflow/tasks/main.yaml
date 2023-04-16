@@ -21,7 +21,6 @@
      - { src: 'airflow-scheduler.service.j2', dest: '/etc/systemd/system/airflow-scheduler.service'  }
      - { src: 'airflow-webserver.service.j2', dest: '/etc/systemd/system/airflow-webserver.service'  }
      - { src: 'airflow_env.sh.j2', dest: '{{ airflow_home }}/airflow_env.sh'  }
-     - { src: 'airflow_fuse.sh.j2', dest: '{{ airflow_home }}/airflow_fuse.sh'  }
   notify: 
      - restart airflow_scheduler      
      - restart airflow_webserver     
