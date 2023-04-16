@@ -1,7 +1,13 @@
 
 ### https://luminousmen.com/post/dive-into-spark-memory
 
+```
+export SPARK_HOME=/opt/spark; ${SPARK_HOME}/bin/spark-submit  --class org.apache.spark.examples.SparkPi --master spark://node-1:7077,node-2:7077  $SPARK_HOME/examples/jars/spark-examples_2.13-3.3.2.jar
+export SPARK_HOME=/opt/spark; ${SPARK_HOME}/bin/spark-submit  --class org.apache.spark.examples.SparkPi --master spark://node-1:7077,node-2:7077  $SPARK_HOME/examples/src/main/python/pi.py
+```
+
 ## sparksql
+```
 /opt/spark/bin/spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.1.0 \
  --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
  --conf spark.sql.catalog.spark_catalog=org.apache.iceberg.spark.SparkSessionCatalog \
@@ -15,9 +21,12 @@
  --conf spark.hadoop.datanucleus.fixedDatastore=false \
  --conf spark.hadoop.fs.s3a.aws.credentials.provider=org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider \
  --conf spark.hadoop.fs.s3a.secret.key=minioadmin 
-
+```
 ___
 
+## setup the iceberg catalog
+https://blog.min.io/lakehouse-architecture-iceberg-minio/
+```
 export AWS_ACCESS_KEY_ID=minioadmin
 export AWS_SECRET_ACCESS_KEY=minioadmin
 export AWS_S3_ENDPOINT=https://127.0.0.1:9000
@@ -99,3 +108,4 @@ data string,
 category string)
 USING iceberg
 PARTITIONED BY (category);
+```
