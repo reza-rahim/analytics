@@ -1,12 +1,49 @@
+#### group
 
 - name: create group application
   group:
     name: '{{ application_group }}'
     state: present
 
-- name: create group jupyterhub_group
+- name: create group zookeeper  
+  group:
+    name: '{{ zookeeper_group }}'
+    state: present
+
+- name: create group minio
+  group:
+    name: '{{ minio_group }}'
+    state: present
+
+- name: create group db_group
+  group:
+    name: '{{ db_user }}'
+    state: present
+
+- name: create group keycloak_group
+  group:
+    name: '{{  keycloak_group }}'
+    state: present
+
+
+- name: create group spark
+  group:
+    name: '{{ spark_group }}'
+    state: present
+
+- name: create group spark-fuse
+  group:
+    name: '{{ spark_fuse_group }}'
+    state: present
+
+- name: create group jupyterhub
   group:
     name: '{{ jupyterhub_group }}'
+    state: present
+
+- name: create group jupyterhub-fuse
+  group:
+    name: '{{ jupyterhub_fuse_group }}'
     state: present
 
 - name: create group airflow
@@ -14,97 +51,136 @@
     name: '{{ airflow_group }}'
     state: present
 
+- name: create group airflow-fuse
+  group:
+    name: '{{ airflow_fuse_group }}'
+    state: present
+
+- name: create group trino
+  group:
+    name: '{{ trino_group }}'
+    state: present
+
+- name: create group superset
+  group:
+    name: '{{ superset_group }}'
+    state: present
+
+- name: create group node_exporter
+  group:
+    name: '{{ node_exporter_group }}'
+    state: present
+
+- name: create group prometheus
+  group:
+    name: '{{ prometheus_group }}'
+    state: present
+
+- name: create group grafana
+  group:
+    name: '{{ grafana_group }}'
+    state: present
+
+- name: create group loki
+  group:
+    name: '{{ loki_group }}'
+    state: present
+
+- name: create group promtail
+  group:
+    name: '{{ promtail_group }}'
+    state: present
+
+- name: create group 
+  group:
+    name: '{{ jceks_group }}'
+    state: present
+
+ #### users
 - name: Create user hadoop-user
   user:
     name: '{{ hadoop_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash  
+    groups: '{{hadoop_group}},{{ application_group }}'
+
+- name: Create user zookeeper
+  user:
+    name: '{{ zookeeper_user }}'
+    groups: '{{ zookeeper_group }},{{ application_group }}'
 
 
-- name: Create user minio-user
+- name: Create user minio
   user:
     name: '{{ minio_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash  
-
-- name: Create user spark
-  user:
-    name: '{{ spark_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-- name: Create user jupyterhub_user
-  user:
-    name: '{{ jupyterhub_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-- name: Create user hive
-  user:
-    name: '{{ hive_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-- name: Create user trino
-  user:
-    name: '{{ trino_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-- name: Create user airflow
-  user:
-    name: '{{ airflow_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-- name: Create user {{ keycloak_user }}
-  user:
-    name: '{{ keycloak_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash
-
-- name: Create user superset
-  user:
-    name: '{{ superset_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ application_group }},{{ minio_group }}'
 
 - name: Create user {{ db_user }}
   user:
     name: '{{ db_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ db_user }},{{ application_group }}'
+
+- name: Create user {{ keycloak_user }}
+  user:
+    name: '{{ keycloak_user }}'
+    groups: '{{ keycloak_group }},{{ application_group }}'
+
+- name: Create user hive
+  user:
+    name: '{{ hive_user }}'
+    groups: '{{ hive_group }},{{ application_group }}, {{ jceks_group }}'
+
+- name: Create user spark
+  user:
+    name: '{{ spark_user }}'
+    groups: '{{ spark_group }},{{ spark_fuse_group }},{{ jupyterhub_fuse_group }},,{{ airflow_fuse_group }},{{ application_group }}, {{ jceks_group }}'
+
+
+- name: Create user trino
+  user:
+    name: '{{ trino_user }}'
+    groups: '{{ trino_group }},{{ application_group }}'
+
+- name: Create user jupyterhub_user
+  user:
+    name: '{{ jupyterhub_user }}'
+    groups: '{{ jupyterhub_group }},{{ spark_fuse_group }},{{ jupyterhub_fuse_group }},,{{ airflow_fuse_group }}, {{ application_group }} , {{ jceks_group }}'  
+
+
+- name: Create user airflow
+  user:
+    name: '{{ airflow_user }}'
+    groups: '{{ airflow_group }},{{ spark_fuse_group }},{{ jupyterhub_fuse_group }},,{{ airflow_fuse_group }}, {{ application_group }}, {{ jceks_group }}'
+
+
+- name: Create user superset
+  user:
+    name: '{{ superset_user }}'
+    groups: '{{ superset_group }},{{ application_group }}'
 
 
 - name: Create user node_exporter
   user:
     name: '{{ node_exporter_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ node_exporter_group }},{{ application_group }}'
 
 - name: Create user prometheus
   user:
     name: '{{ prometheus_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ prometheus_group }},{{ application_group }}'
 
 - name: Create user {{ grafana_user }}
   user:
     name: '{{ grafana_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ grafana_group }},{{ application_group }}'
 
 - name: Create user {{ loki_user }}
   user:
     name: '{{ loki_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ loki_group }},{{ application_group }}'
 
 - name: Create user promtail user
   user:
     name: '{{ promtail_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash    
+    groups: '{{ promtail_group }},{{ application_group }}'
 
 - name: Create user '{{ kcadm_user }}' user
   user:
@@ -112,9 +188,3 @@
     group: '{{ application_group }}'
     shell: /bin/bash    
     home: '{{ tmpfs_dir }}/kcadm'
-
-- name: Create user '{{ zookeeper_user }}' user
-  user:
-    name: '{{ zookeeper_user }}'
-    group: '{{ application_group }}'
-    shell: /bin/bash

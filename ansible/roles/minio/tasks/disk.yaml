@@ -5,12 +5,12 @@
     path: "{{ item.path }}"
     state: directory
     owner: "{{ item.owner }}"
-    group: "{{ application_group }}"
+    group: "{{ minio_group }}"
   loop:
-    - { path: '/mnt/disk1', owner: 'minio-user'}
-    - { path: '/mnt/disk2', owner: 'minio-user'}
-    - { path: '/mnt/disk3', owner: 'minio-user'}
-    - { path: '/mnt/disk4', owner: 'minio-user'}
+    - { path: '/mnt/disk1', owner: '{{ minio_user }}'}
+    - { path: '/mnt/disk2', owner: '{{ minio_user }}'}
+    - { path: '/mnt/disk3', owner: '{{ minio_user }}'}
+    - { path: '/mnt/disk4', owner: '{{ minio_user }}'}
 
 - name: Create a xfs filesystem on /dev/sd*
   command: mkfs.xfs "{{ item.path }}"  -L "{{ item.label }}"
@@ -42,11 +42,11 @@
     path: "{{ item.path }}"
     state: directory
     owner: "{{ item.owner }}"
-    group: "{{ application_group }}"
+    group: "{{ minio_group }}"
   loop:
-    - { path: '/mnt/disk1/minio', owner: 'minio-user'}
-    - { path: '/mnt/disk2/minio', owner: 'minio-user'}
-    - { path: '/mnt/disk3/minio', owner: 'minio-user'}
-    - { path: '/mnt/disk4/minio', owner: 'minio-user'}
+    - { path: '/mnt/disk1/minio', owner: '{{ minio_user }}'}
+    - { path: '/mnt/disk2/minio', owner: '{{ minio_user }}'}
+    - { path: '/mnt/disk3/minio', owner: '{{ minio_user }}'}
+    - { path: '/mnt/disk4/minio', owner: '{{ minio_user }}'}
 
 

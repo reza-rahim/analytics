@@ -27,7 +27,7 @@
      dest: '{{ zookeeper_home }}'
      state: link
      owner: '{{ zookeeper_user }}'
-     group: '{{ application_group }}'
+     group: '{{ zookeeper_group }}'
   when: not stat_result.stat.exists  
 
 - name: copy  zookeeper conf files

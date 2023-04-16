@@ -18,7 +18,7 @@ source  {{ tmpfs_dir }}/lockbox.env
 /usr/bin/echo  $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY > {{ tmpfs_dir }}/s3cred
 /usr/bin/chmod 600 {{ tmpfs_dir }}/s3cred 
 
-group="$(/usr/bin/getent group {{ jupyterhub_group }}  | /usr/bin/cut -d: -f3)"
+group="$(/usr/bin/getent group {{ jupyterhub_fuse_group }}  | /usr/bin/cut -d: -f3)"
 
 /usr/bin/s3fs {{ jupyterhub_s3_bucket }} {{ jupyterhub_notebook_dir }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,allow_other,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
 

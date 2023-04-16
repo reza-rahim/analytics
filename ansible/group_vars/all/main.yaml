@@ -11,7 +11,6 @@ ca_cert_file_name: CA_cert.crt
 server_cert_file_name: server.crt
 server_key_file_name: server.key
 server_cert_key_file_name: server_crt_key.pem
-client_secret: Mfn4234D2cHizt5jUawUgqHMR9AxLuvn
 client_id: trino
 
 ##########################   server name ##################
@@ -38,8 +37,7 @@ tmpfs_size: 1M
 #passphrase: "/usr/bin/cat /run/machine-id"
 passphrase: "/usr/sbin/blkid | /usr/bin/grep UUID | /usr/bin/grep sda | /usr/bin/head -n 1 | /usr/bin/awk -F' ' '{print $3}' |  /usr/bin/awk -F'=' '{print $2}' | /usr/bin/sed 's/.$//' | /usr/bin/sed 's/^.//'"
 application_group: application
-jupyterhub_group: jupyterhub
-airflow_group: airflow
+jceks_group: jceks
 
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
@@ -47,6 +45,7 @@ podman_version:  100:3.4.2-4
 
 ############################## hadoop ##################### 
 hadoop_user: hadoop
+hadoop_group: hadoop
 hadoop_home: /opt/hadoop
 hadoop_version: 3.2.0
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
@@ -57,6 +56,8 @@ hadoop_install_dir: /opt/hadoop
 spark_home: /opt/spark/
 spark_mnaster_conf_dir: /opt/spark/master_conf
 spark_user: spark
+spark_group: spark
+spark_fuse_group: spark-fuse
 spark_webui_port: 8080
 spark_rpc_port: 7077
 spark_history_ui_port: 18080
@@ -106,8 +107,9 @@ minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
 minio_file_name: minio
 
 minio_dir: /opt/minio
-minio_user: minio-user
-minio_home: /home/minio-user
+minio_user: minio
+minio_group: minio
+minio_home: /home/minio
 
 #minio_redirectUris: \"localhost:8080\"
 
@@ -121,6 +123,7 @@ s3_protocol: https
 
 ####################### hive metastore ##################
 hive_user: hive
+hive_group: hive
 hive_db_name: hive
 hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
@@ -132,7 +135,8 @@ iceberg_db_name: iceberg
 
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
-jupyterhub_user_group: jupyterhub
+jupyterhub_group: jupyterhub
+jupyterhub_fuse_group: jupyterhub-fuse
 jupyterhub_port: 9080
 jupyterhub_hub_port: 9081
 JupyterHub_api_port: 9082
@@ -141,6 +145,7 @@ jupyterhub_notebook_dir: /var/data/jupyterhub
 
 ######################### Trino #####################
 trino_user: trino
+trino_group: trino
 trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
 trino_file_name: trino-server-410
 trino_home: /opt/trino
@@ -157,6 +162,8 @@ trino_password_file: /etc/trino/passwdfile
 ######################### airflow #####################
 airflow_version: 2.5.2
 airflow_user: airflow
+airflow_group: airflow
+airflow_fuse_group: airflow-fuse
 airflow_db_name: airflow
 airflow_home: /opt/airflow
 #airflow_admin_username: demo                     # change it 
@@ -167,11 +174,13 @@ airflow_s3_bucket: airflow
 
 ######################### superset  #####################
 superset_user: superset
+superset_group: superset
 superset_db_name: superset
 superset_home: /opt/superset
 
 ######################### keycloak  #####################
 keycloak_user:  keycloak
+keycloak_group:  keycloak
 keycloak_db_name: keycloak
 keycloak_home: /opt/keycloak
 keycloak_http_port: 6080
@@ -186,6 +195,7 @@ keycloak_url: https://github.com/keycloak/keycloak/releases/download/21.0.1/keyc
 keycloak_url_file_name: keycloak-21.0.1.tar.gz
 keycloak_file_name: keycloak-21.0.1
 kcadm_user: kcadm
+kcadm_group: kcadm
 
 ## user uuidgen to generate uuid
 keycloak_realms_devel: devel
@@ -196,12 +206,14 @@ prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43
 prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
 prometheus_filanme: prometheus-2.43.0.linux-amd64
 prometheus_user: prometheus
+prometheus_group: prometheus
 prometheus_home: /opt/prometheus
 prometheus_data_dir: /var/lib/prometheus/
 prometheus_port: 9090
 
 ############################### prometheus  #########################
 node_exporter_user: node_exporter
+node_exporter_group: node_exporter
 node_exporter_home: /opt/node_exporter
 node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
 node_exporter_file_name: node_exporter-1.5.0.linux-amd64
@@ -209,6 +221,7 @@ node_exporter_port: 9200
 
 ############################### Grafana  #########################
 grafana_user: grafana
+grafana_group: grafana
 grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
 grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
 grafana_file_name: grafana-9.4.3
@@ -216,15 +229,18 @@ grafana_home: /opt/grafana
 
 #############
 loki_user: loki
+loki_group: loki
 
 ############
 promtail_user: promtail
+promtail_group: promtail
 
 ############# Zookeeper ################
 zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
 zookeeper_url_file_name: apache-zookeeper-3.8.0-bin.tar.gz
 zookeeper_file_name: apache-zookeeper-3.8.0-bin        
 zookeeper_user: zookeeper
+zookeeper_group: zookeeper
 zookeeper_home: /opt/zookeeper
 zookeeper_data_dir: /var/zookeeper/data/
 zookeeper_clientPort: 2181 

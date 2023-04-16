@@ -2,11 +2,11 @@
 Description=MinIO
 Documentation=https://min.io/docs/minio/linux/index.html
 Wants=network-online.target
-After=network-online.target keycloak.service
+After=network-online.target  zookeeper.service
 AssertFileIsExecutable=/usr/local/bin/minio
 
 [Service]
-WorkingDirectory=/home/minio-user
+WorkingDirectory={{ minio_home }}
 
 Environment=MINIO_IDENTITY_OPENID_CONFIG_URL_PRIMARY_IAM="https://keyclock.mnbvcxz.com:6443/realms/devel/.well-known/openid-configuration"
 Environment=MINIO_IDENTITY_OPENID_CLIENT_ID_PRIMARY_IAM="minio"
