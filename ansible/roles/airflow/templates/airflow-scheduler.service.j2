@@ -11,7 +11,6 @@ User={{ airflow_user }}
 Group={{ application_group }}
 
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
-ExecStartPre={{ fuse_home }}/spark_fuse.sh
 
 ExecStart= bash -c 'source {{ tmpfs_dir }}/{{ lockbox_env }};  /usr/bin/rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }}; \
                    /usr/local/bin/airflow db upgrade; \
