@@ -40,8 +40,4 @@
     dest: '{{ hadoop_home }}'
     state: link
   
-
-- name: modify /etc/fuse.conf 
-  lineinfile:
-     dest: /etc/fuse.conf
-     line: user_allow_other    
+     

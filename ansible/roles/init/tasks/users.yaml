@@ -91,9 +91,14 @@
     name: '{{ promtail_group }}'
     state: present
 
-- name: create group 
+- name: create group jceks
   group:
     name: '{{ jceks_group }}'
+    state: present
+
+- name: create group fuse
+  group:
+    name: '{{ fuse_group }}'
     state: present
 
  #### users
@@ -131,7 +136,7 @@
 - name: Create user spark
   user:
     name: '{{ spark_user }}'
-    groups: '{{ spark_group }},{{ spark_fuse_group }},{{ jupyterhub_fuse_group }},,{{ airflow_fuse_group }},{{ application_group }}, {{ jceks_group }}'
+    groups: '{{ spark_group }},{{ fuse_group }},{{ application_group }}, {{ jceks_group }}'
 
 
 - name: Create user trino
@@ -142,13 +147,13 @@
 - name: Create user jupyterhub_user
   user:
     name: '{{ jupyterhub_user }}'
-    groups: '{{ jupyterhub_group }},{{ spark_fuse_group }},{{ jupyterhub_fuse_group }},,{{ airflow_fuse_group }}, {{ application_group }} , {{ jceks_group }}'  
+    groups: '{{ jupyterhub_group }},{{ fuse_group }},{{ application_group }} , {{ jceks_group }}'  
 
 
 - name: Create user airflow
   user:
     name: '{{ airflow_user }}'
-    groups: '{{ airflow_group }},{{ spark_fuse_group }},{{ jupyterhub_fuse_group }},,{{ airflow_fuse_group }}, {{ application_group }}, {{ jceks_group }}'
+    groups: '{{ airflow_group }},{{ fuse_group }}, {{ application_group }}, {{ jceks_group }}'
 
 
 - name: Create user superset
@@ -181,6 +186,11 @@
   user:
     name: '{{ promtail_user }}'
     groups: '{{ promtail_group }},{{ application_group }}'
+
+- name: Create user fuse
+  user:
+    name: '{{ fuse_user }}'
+    groups: '{{ fuse_group }},{{ application_group }}'
 
 - name: Create user '{{ kcadm_user }}' user
   user:

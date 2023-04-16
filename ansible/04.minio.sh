@@ -7,6 +7,8 @@ mc mb s3/spark
 mc mb s3/warehouse
 mc mb s3/airflow
 mc mb s3/jupyterhub
+mc mb s3/spark-app
+mc mb s3/spark-data
 touch init
 mc cp init s3/spark/logs/init/init
 mc cp init s3/airflow/init

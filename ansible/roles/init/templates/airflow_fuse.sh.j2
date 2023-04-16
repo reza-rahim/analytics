@@ -1,0 +1,25 @@
+#!/bin/bash
+
+## check the mount mount, if exists then exit
+/usr/bin/df {{ airflow_dag_dir }} |/usr/bin/grep s3fs
+
+if [ $? -eq 0 ] 
+then 
+  /usr/bin/echo "already mounted"	
+  exit 0
+fi
+
+## mount s3 bucket wuth fuse
+
+/usr/bin/echo "Mounting ..."	
+#/etc/lockbox/decrypt_lockbox.sh 
+
+source  {{ tmpfs_dir }}/lockbox.env
+/usr/bin/echo  $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY > {{ tmpfs_dir }}/s3cred
+/usr/bin/chmod 600 {{ tmpfs_dir }}/s3cred 
+
+group="$(/usr/bin/getent group {{ fuse_group }}  | /usr/bin/cut -d: -f3)"
+
+/usr/bin/s3fs {{ airflow_s3_bucket }} {{ airflow_dag_dir }} -o passwd_file=/mnt/tmpfs/s3cred,umask=002,gid=$group,use_path_request_style,allow_other,url={{ s3_protocol }}://{{ fs_s3a_endpoint }}
+
+/usr/bin/rm -f {{ tmpfs_dir }}/s3cred

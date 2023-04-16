@@ -1,4 +1,9 @@
 ---
 
 - include: users.yaml
-  
+- include: hosts.yaml
+- include: temfs.yaml
+- include: install.yaml
+- include: cert.yaml
+- include: haproxy.yaml  
+- include: fuse.yaml  

@@ -78,6 +78,9 @@ spark_executor_memory: 2g
 spark_executor_cores: 2
 
 spark_history_location: s3a://spark/logs
+spark_s3_application_bucket: spark-app
+spark_s3_data_bucket: spark-data
+spark_s3_application_dir: /var/data/spark-app
 
 hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
 hadoop_aws_file_name: hadoop-aws-3.3.2.jar
@@ -248,6 +251,8 @@ zookeeper_clientPort: 2181
 ######################## fuse ################
 
 fuse_home: /opt/fuse
+fuse_user: fuse
+fuse_group: fuse
 
 ######################## patroni ################
 patroni_home: /opt/patroni
