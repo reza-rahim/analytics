@@ -30,15 +30,3 @@
   systemd:
     daemon_reload: true       
 
-- name: Check that the airlfow dag home exists
-  stat:
-      path: '{{ airflow_dag_dir }}'
-  register: dag_stat_result
-       
-- name: create airflow dag directory 
-  file:
-     path: '{{ airflow_dag_dir }}'
-     state: directory
-     owner: '{{ airflow_user }}'   
-     group: '{{ application_group }}'
-  when: not dag_stat_result.stat.exists   

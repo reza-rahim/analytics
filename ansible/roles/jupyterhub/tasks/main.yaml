@@ -1,18 +1,5 @@
 ---
 
-- name: check for '{{ jupyterhub_notebook_dir }}'
-  stat:
-     path: '{{ jupyterhub_notebook_dir }}'
-  register: jupyterhub_notebook_dir_stat_result
-
-- name: create {{ jupyterhub_notebook_dir }}
-  file:
-     path: '{{ jupyterhub_notebook_dir }}'
-     state: directory
-     owner: '{{ jupyterhub_user }}'
-     group: '{{ jupyterhub_group }}'
-  when: not jupyterhub_notebook_dir_stat_result.stat.exists
-
 - name: Create /etc/jupyterhub
   file: 
      path:  /etc/jupyterhub
@@ -80,11 +67,9 @@
   loop:
      - { src: 'jupyterhub.service.j2', dest: '/etc/systemd/system/jupyterhub.service'  }      
      - { src: 'jupyterhub_config_simple.py.j2', dest: '/etc/jupyterhub/jupyterhub_config_simple.py'  }      
-     - { src: 'jupyterhub_fuse.sh.j2', dest: '/etc/jupyterhub/jupyterhub_fuse.sh'  }      
   notify: restart jupyterhub 
 
 - name: Reload service files
   systemd:
     daemon_reload: true  
-
 

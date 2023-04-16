@@ -65,3 +65,4 @@
      - { src: 'airflow_fuse.sh.j2', dest: '{{ fuse_home }}/airflow_fuse.sh'  }
      - { src: 'jupyterhub_fuse.sh.j2', dest: '{{ fuse_home }}/jupyterhub_fuse.sh'  }
      - { src: 'spark_fuse.sh.j2', dest: '{{ fuse_home }}/spark_fuse.sh'  }
+     - { src: 'spark_fuse.sh.j2', dest: '{{ fuse_home }}/spark_fuse.sh'  }
