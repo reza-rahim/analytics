@@ -13,3 +13,5 @@ touch init
 mc cp init s3/spark/logs/init/init
 mc cp init s3/airflow/init
 mc cp example/simple_iceberg_demo_v4.ipynb  s3/jupyterhub/simple_iceberg_demo_v4.ipynb
+mc cp example/01.hello_world_dag.py  s3/airflow/01.hello_world_dag.py
+mc cp example/02.spark.py  s3/airflow/02.spark.py
