@@ -10,4 +10,4 @@ mc mb s3/jupyterhub
 touch init
 mc cp init s3/spark/logs/init/init
 mc cp init s3/airflow/init
-mc cp init s3/jupyterhub/init
+mc cp example/simple_iceberg_demo_v4.ipynb  s3/jupyterhub/simple_iceberg_demo_v4.ipynb

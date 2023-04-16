@@ -1,6 +1,6 @@
 [Unit]
 Description=Apache Spark Master 
-After=network.target zookeeper.service minio.service
+After=network.target zookeeper.service hive-metastore.service
 
 [Service]
 User={{ spark_user }}

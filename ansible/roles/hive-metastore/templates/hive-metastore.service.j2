@@ -1,6 +1,6 @@
 [Unit]
 Description=Apache Hive Metastore 
-After=network.target patroni.service  minio.service 
+After=network.target patroni.service   keycloak.service
 
 [Service]
 User={{ hive_user }}
