@@ -1,6 +1,6 @@
 [Unit]
 Description=Apache Airflow Webserver
-After=network.target airflow-scheduler.service 
+After=network.target patroni.service airflow-scheduler.service 
 
 [Service]
 EnvironmentFile={{ airflow_home }}/airflow_env.sh
