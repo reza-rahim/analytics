@@ -24,6 +24,7 @@ docker run  \
 -e AUTO_DETECT_SCHEMA=true \
 -e USE_STREAM_CAPABLE_STATE=true \
 -e MICRONAUT_ENVIRONMENTS=control-plane \
+-v /var/run/docker.sock:/var/run/docker.sock \
 --net airbyte \
 --ip=172.36.0.11 \
 --name airbyte-worker \

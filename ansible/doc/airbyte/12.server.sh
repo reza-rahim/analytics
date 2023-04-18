@@ -1,7 +1,7 @@
 docker run  \
 -e AIRBYTE_VERSION=0.44.0 \
 -e CONFIG_ROOT=/data \
--e DATABASE_URL=jdbc:postgresql://192.168.1.6:5432/airbyte \
+-e DATABASE_URL=jdbc:postgresql://192.168.1.6:5000/airbyte \
 -e DATABASE_USER=postgres \
 -e DATABASE_PASSWORD=postgres \
 -e LOCAL_ROOT=/tmp/airbyte_local \
