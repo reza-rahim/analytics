@@ -119,7 +119,7 @@ minio_home: /home/minio
 fs_s3a_endpoint: 127.0.0.1:9000
 metastore_warehouse_dir: s3a://warehouse/
 #export S3_PROTOCOL=http
-s3_protocol: https
+s3_protocol: http
 #fs_s3a_access_key: minioadmin                 ##  pass from env
 #fs_s3a_secret_key: minioadmin                 ##  pass from env
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
@@ -132,6 +132,7 @@ hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metasto
 hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
 hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_home: /opt/apache-hive-metastore
+hive_metastore_port: 9083
 
 ########################## iceberg ##################
 iceberg_db_name: iceberg

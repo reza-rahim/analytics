@@ -6,6 +6,7 @@ mc  alias set s3   https://minio.mnbvcxz.com:9000  $MINIO_ROOT_USER $MINIO_ROOT_
 mc mb s3/spark
 mc mb s3/warehouse
 mc mb s3/airflow
+mc mb s3/airflow-log
 mc mb s3/jupyterhub
 mc mb s3/spark-app
 mc mb s3/spark-data
