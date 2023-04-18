@@ -1,0 +1,31 @@
+docker run  \
+-e AIRBYTE_VERSION=0.44.0 \
+-e CONFIG_ROOT=/data \
+-e DATABASE_PASSWORD=postgres \
+-e DATABASE_URL=jdbc:postgresql://192.168.1.6:5000/airbyte \
+-e DATABASE_USER=postgres \
+-e INTERNAL_API_HOST=airbyte-server:8001 \
+-e LOCAL_ROOT=/tmp/airbyte_local \
+-e LOG_LEVEL=WARN \
+-e CONFIGS_DATABASE_MINIMUM_FLYWAY_MIGRATION_VERSION=0.40.23.002 \
+-e JOBS_DATABASE_MINIMUM_FLYWAY_MIGRATION_VERSION=0.40.26.001 \
+-e MAX_CHECK_WORKER=5 \
+-e MAX_DISCOVER_WORKERS=5 \
+-e MAX_SPEC_WORKERS=5 \
+-e MAX_SYNC_WORKERS=5 \
+-e MAX_NOTIFY_WORKERS=5 \
+-e SHOULD_RUN_NOTIFY_WORKFLOWS=true \
+-e SYNC_JOB_MAX_ATTEMPTS=3 \
+-e TEMPORAL_HOST=airbyte-temporal:7233 \
+-e TRACKING_STRATEGY=segment \
+-e WEBAPP_URL=http://localhost:8000 \
+-e WORKSPACE_ROOT=/tmp/workspace \
+-e JOB_ERROR_REPORTING_STRATEGY=logging \
+-e AUTO_DETECT_SCHEMA=true \
+-e USE_STREAM_CAPABLE_STATE=true \
+-e MICRONAUT_ENVIRONMENTS=control-plane \
+--net airbyte \
+--ip=172.36.0.11 \
+--name airbyte-worker \
+--rm \
+airbyte/worker:0.44.0 /app/airbyte-workers-0.44.0/bin/airbyte-workers
