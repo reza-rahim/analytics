@@ -55,11 +55,16 @@ vault write pki_int/issue/redislabs-dot-com common_name="north.redislabs.local" 
 rladmin cluster certificate set <cert-name> certificate_file cert.pem key_file key.pem
 
 ###centos
-### add the root ca (CA_cert.crt) and issuing_ca to /etc/pki/ca-trust/source/anchors/CA_cert.crt 
-### run update-ca-trust
-
+#### add the root ca (CA_cert.crt) and issuing_ca to /etc/pki/ca-trust/source/anchors/CA_cert.crt 
+#### run
+```
+update-ca-trust
+```
 
 ###ubuntu
-### add the root ca (CA_cert.crt) and issuing_ca to  /usr/local/share/ca-certificates/
-### run update-ca-certificates
+#### add the root ca (CA_cert.crt) and issuing_ca to  /usr/local/share/ca-certificates/
+#### run 
+```
+update-ca-certificates
+```     
 
