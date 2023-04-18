@@ -108,19 +108,19 @@ services:
         rpc:
             grpcPort: 7235
             membershipPort: 6935
-            bindOnIP: 192.168.1.6
+            bindOnIP: 172.36.0.10
 
     history:
         rpc:
             grpcPort: 7234
             membershipPort: 6934
-            bindOnIP: 192.168.1.6
+            bindOnIP: 172.36.0.10
 
     worker:
         rpc:
             grpcPort: 7239
             membershipPort: 6939
-            bindOnIP: 192.168.1.6
+            bindOnIP: 172.36.0.10
 
 clusterMetadata:
     enableGlobalNamespace: false
@@ -132,7 +132,7 @@ clusterMetadata:
             enabled: true
             initialFailoverVersion: 1
             rpcName: "frontend"
-            rpcAddress: 192.168.1.6:7233
+            rpcAddress: 172.36.0.10:7233
 
 dcRedirectionPolicy:
     policy: "noop"
@@ -164,7 +164,7 @@ namespaceDefaults:
       URI: "file:///tmp/temporal_vis_archival/development"
 
 publicClient:
-    hostPort: "192.168.1.6:7233"
+    hostPort: "172.36.0.10:7233"
 
 dynamicConfigClient:
     filepath: "config/dynamicconfig/development.yaml"
