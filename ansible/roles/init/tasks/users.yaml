@@ -5,6 +5,11 @@
     name: '{{ application_group }}'
     state: present
 
+- name: create group hadoop
+  group:
+    name: '{{ hadoop_group }}'
+    state: present
+
 - name: create group zookeeper  
   group:
     name: '{{ zookeeper_group }}'
@@ -29,6 +34,11 @@
 - name: create group spark
   group:
     name: '{{ spark_group }}'
+    state: present
+
+- name: create group hive
+  group:
+    name: '{{ hive_group }}'
     state: present
 
 - name: create group spark-fuse
