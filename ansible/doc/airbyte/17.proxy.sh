@@ -2,7 +2,6 @@ docker run  \
 -e BASIC_AUTH_USERNAME=demo \
 -e BASIC_AUTH_PASSWORD=demo \
 -e BASIC_AUTH_PROXY_TIMEOUT=600 \
--v ./config/nginx.conf:/etc/nginx/nginx.conf \
 --net airbyte \
 --ip=172.36.0.16 \
 --name airbyte-proxy \

@@ -32,4 +32,4 @@ docker run  \
 --name airbyte-worker \
 --rm \
 -d \
-airbyte/worker:0.44.0 /app/airbyte-workers-0.44.0/bin/airbyte-workers
+airbyte-worker-ca  /app/airbyte-workers-0.44.0/bin/airbyte-workers
