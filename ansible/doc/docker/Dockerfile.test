@@ -1,0 +1,5 @@
+FROM airbyte/worker:0.44.0 
+
+COPY CA_cert.crt /etc/pki/ca-trust/source/anchors/CA_cert.crt
+RUN update-ca-trust
+
