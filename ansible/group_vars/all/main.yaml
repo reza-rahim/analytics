@@ -119,7 +119,7 @@ minio_home: /home/minio
 fs_s3a_endpoint: 127.0.0.1:9000
 metastore_warehouse_dir: s3a://warehouse/
 #export S3_PROTOCOL=http
-s3_protocol: https
+s3_protocol: http
 #fs_s3a_access_key: minioadmin                 ##  pass from env
 #fs_s3a_secret_key: minioadmin                 ##  pass from env
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
