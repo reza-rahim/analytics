@@ -17,6 +17,20 @@ listen stats
 	stats enable
 	stats uri /
 
+{% if s3_protocol== "http" %}
+
+frontend minio_fn
+    bind *:9443 ssl crt /etc/cert.d/server_crt_key.pem 
+    mode http
+    default_backend minio_be
+
+backend minio_be
+      mode http
+      server minio {{ inventory_hostname }}:9001
+
+{% endif %}
+
+
 listen partoni
 	bind *:{{ partoni_haproxy_port }}
 	option httpchk
