@@ -26,7 +26,7 @@ frontend minio_fn
 
 backend minio_be
       mode http
-      server minio {{ inventory_hostname }}:9001
+      server minio 127.0.0.1:9001
 
 {% endif %}
 

@@ -1,5 +1,12 @@
 ---
 
+- name: Remove file {{ minio_home }}.minio/certs when s3 protocol is http
+  file:
+    path: '{{ minio_home }}/.minio/certs'
+    state: absent
+  when: 's3_protocol== "http"'  
+
+
 - name: create {{ minio_dir }}
   file:    
      path: '{{ minio_dir }}'

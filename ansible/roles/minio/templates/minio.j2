@@ -38,4 +38,4 @@ MINIO_OPTS="--console-address :9001"
 # MinIO hosts in the deployment as a temporary measure.
 #MINIO_SERVER_URL="https://minio:9000"
 #
-MINIO_SERVER_URL="https://{{ minio_server }}:9000"
+MINIO_SERVER_URL="{{ s3_protocol }}://{{ minio_server }}:9000"

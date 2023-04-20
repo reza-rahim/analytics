@@ -19,6 +19,7 @@
     - '{{ java_jdk }}'
     - s3fs
     - apache2-utils  
+    - net-tools 
 
 - name: Check that the hadoop home exists
   stat:
