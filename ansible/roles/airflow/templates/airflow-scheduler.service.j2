@@ -6,9 +6,9 @@ After=network.target patroni.service trino.service
 EnvironmentFile={{ airflow_home }}/airflow_env.sh
 Environment=SPARK_HOME={{ spark_home }}
 
-
 User={{ airflow_user }}
 Group={{ application_group }}
+Environment="PATH=$PATH:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin;$SPARK_HOME/bin"
 
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
 
