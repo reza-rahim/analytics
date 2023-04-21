@@ -12,7 +12,7 @@
      name: '{{ item }}'      
   loop:
      - 'apache-airflow=={{ airflow_version }}'
-     - apache-airflow[crypto]       
+     - apache-airflow[s3,crypto]       
      - psycopg2-binary  
 
 - name: copy  airflow config files
