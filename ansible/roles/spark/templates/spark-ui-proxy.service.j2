@@ -1,0 +1,17 @@
+[Unit]
+Description=Apache Spark Master 
+After=network.target spark-master.service
+
+[Service]
+User={{ spark_user }}
+Group={{ application_group }}
+
+
+ExecStart=/bin/bash -c "/usr/bin/python3 {{ spark_home }}/bin//spark-ui-proxy.py localhost:{{ spark_webui_port }} {{ spark_webui_proxy_port }}"
+
+
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

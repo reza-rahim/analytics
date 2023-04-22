@@ -14,6 +14,7 @@ ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }};  /usr/bin/rm -
 
 ExecStop=/opt/spark/sbin/start-worker.sh
 Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target

@@ -1,14 +1,25 @@
 ---
+- name: copy proxy file
+  copy:
+    src: roles/spark/files/spark-ui-proxy.py
+    dest: '{{ spark_home }}/bin/spark-ui-proxy.py'
+    mode: 0755
 
 - name: copy  spark-master.service
-  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  template: src='{{ item.src }}' dest='{{ item.dest }}' owner={{ spark_user }} group={{ spark_group }}  mode=0755
   loop:
      - { src: 'spark-master.service.j2', dest: '/etc/systemd/system/spark-master.service'  }
+     - { src: 'spark-ui-proxy.service.j2', dest: '/etc/systemd/system/spark-ui-proxy.service'  }
      - { src: 'spark-env.sh.j2', dest: '{{ spark_mnaster_conf_dir }}/spark-env.sh'  }
      - { src: 'spark-defaults.conf.j2', dest: '{{ spark_mnaster_conf_dir }}/spark-defaults.conf'  }
      - { src: 'ha.conf.j2', dest: '{{ spark_mnaster_conf_dir }}/ha.conf'  }
   when: >
     inventory_hostname in groups['spark_master'] 
     and ( groups['spark_master'].index(inventory_hostname) == 0 or groups['spark_master'].index(inventory_hostname) == 1 )
-  notify: restart start_master
+  notify: 
+    - restart start_master
+    - restart start_proxy
 
+- name: Reload service files
+  systemd:
+    daemon_reload: true

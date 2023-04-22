@@ -1,6 +1,9 @@
 - name: restart start_master
   service: name=spark-master.service  state=restarted enabled=yes
 
+- name: restart start_proxy
+  service: name=spark-ui-proxy.service  state=restarted enabled=yes
+
 - name: restart start_worker
   service: name=spark-worker.service  state=restarted enabled=yes
 
