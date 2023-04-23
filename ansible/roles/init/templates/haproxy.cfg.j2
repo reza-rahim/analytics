@@ -17,6 +17,16 @@ listen stats
 	stats enable
 	stats uri /
 
+frontend spark_fn
+    bind *:{{ spark_webui_haproxy_port }} ssl crt /etc/cert.d/server_crt_key.pem
+    mode http
+    default_backend spark_be
+
+backend spark_be
+      mode http
+      server spark 127.0.0.1:{{ spark_webui_proxy_port }}
+
+
 {% if s3_protocol== "http" %}
 
 frontend minio_fn
