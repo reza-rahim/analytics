@@ -54,3 +54,7 @@ export AWS_SECRET_ACCESS_KEY=minioadmin
 #airflow
 export AIRFLOW_ADMIN_USERNAME=demo
 export AIRFLOW_ADMIN_PASSWORD=demo
+
+#spark
+export SPARK_UI_USER=demo
+export SPARK_UI_PASSWORD=demo

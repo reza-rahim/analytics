@@ -22,4 +22,6 @@ ansible-playbook -i inventory.ini \
 -e keycloak_airflow_client_secret=${KEYCLOAK_AIRFLOW_CLIENT_SECRET} \
 -e trino_shared_secret=${TRINO_SHARED_SECRET} \
 -e trino_password=${TRINO_PASSWORD} \
+-e spark_ui_user=${SPARK_UI_USER} \
+-e spark_ui_password=${SPARK_UI_PASSWORD} \
 secret.yaml
