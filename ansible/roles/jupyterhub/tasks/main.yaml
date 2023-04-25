@@ -5,6 +5,11 @@
      path:  /etc/jupyterhub
      state: directory
 
+- name: Create {{ jupyterhub_home }}
+  file: 
+     path:  '{{ jupyterhub_home }}'
+     state: directory
+
 - name: check for nodejs
   stat: 
      path: /usr/bin/node 

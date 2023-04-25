@@ -141,6 +141,7 @@ iceberg_db_name: iceberg
 
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
+jupyterhub_home: /opt/jupyterhub
 jupyterhub_group: jupyterhub
 jupyterhub_fuse_group: jupyterhub-fuse
 jupyterhub_port: 9080
