@@ -34,28 +34,28 @@
   pip: 
     name: '{{ item }}'
   loop:
-    - jupyterhub      
-    - JupyterLab
+    - jupyterhub==3.1      
+    - JupyterLab==3.6.3
     - oauthenticator
-    - pyspark
-    - numpy 
-    - pandas
-    - plotly 
-    - seaborn 
-    - matplotlib   
-    - pyarrow  
-    - scikit-learn 
-    - scikit-image
-    - pymc
-    - statsmodels  
-    - s3cmd
-    - ipython-sql
-    - sqlalchemy
-    - sparksql-magic  
-    - sqlalchemy-trino
-    - clickhouse-driver
-    - clickhouse-sqlalchemy
-    - tensorflow  
+    #- pyspark
+    - plotly==3.7.1 
+    - seaborn==0.12.2 
+    - matplotlib== 3.7.1  
+    - numpy==1.23.0 
+    - pandas==2.0.1
+    - pyarrow==11.0.0 
+    - scikit-learn==1.2.2 
+    - scikit-image==0.20.0
+    - pymc==5.3.0
+    - statsmodels==0.13.5  
+    - s3cmd==2.3.0
+    - ipython-sql==0.5.0
+    - sqlalchemy==1.4.47
+    - sparksql-magic==0.0.3  
+    - sqlalchemy-trino==0.5.0
+    #- clickhouse-driver
+    #- clickhouse-sqlalchemy
+    - tensorflow==2.12.0  
 
 - name: install configurable-http-proxy
   npm:
