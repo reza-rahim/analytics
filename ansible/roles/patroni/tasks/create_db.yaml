@@ -11,6 +11,7 @@
      - '{{ superset_db_name }}' 
      - '{{ hive_db_name }}'  
      - '{{ iceberg_db_name }}'  
+     - '{{ airbyte }}'  
   when: >
      inventory_hostname in groups['patroni']
      and  groups['patroni'].index(inventory_hostname) == 0 
