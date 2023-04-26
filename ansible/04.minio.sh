@@ -1,7 +1,7 @@
 source env.sh
-#ansible-playbook -i inventory.ini   minio.yaml
+ansible-playbook -i inventory.ini   minio.yaml
 echo "sleeping..."
-#sleep 15
+sleep 15
 #mc  alias set s3   https://minio.mnbvcxz.com:9000  $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD
 mc  alias set s3   http://minio.mnbvcxz.com:9000  $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD
 mc mb s3/spark
