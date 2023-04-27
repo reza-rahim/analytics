@@ -1,5 +1,9 @@
 ---
 
+- name: install libs
+  apt: 
+    name: [python3-virtualenv ,libldap2-dev,libffi-dev , libssl-dev , libsasl2-dev, libpq-dev]
+
 - name: create  {{ superset_home }} 
   file: 
      path: '{{  superset_home }}' 
@@ -14,18 +18,13 @@
      owner: '{{ superset_user }}'
      group: '{{ application_group }}'
 
- 
-
 - name: copy  superset files
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
+     - { src: 'requirements.txt.j2', dest: '{{  superset_home }}/requirements.txt'  }
      - { src: 'superset_config.py.j2', dest: '{{  superset_home }}/pythonpath/superset_config.py'  }
 
-- name: init superset
-  shell: '{{ item }}'  
-  loop: 
-    - 'podman run --restart unless-stopped -d --network host -v /opt/superset/pythonpath:/app/pythonpath --name superset docker.io/apache/superset'
-    - 'podman exec -it superset superset fab create-admin  --username demo  --firstname Superset  --lastname Admin  --email demo@superset.com  --password demo'
-    - 'podman  exec -it superset superset db upgrade'
-    - 'podman exec -it superset superset init'  
-  ignore_errors: true    
+- name: install requirement
+  pip:
+     virtualenv:  '{{ superset_home }}/venv'   
+     requirements: '{{ superset_home }}/requirements.txt' 
