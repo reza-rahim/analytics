@@ -9,22 +9,53 @@
      path: '{{  superset_home }}' 
      state: directory
      owner: '{{ superset_user }}'
-     group: '{{ application_group }}'
+     group: '{{ superset_group }}'
 
 - name: create  {{ superset_home }}/pythonpath 
   file: 
      path: '{{  superset_home }}/pythonpath' 
      state: directory
      owner: '{{ superset_user }}'
-     group: '{{ application_group }}'
+     group: '{{ superset_group }}'
 
 - name: copy  superset files
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
      - { src: 'requirements.txt.j2', dest: '{{  superset_home }}/requirements.txt'  }
      - { src: 'superset_config.py.j2', dest: '{{  superset_home }}/pythonpath/superset_config.py'  }
+     - { src: 'superset.txt.j2', dest: '{{  superset_home }}/superset.txt'  }
+  become: True
+  become_user: "{{ superset_user }}"
 
-- name: install requirement
+- name: install requirement lib
   pip:
      virtualenv:  '{{ superset_home }}/venv'   
      requirements: '{{ superset_home }}/requirements.txt' 
+  become: True
+  become_user: "{{ superset_user }}"
+
+- name: install superset
+  pip:
+     virtualenv:  '{{ superset_home }}/venv'   
+     requirements: '{{ superset_home }}/superset.txt' 
+  become: True
+  become_user: "{{ superset_user }}"
+
+- name: 
+  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset;  export PYTHONPATH=/opt/superset/pythonpath;  {{ superset_home }}/venv/bin/superset db upgrade;'
+  become: True
+  become_user: "{{ superset_user }}"
+  ignore_errors: true
+
+- name:
+  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath; {{ superset_home }}/venv/bin/superset fab create-admin --username {{ superset_admin_user }} --firstname Superset --lastname Admin --email demo@superset.com --password {{ superset_admin_password }};' 
+  become: True
+  become_user: "{{ superset_user }}"
+  ignore_errors: true  
+
+
+- name:
+  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath ; {{ superset_home }}/venv/bin/superset init'
+  become: True
+  become_user: "{{ superset_user }}"
+  ignore_errors: true
