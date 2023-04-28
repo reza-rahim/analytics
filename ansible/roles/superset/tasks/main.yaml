@@ -18,14 +18,21 @@
      owner: '{{ superset_user }}'
      group: '{{ superset_group }}'
 
+- name: copy  superset service files
+  template: src='{{ item.src }}' dest='{{ item.dest }}'
+  loop:
+     - { src: 'superset.service.j2', dest: '/etc/systemd/system/superset.service' }
+  notify: restart superset
+
 - name: copy  superset files
   template: src='{{ item.src }}' dest='{{ item.dest }}'
   loop:
-     - { src: 'requirements.txt.j2', dest: '{{  superset_home }}/requirements.txt'  }
-     - { src: 'superset_config.py.j2', dest: '{{  superset_home }}/pythonpath/superset_config.py'  }
+     - { src: 'requirements.txt.j2', dest: '{{  superset_home }}/requirements.txt' }
+     - { src: 'superset_config.py.j2', dest: '{{  superset_home }}/pythonpath/superset_config.py' }
      - { src: 'superset.txt.j2', dest: '{{  superset_home }}/superset.txt'  }
   become: True
   become_user: "{{ superset_user }}"
+  notify: restart superset
 
 - name: install requirement lib
   pip:
@@ -45,17 +52,19 @@
   shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset;  export PYTHONPATH=/opt/superset/pythonpath;  {{ superset_home }}/venv/bin/superset db upgrade;'
   become: True
   become_user: "{{ superset_user }}"
-  ignore_errors: true
 
 - name:
-  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath; {{ superset_home }}/venv/bin/superset fab create-admin --username {{ superset_admin_user }} --firstname Superset --lastname Admin --email demo@superset.com --password {{ superset_admin_password }};' 
+  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath; {{ superset_home }}/venv/bin/superset fab create-admin --username {{ superset_admin_user }} --firstname Superset --lastname Admin --email {{ superset_admin_email }} --password {{ superset_admin_password }};' 
   become: True
   become_user: "{{ superset_user }}"
-  ignore_errors: true  
 
 
 - name:
   shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath ; {{ superset_home }}/venv/bin/superset init'
   become: True
   become_user: "{{ superset_user }}"
-  ignore_errors: true
+
+- name: Reload service files
+  systemd:
+    daemon_reload: true
+                           

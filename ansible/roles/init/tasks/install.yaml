@@ -15,11 +15,13 @@
     update_cache: yes
   loop:
     - python3-pip
+    - python3-dev
     - postgresql-client-{{ postgresql_version }}     
     - '{{ java_jdk }}'
     - s3fs
     - apache2-utils  
     - net-tools 
+    - ntp
 
 - name: Check that the hadoop home exists
   stat:

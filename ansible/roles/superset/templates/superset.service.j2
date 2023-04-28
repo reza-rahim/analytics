@@ -1,0 +1,21 @@
+[Unit]
+Description=Apache  superset
+After=network.target trino.service
+
+[Service]
+User={{ superset_user }}
+Group={{ application_group }}
+WorkingDirectory={{ superset_home }}
+Environment=FLASK_APP=superset
+Environment=PYTHONPATH={{ superset_home }}/pythonpath
+
+ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
+
+ExecStart=/bin/bash -c "source {{ tmpfs_dir }}/{{ lockbox_env }}; \
+                       /usr/bin/rm -f  {{ tmpfs_dir }}/*{{ lockbox_env }} ; \
+                       /opt/superset/venv/bin/gunicorn -w 8 -k gevent --timeout 120 -b 0.0.0.0:8088 --limit-request-line 0 --limit-request-field_size 0 'superset.app:create_app()' "
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
