@@ -49,27 +49,32 @@
   become_user: "{{ superset_user }}"
 
 - name: superset db upgrade
-  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset;  export PYTHONPATH=/opt/superset/pythonpath;  {{ superset_home }}/venv/bin/superset db upgrade;'
+  shell: '. {{ superset_home }}/venv/bin/activate; export PGUSER={{ db_user }}; export PGPASSWORD={{ db_password }};  export FLASK_APP=superset;  export PYTHONPATH=/opt/superset/pythonpath;  {{ superset_home }}/venv/bin/superset db upgrade;'
   become: True
   become_user: "{{ superset_user }}"
+  when: >
+      groups['superset'].index(inventory_hostname) == 0
 
 - name: set superset admin user
-  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath; {{ superset_home }}/venv/bin/superset fab create-admin --username {{ superset_admin_user }} --firstname Superset --lastname Admin --email {{ superset_admin_email }} --password {{ superset_admin_password }};' 
+  shell: '. {{ superset_home }}/venv/bin/activate; export PGUSER={{ db_user }}; export PGPASSWORD={{ db_password }};  export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath; {{ superset_home }}/venv/bin/superset fab create-admin --username {{ superset_admin_user }} --firstname Superset --lastname Admin --email {{ superset_admin_email }} --password {{ superset_admin_password }};' 
   become: True
   become_user: "{{ superset_user }}"
+  when: >
+      groups['superset'].index(inventory_hostname) == 0
 
 
 - name: superset init
-  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath ; {{ superset_home }}/venv/bin/superset init'
+  shell: '. {{ superset_home }}/venv/bin/activate; export PGUSER={{ db_user }}; export PGPASSWORD={{ db_password }}; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath ; {{ superset_home }}/venv/bin/superset init'
   become: True
   become_user: "{{ superset_user }}"
+  when: >
+      groups['superset'].index(inventory_hostname) == 0
 
-- name: superset init
-  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath ; {{ superset_home }}/venv/bin/superset set_database_uri -d Trino -u trino://{{ trino_user }}:{{ trino_password }}@127.0.0.1:7443/iceberg?verify=false'
-  become: True
-  become_user: "{{ superset_user }}"
+#- name: superset init
+#  shell: '. {{ superset_home }}/venv/bin/activate; export FLASK_APP=superset; export PYTHONPATH=/opt/superset/pythonpath ; {{ superset_home }}/venv/bin/superset set_database_uri -d Trino -u trino://{{ trino_user }}:{{ trino_password }}@127.0.0.1:7443/iceberg?verify=false'
+#  become: True
+#  become_user: "{{ superset_user }}"
 
 - name: Reload service files
   systemd:
     daemon_reload: true
-                           

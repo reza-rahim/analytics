@@ -24,4 +24,6 @@ ansible-playbook -i inventory.ini \
 -e trino_password=${TRINO_PASSWORD} \
 -e spark_ui_user=${SPARK_UI_USER} \
 -e spark_ui_password=${SPARK_UI_PASSWORD} \
+-e superset_admin_user=$SUPERSET_ADMIN_USER \
+-e superset_admin_password=$SUPERSET_ADMIN_PASSWORD \
 secret.yaml
