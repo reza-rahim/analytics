@@ -86,5 +86,7 @@
 
 - name: add the trino database connection   
   shell: "export SUPERSET_USER={{ superset_admin_user }}; export SUPERSET_PASSWORD={{ superset_admin_password }}; python  {{ superset_home }}/create_database.py"
+  when: >
+      groups['superset'].index(inventory_hostname) == 0
   
     
