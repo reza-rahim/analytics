@@ -30,6 +30,7 @@
      - { src: 'requirements.txt.j2', dest: '{{  superset_home }}/requirements.txt' }
      - { src: 'superset_config.py.j2', dest: '{{  superset_home }}/pythonpath/superset_config.py' }
      - { src: 'superset.txt.j2', dest: '{{  superset_home }}/superset.txt'  }
+     - { src: 'create_database.py.j2', dest: '{{  superset_home }}/create_database.py'  }
   become: True
   become_user: "{{ superset_user }}"
   notify: restart superset
@@ -78,3 +79,12 @@
 - name: Reload service files
   systemd:
     daemon_reload: true
+
+- name: Flush handlers
+  meta: flush_handlers
+
+
+- name: add the trino database connection   
+  shell: "export SUPERSET_USER={{ superset_admin_user }}; export SUPERSET_PASSWORD={{ superset_admin_password }}; python  {{ superset_home }}/create_database.py"
+  
+    

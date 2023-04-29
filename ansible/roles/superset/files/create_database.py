@@ -11,18 +11,12 @@ payload = {
 }
 
 r=requests.post(base_url+'/api/v1/security/login',json=payload)
-
+  
 access_token=r.json()
 
 headerAuth = {
   'Authorization': 'Bearer ' + access_token['access_token']
 }
-
-#r2=requests.get(base_url + '/api/v1/chart', headers = headerAuth)
-#r3=requests.get(base_url + '/api/v1/dashboarde, headers = headerAuth)
-r4=requests.get(base_url + '/api/v1/database', headers = headerAuth)
-pretty = json.dumps(r4.json(), indent=4)
-print(pretty)
 
 
 db_payload = {
@@ -31,11 +25,3 @@ db_payload = {
         "impersonate_user": "true",
         "sqlalchemy_uri": "trino://"+os.environ.get('SUPERSET_USER')+":"+os.environ.get('SUPERSET_PASSWORD')+"@127.0.0.1:7443/iceberg"
 }
-
-#db_payload = {
-#        "database_name": "PostgreSQL1",
-#        "sqlalchemy_uri": "postgresql+psycopg2://postgres:postgres@127.0.0.1:5000/airflow"
-#        }        
-
-r5=requests.post(base_url + '/api/v1/database',headers = headerAuth, json=db_payload)
-r5.json()
