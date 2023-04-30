@@ -21,7 +21,7 @@ userlist basic-auth-list
     user "$SPARK_UI_USER" insecure-password "$SPARK_UI_PASSWORD"
 
 frontend spark_fn
-    bind *:{{ spark_webui_haproxy_port }} ssl crt /etc/cert.d/server_crt_key.pem
+    bind *:{{ spark_webui_haproxy_port }} ssl crt  {{ cert_dir }}/{{ server_cert_key_file_name }}
     mode http
     acl draw-auth http_auth(basic-auth-list)
     http-request auth realm draw unless draw-auth
@@ -35,7 +35,7 @@ backend spark_be
 {% if s3_protocol== "http" %}
 
 frontend minio_fn
-    bind *:9443 ssl crt /etc/cert.d/server_crt_key.pem 
+    bind *:9443 ssl crt   {{ cert_dir }}/{{ server_cert_key_file_name }}
     mode http
     default_backend minio_be
 
