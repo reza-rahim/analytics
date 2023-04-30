@@ -9,6 +9,7 @@ trino://trino:trino@trino.mnbvcxz.com:7443/iceberg?verify=false
 
 
 ### superset+keycloak
+https://github.com/apache/superset/discussions/13915
 
 https://github.com/marvincorreia/superset-keycloak
 
