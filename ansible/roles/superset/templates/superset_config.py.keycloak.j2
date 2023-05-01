@@ -1,0 +1,52 @@
+from flask_appbuilder.security.manager import AUTH_OID
+from keycloak_security_manager import OIDCSecurityManager
+import logging
+import os
+from typing import Optional
+from cachelib.file import FileSystemCache
+from celery.schedules import crontab
+import json
+
+
+#---------------------------------------------------------
+# Superset specific config
+#---------------------------------------------------------
+ROW_LIMIT = 5000
+SUPERSET_WORKERS = 4
+
+SUPERSET_WEBSERVER_PORT = {{ superset_port }}
+
+SQLALCHEMY_DATABASE_URI='postgresql://127.0.0.1:5000/superset'
+#
+#---------------------------------------------------------
+
+#---------------------------------------------------------
+# Flask App Builder configuration
+#---------------------------------------------------------
+# Your App secret key
+SECRET_KEY = os.environ['SUPERSET_SECRET_KEY'] 
+
+# The SQLAlchemy connection string to your database backend
+# This connection defines the path to the database that stores your
+# superset metadata (slices, connections, tables, dashboards, ...).
+# Note that the connection information to connect to the datasources
+# you want to explore are managed directly in the web UI
+#SQLALCHEMY_DATABASE_URI = 'sqlite:////to/superset.db'
+
+# Flask-WTF flag for CSRF
+CSRF_ENABLED = True
+
+# Set this API key to enable Mapbox visualizations
+MAPBOX_API_KEY = ''
+WTF_CSRF_ENABLED = False 
+
+AUTH_TYPE = AUTH_OID
+OIDC_CLIENT_SECRETS = '{{ superset_home }}/pythonpath/client_secret.json'
+OIDC_ID_TOKEN_COOKIE_SECURE = False
+OIDC_REQUIRE_VERIFIED_EMAIL = False
+OIDC_OPENID_REALM = '{{ }}'
+OIDC_INTROSPECTION_AUTH_METHOD = 'client_secret_post'
+CUSTOM_SECURITY_MANAGER = OIDCSecurityManager
+AUTH_USER_REGISTRATION = True
+AUTH_USER_REGISTRATION_ROLE = 'Gamma'
+
