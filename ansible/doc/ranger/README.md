@@ -16,15 +16,17 @@ cd /ranger/distro
 
 #mvn -Pall -DskipTests=true  -Drat.numUnapprovedLicenses=10000 clean compile package install
 mvn -Pranger-jdk11 -DskipTests=true  -Drat.numUnapprovedLicenses=10000 clean compile package install
-
-# create trino plugin
 mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
 
+# create trino plugin
+mvn clean compile package install -P ranger-trino-plugin,'!linux' -am
 ```
 # build the docker container for ranger admin
 cd docker_ranger_admin
 
 docker build -t rahimre/ranger_admin .
+
+docker push rahimre/ranger_admin 
 
 ```
 

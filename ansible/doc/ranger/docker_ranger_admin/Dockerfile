@@ -12,7 +12,7 @@ RUN mkdir /ranger
 
 WORKDIR /ranger
 
-ADD https://jdbc.postgresql.org/download/postgresql-42.2.23.jar /ranger
+ADD https://jdbc.postgresql.org/download/postgresql-42.2.23.jar /ranger/postgresql.jar 
 
 ADD https://github.com/reza-rahim/ranger/raw/main/ranger-${RANGER_VERSION}-admin.tar.gz /ranger
 
