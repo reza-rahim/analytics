@@ -22,7 +22,7 @@ mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.s
 
 ```
 # build the docker container for ranger admin
-cd docker_admin
+cd docker_ranger_admin
 
 docker build -t rahimre/ranger_admin .
 
