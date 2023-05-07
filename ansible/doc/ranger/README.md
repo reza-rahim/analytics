@@ -1,6 +1,8 @@
 
 ```
 # build the docker container
+cd docker_ranger_compile
+
 docker build -t ranger_build .
 
 wget https://github.com/apache/ranger/archive/refs/tags/release-ranger-2.3.0.tar.gz
