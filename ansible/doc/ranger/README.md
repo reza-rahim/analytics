@@ -12,13 +12,40 @@ cd ranger-release-ranger-2.3.0
 
 docker run -it -v "${PWD}:/ranger" -v "${PWD}/.m2:/root/.m2"  ranger_build bash
 
-cd /ranger/distro
+cd /ranger/
 
-#mvn -Pall -DskipTests=true  -Drat.numUnapprovedLicenses=10000 clean compile package install
-mvn -Pranger-jdk11 -DskipTests=true  -Drat.numUnapprovedLicenses=10000 clean compile package install
+#in pom.xml look for the profile ranger-admin and distro module
+<profile>
+   <id>ranger-admin</id>
+       <modules>
+          <module>agents-common</module>
+          <module>security-admin</module>
+          <module>ugsync-util</module>
+          <module>distro</module>
+       </modules>
+</profile>
+
 mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
 
-# create trino plugin
+#look for ranger-2.3.0-admin.tar.gz in the target directory
+
+#  create trino plugin
+ <profile>
+            <id>ranger-trino-plugin</id>
+            <modules>
+                <module>agents-audit</module>
+                <module>agents-common</module>
+                <module>agents-cred</module>
+                <module>agents-installer</module>
+                <module>credentialbuilder</module>
+                <module>ranger-plugin-classloader</module>
+                <module>ranger-util</module>
+                <module>plugin-trino</module>
+                <module>ranger-trino-plugin-shim</module>
+                <module>distro</module>
+            </modules>
+        </profile>
+
 mvn clean compile package install -P ranger-trino-plugin,'!linux' -am
 ```
 # build the docker container for ranger admin
