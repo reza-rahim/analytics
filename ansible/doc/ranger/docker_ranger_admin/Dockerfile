@@ -4,9 +4,9 @@ ENV RANGER_VERSION=2.3.0
 
 RUN apt update
 
-RUN apt install -y openjdk-11-jdk
+RUN apt install -y openjdk-8-jdk
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.11.0-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-1..0-openjdk-amd64
 
 RUN mkdir /ranger
 
