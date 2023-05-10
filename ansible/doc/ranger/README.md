@@ -22,7 +22,8 @@ docker run -it -v "${PWD}:/ranger" -v "${PWD}/.m2:/root/.m2"  ranger_build bash
 
 cd /ranger/
 
-mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true 
+mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -DskipJSTests=-true 
+# -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
 
 
 mvn clean compile package install -P ranger-trino-plugin,'!linux' -am
