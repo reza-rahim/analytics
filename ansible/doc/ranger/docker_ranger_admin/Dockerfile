@@ -1,22 +1,20 @@
-FROM ubuntu:latest
-
+FROM  centos:centos7
 ENV RANGER_VERSION=2.3.0
+  
+RUN yum clean all
+RUN yum install -y wget
+RUN yum install -y python3 
 
-RUN apt update
 
-RUN apt install -y openjdk-8-jdk
+RUN yum install -y java-1.8.0-openjdk 
+#ENV JAVA_HOME /etc/alternatives/jre
+ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk
+ENV PATH $JAVA_HOME/bin:$PATH
 
-ENV JAVA_HOME /usr/lib/jvm/java-1..0-openjdk-amd64
 
-RUN mkdir /ranger
-
+RUN mkdir ranger
 WORKDIR /ranger
 
 ADD https://jdbc.postgresql.org/download/postgresql-42.2.23.jar /ranger/postgresql.jar 
 
-ADD https://github.com/reza-rahim/ranger/raw/main/ranger-${RANGER_VERSION}-admin.tar.gz /ranger
-
-RUN tar xvf  ranger-${RANGER_VERSION}-admin.tar.gz 
-
-WORKDIR /ranger/ranger-${RANGER_VERSION}-admin
-
+COPY ranger-${RANGER_VERSION}-admin.tar.gz /ranger/
