@@ -2,7 +2,7 @@
 ```
 cd docker_ranger_compile
 
-docker build -t ranger_build .
+docker build -t ranger_build  -f Dockerfile .
 
 wget https://github.com/apache/ranger/archive/refs/tags/release-ranger-2.3.0.tar.gz
 
@@ -25,9 +25,16 @@ cd /ranger/
 mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -DskipJSTests=-true 
 # -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
 
+```
+#### trino plugin
+```
+## use java 17 to comile trino plugin
+
+docker build -t ranger_build_ubuntu  -f Dockerfile_ubuntu  .
 
 mvn clean compile package install -P ranger-trino-plugin,'!linux' -am
 ```
+
 #### build the docker container for ranger admin
 ```
 cd docker_ranger_admin
