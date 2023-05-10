@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+RUN apt update
+RUN apt install -y openjdk-17-jdk
+ENV JAVA_HOME /usr/lib/jvm/java-1.17.0-openjdk-amd64
+ENV PATH $JAVA_HOME/bin:$PATH
+
+ADD https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz /tools/
+
+
+WORKDIR /tools
+RUN tar xvf /tools/apache-maven-3.6.3-bin.tar.gz
+RUN ln -sf /tools/apache-maven-3.6.3 /tools/maven
+
+ENV  PATH /tools/maven/bin:$PATH
