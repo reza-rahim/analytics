@@ -35,7 +35,8 @@ docker build -t rahimre/ranger_admin .
 
 docker push rahimre/ranger_admin:2.3.0
 
-docker run -it -v "./install.properties:/ranger/install.properties" -p 6080:6080 rahimre/ranger_admin:2.3.0  bash
+#docker run -it -v "./install.properties:/ranger/install.properties" -p 6080:6080 rahimre/ranger_admin:2.3.0  bash
+docker run -it -v "./install.properties:/ranger/install.properties" -p 6080:6080  --entrypoint=/ranger/entrypoint.sh --rm  --name ranger rahimre/ranger_admin:2.3.0
 
 ```
 
