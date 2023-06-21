@@ -266,3 +266,4 @@ patroni_pgpass: /tmp/pgpass
 partoni_haproxy_port: 5000
 partoni_restapi_port: 8008
 patroni_url: 127.0.0.1
+airbyte: airbyte
