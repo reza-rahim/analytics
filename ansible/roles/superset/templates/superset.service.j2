@@ -7,6 +7,7 @@ User={{ superset_user }}
 Group={{ application_group }}
 WorkingDirectory={{ superset_home }}
 Environment=FLASK_APP=superset
+Environment=SUPERSET_SECRET_KEY={{ superset_secret_key }}
 Environment=PYTHONPATH={{ superset_home }}/pythonpath
 
 ExecStartPre={{ lockbox_dir }}/decrypt_lockbox.sh
