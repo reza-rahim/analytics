@@ -244,14 +244,14 @@ promtail_user: promtail
 promtail_group: promtail
 
 ############# Zookeeper ################
-zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-zookeeper_url_file_name: apache-zookeeper-3.8.0-bin.tar.gz
-zookeeper_file_name: apache-zookeeper-3.8.0-bin        
+zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.9.3/apache-zookeeper-3.9.3-bin.tar.gz
+zookeeper_url_file_name: apache-zookeeper-3.9.3-bin.tar.gz
+zookeeper_file_name:  apache-zookeeper-3.9.3-bin
 zookeeper_user: zookeeper
 zookeeper_group: zookeeper
 zookeeper_home: /opt/zookeeper
 zookeeper_data_dir: /var/zookeeper/data/
-zookeeper_clientPort: 2181 
+zookeeper_clientPort: 2181
 
 ######################## fuse ################
 
