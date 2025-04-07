@@ -66,8 +66,8 @@ spark_history_ui_port: 18080
 
 number_of_spark_worker_per_node: 2
 
-spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
-spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
+spark_file_url: https://dlcdn.apache.org/spark/spark-3.4.4/spark-3.4.4-bin-hadoop3-scala2.13.tgz
+spark_file_name: spark-3.4.4-bin-hadoop3-scala2.13
 
 spark_worker_memory: 8gb                     ##  adjust it
 spark_worker_cores: 3                        ##  adjust it
