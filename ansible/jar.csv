@@ -14,7 +14,7 @@ https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standa
 
 trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
 trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
-https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
+
 
 keycloak_url: https://github.com/keycloak/keycloak/releases/download/26.2.0/keycloak-26.2.0.tar.gz
 prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
