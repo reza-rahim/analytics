@@ -13,6 +13,9 @@ server_key_file_name: server.key
 server_cert_key_file_name: server_crt_key.pem
 client_id: trino
 
+############################ downlaods ################
+
+
 ##########################   server name ##################
 virtual_ip: 192.168.1.4
 keyclock_server: keyclock.mnbvcxz.com
@@ -48,8 +51,8 @@ hadoop_user: hadoop
 hadoop_group: hadoop
 hadoop_home: /opt/hadoop
 hadoop_version: 3.2.0
-hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
-hadoop_file_name: hadoop-3.2.0
+#hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
+#hadoop_file_name: hadoop-3.2.0
 hadoop_install_dir: /opt/hadoop
 
 ################### Spark #################
@@ -66,8 +69,8 @@ spark_history_ui_port: 18080
 
 number_of_spark_worker_per_node: 2
 
-spark_file_url: https://dlcdn.apache.org/spark/spark-3.4.4/spark-3.4.4-bin-hadoop3-scala2.13.tgz
-spark_file_name: spark-3.4.4-bin-hadoop3-scala2.13
+#spark_file_url: https://dlcdn.apache.org/spark/spark-3.4.4/spark-3.4.4-bin-hadoop3-scala2.13.tgz
+#spark_file_name: spark-3.4.4-bin-hadoop3-scala2.13
 
 spark_worker_memory: 8gb                     ##  adjust it
 spark_worker_cores: 3                        ##  adjust it
@@ -84,31 +87,31 @@ spark_s3_application_bucket: spark-app
 spark_s3_data_bucket: spark-data
 spark_s3_application_dir: /var/data/spark-app
 
-hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
-hadoop_aws_file_name: hadoop-aws-3.3.2.jar
-aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
-aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-1.12.99.jar 
-iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
-iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
-awssdk_bundle_url: https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.20.8/bundle-2.20.8.jar
-awssdk_bundle_filename: bundle-2.20.8.jar
-url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar
-url_connection_client_filename: url-connection-client-2.20.38.jar
+#hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
+#hadoop_aws_file_name: hadoop-aws-3.3.2.jar
+#aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
+#aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-1.12.99.jar 
+#iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.13/1.8.0/iceberg-spark-runtime-3.5_2.13-1.8.0.jar
+#iceberg_spark_runtime_file_name:  iceberg-spark-runtime-3.5_2.13-1.8.0.jar
+#awssdk_bundle_url: https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.20.8/bundle-2.20.8.jar
+#awssdk_bundle_filename: bundle-2.20.8.jar
+#url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar
+#url_connection_client_filename: url-connection-client-2.20.38.jar
 
 #####################   Postgresql   ##################
 postgresql_version: 12
 
 #db_user: postgres                            ## pass from env 
 #db_password: postgres                        ## pass from env  
-postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
-postgresql_connector_file_name: postgresql-42.2.19.jar
+#postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
+#postgresql_connector_file_name: postgresql-42.2.19.jar
 postgresql_port: 5432
 
 ######################  minio ##############
 #minio_root_user: minioadmin
 #minio_root_password: minioadmin
-minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
-minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
+#minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
+#minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
 minio_file_name: minio
 
 minio_dir: /opt/minio
@@ -130,9 +133,9 @@ s3_protocol: http
 hive_user: hive
 hive_group: hive
 hive_db_name: hive
-hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
-hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
-hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
+#hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
+#hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
+#hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_home: /opt/apache-hive-metastore
 hive_metastore_port: 9083
 
@@ -153,16 +156,16 @@ jupyterhub_notebook_dir: /var/data/jupyterhub
 ######################### Trino #####################
 trino_user: trino
 trino_group: trino
-trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
-trino_file_name: trino-server-410
+#trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
+#trino_file_name: trino-server-410
 trino_home: /opt/trino
 trino_jvm_mx: Xmx1G                           ##  adjust it
 trino_data_dir: /var/trino/data
 trino_port: 7080
 trino_tls_port: 7443
-trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
-trino_cli_file: trino-cli-410-executable.jar
-#shared_secret: bhujd3456ndswu5!&df
+#trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
+#trino_cli_file: trino-cli-410-executable.jar
+shared_secret: bhujd3456ndswu5!&df
 trino_password_dir: /etc/trino/
 trino_password_file: /etc/trino/passwdfile
 
@@ -199,8 +202,8 @@ keycloak_bi_realm: bi
 keycloak_admin:  admin                        ## chamge it
 keycloak_admin_psassword:  admin               ## change it
 
-keycloak_url: https://github.com/keycloak/keycloak/releases/download/21.0.1/keycloak-21.0.1.tar.gz
-keycloak_url_file_name: keycloak-21.0.1.tar.gz
+#keycloak_url: https://github.com/keycloak/keycloak/releases/download/21.0.1/keycloak-21.0.1.tar.gz
+#keycloak_url_file_name: keycloak-21.0.1.tar.gz
 keycloak_file_name: keycloak-21.0.1
 kcadm_user: kcadm
 kcadm_group: kcadm
@@ -210,9 +213,9 @@ keycloak_realms_devel: devel
 keycloak_realms_bi: bi
 
 ############################### prometheus  #########################
-prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
-prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
-prometheus_filanme: prometheus-2.43.0.linux-amd64
+#prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
+#prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
+#prometheus_filanme: prometheus-2.43.0.linux-amd64
 prometheus_user: prometheus
 prometheus_group: prometheus
 prometheus_home: /opt/prometheus
@@ -223,16 +226,16 @@ prometheus_port: 9090
 node_exporter_user: node_exporter
 node_exporter_group: node_exporter
 node_exporter_home: /opt/node_exporter
-node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
-node_exporter_file_name: node_exporter-1.5.0.linux-amd64
+#node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
+#node_exporter_file_name: node_exporter-1.5.0.linux-amd64
 node_exporter_port: 9200
 
 ############################### Grafana  #########################
 grafana_user: grafana
 grafana_group: grafana
-grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
-grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
-grafana_file_name: grafana-9.4.3
+#grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
+#grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
+#grafana_file_name: grafana-9.4.3
 grafana_home: /opt/grafana
 
 #############
@@ -244,14 +247,14 @@ promtail_user: promtail
 promtail_group: promtail
 
 ############# Zookeeper ################
-zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.9.3/apache-zookeeper-3.9.3-bin.tar.gz
-zookeeper_url_file_name: apache-zookeeper-3.9.3-bin.tar.gz
-zookeeper_file_name:  apache-zookeeper-3.9.3-bin
+#zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.9.3/apache-zookeeper-3.9.3-bin.tar.gz
+#zookeeper_url_file_name: apache-zookeeper-3.9.3-bin.tar.gz
+#zookeeper_file_name:  apache-zookeeper-3.9.3-bin       
 zookeeper_user: zookeeper
 zookeeper_group: zookeeper
 zookeeper_home: /opt/zookeeper
 zookeeper_data_dir: /var/zookeeper/data/
-zookeeper_clientPort: 2181
+zookeeper_clientPort: 2181 
 
 ######################## fuse ################
 
