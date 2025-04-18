@@ -1,5 +1,9 @@
+hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 hadoop_aws_url,https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar, hadoop-aws-3.3.2.jar
 aws_java_sdk_bundle_url,https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar,aws-java-sdk-bundle-1.12.99.jar
 iceberg_spark_runtime_url, https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.13/1.8.0/iceberg-spark-runtime-3.5_2.13-1.8.0.jar,iceberg-spark-runtime-3.5_2.13-1.8.0.jar
 awssdk_bundle_url,https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.20.8/bundle-2.20.8.jar,bundle-2.20.8.jar
 url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar,url-connection-client-2.20.38.jar
+
+
+https://github.com/keycloak/keycloak/releases/download/26.2.0/keycloak-26.2.0.tar.gz
