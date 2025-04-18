@@ -1,9 +1,20 @@
 hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
+spark_file_url: https://dlcdn.apache.org/spark/spark-3.4.4/spark-3.4.4-bin-hadoop3-scala2.13.tgz
+
 hadoop_aws_url,https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar, hadoop-aws-3.3.2.jar
 aws_java_sdk_bundle_url,https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar,aws-java-sdk-bundle-1.12.99.jar
 iceberg_spark_runtime_url, https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.13/1.8.0/iceberg-spark-runtime-3.5_2.13-1.8.0.jar,iceberg-spark-runtime-3.5_2.13-1.8.0.jar
 awssdk_bundle_url,https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.20.8/bundle-2.20.8.jar,bundle-2.20.8.jar
 url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar,url-connection-client-2.20.38.jar
 
+postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
 
-https://github.com/keycloak/keycloak/releases/download/26.2.0/keycloak-26.2.0.tar.gz
+minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
+https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
+
+trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
+trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
+https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
+
+keycloak_url: https://github.com/keycloak/keycloak/releases/download/26.2.0/keycloak-26.2.0.tar.gz
+prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
