@@ -1,3 +1,4 @@
+source env.sh
 ansible-playbook -i inventory.ini repo.yaml
 echo "-------------------------------"
 echo ""
