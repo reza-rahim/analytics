@@ -1,18 +1,56 @@
-export HADOOP_VERSION=3.4.1
-export SPARK_VERSION=3.5.5
-export HADOOP_AWS_URL=3.4.1
+hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.4.1/hadoop-{{ lookup('env', 'HADOOP_VERSION') }}.tar.gz
+hadoop_file_name: hadoop-{{ lookup('env', 'HADOOP_VERSION') }}
 
-export AWS_JAVA_SDK_BUNDLE=1.12.779
-export ICEBERG_SPARK_RUNTIME_MAJOR=3.5_2.13
-export ICEBERG_SPARK_RUNTIME_MINOR=1.8.0
-export AWSSDK_BUNDLE=2.31.8
-export URL_CONNECTION_CLIENT=2.31.9
-export HIVE_METASTOR=3.0.0
-export POSTGRESQL_CONNECTOR=42.7.5
-export TRINO=474
-export TRINO_CLI=474
-export KEYCLOAK=26.2.0
-export PROMETHEUS=3.2.1
-export NODE_EXPORTER=1.9.1
-export GRAFANA=11.6.0
-export ZOOKEEPER=3.9.3
+spark_file_url: https://dlcdn.apache.org/spark/spark-{{ lookup('env', 'SPARK_VERSION') }}/spark-3.5.5-bin-hadoop3-scala2.13.tgz
+spark_file_name: spark-{{ lookup('env', 'SPARK_VERSION') }}-bin-hadoop3-scala2.13
+
+hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/{{ lookup('env', 'HADOOP_AWS_URL') }}/hadoop-aws-{{ lookup('env', 'HADOOP_AWS_URL') }}.jar
+hadoop_aws_file_name : hadoop-aws-{{ lookup('env', 'HADOOP_AWS_URL') }}.jar
+
+aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/{{ lookup('env', 'AWS_JAVA_SDK_BUNDLE') }}/aws-java-sdk-bundle-{{ lookup('env', 'AWS_JAVA_SDK_BUNDLE') }}.jar
+aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-{{ lookup('env', 'AWS_JAVA_SDK_BUNDLE') }}.jar
+
+iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-{{ lookup('env', 'ICEBERG_SPARK_RUNTIME_MAJOR') }}/{{ lookup('env', 'ICEBERG_SPARK_RUNTIME_MINOR') }}/iceberg-spark-runtime-{{ lookup('env', 'ICEBERG_SPARK_RUNTIME_MAJOR') }}-{{ lookup('env', 'ICEBERG_SPARK_RUNTIME_MINOR') }}.jar
+iceberg_spark_runtime_file_name: iceberg-spark-runtime-{{ lookup('env', 'ICEBERG_SPARK_RUNTIME_MAJOR') }}-{{ lookup('env', 'ICEBERG_SPARK_RUNTIME_MINOR') }}.jar
+
+awssdk_bundle_url: https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/{{ lookup('env', 'AWSSDK_BUNDLE') }}/bundle-{{ lookup('env', 'AWSSDK_BUNDLE') }}.jar
+awssdk_bundle_filename: bundle-{{ lookup('env', 'AWSSDK_BUNDLE') }}/.jar
+
+url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/{{ lookup('env', 'URL_CONNECTION_CLIENT') }}/url-connection-client-{{ lookup('env', 'URL_CONNECTION_CLIENT') }}.jar 
+url_connection_client_filename: url-connection-client-{{ lookup('env', 'URL_CONNECTION_CLIENT') }}.jar
+
+hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-{{ lookup('env', 'HIVE_METASTOR') }}/hive-standalone-metastore-{{ lookup('env', 'HIVE_METASTOR') }}-bin.tar.gz
+hive_metastore_url_file_name: hive-standalone-metastore-{{ lookup('env', 'HIVE_METASTOR') }}-bin.tar.gz
+hive_metastore_file_name: apache-hive-metastore-{{ lookup('env', 'HIVE_METASTOR') }}-bin
+
+postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/{{ lookup('env', 'POSTGRESQL_CONNECTOR') }}/postgresql-{{ lookup('env', 'POSTGRESQL_CONNECTOR') }}.jar
+postgresql_connector_file_name: postgresql-{{ lookup('env', 'POSTGRESQL_CONNECTOR') }}.jar
+
+minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
+minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
+
+trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/{{ lookup('env', 'TRINO') }}/trino-server-{{ lookup('env', 'TRINO') }}.jar
+itrino_file_name: trino-server-{{ lookup('env', 'TRINO') }}.jar
+
+trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/{{ lookup('env', 'TRINO_CLI') }}/trino-cli-{{ lookup('env', 'TRINO_CLI') }}.jar
+trino_cli_file: trino-cli-{{ lookup('env', 'TRINO_CLI') }}.jar
+
+keycloak_url: https://github.com/keycloak/keycloak/releases/download/26.2.0/keycloak-{{ lookup('env', 'KEYCLOAK') }}.tar.gz
+keycloak_url_file_name: keycloak-{{ lookup('env', 'KEYCLOAK') }}.tar.gz
+keycloak_file_name: keycloak-{{ lookup('env', 'KEYCLOAK') }}
+
+prometheus_url: https://github.com/prometheus/prometheus/releases/download/v{{ lookup('env', 'PROMETHEUS') }}/prometheus-{{ lookup('env', 'PROMETHEUS') }}.darwin-amd64.tar.gz
+prometheus_url_filanme: prometheus-{{ lookup('env', 'PROMETHEUS') }}.linux-amd64.tar.gz
+prometheus_filanme: prometheus-{{ lookup('env', 'PROMETHEUS') }}.linux-amd64
+
+node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v{{ lookup('env', 'NODE_EXPORTER') }}/node_exporter-{{ lookup('env', 'NODE_EXPORTER') }}.linux-amd64.tar.gz
+node_exporter_file_name: node_exporter-{{ lookup('env', 'NODE_EXPORTER') }}.linux-amd64
+
+grafana_url:  https://dl.grafana.com/oss/release/grafana-{{ lookup('env', 'GRAFANA') }}.linux-amd64.tar.gz
+grafana_file_url_name: grafana-{{ lookup('env', 'GRAFANA') }}.linux-amd64.tar.gz
+grafana_file_name: grafana-{{ lookup('env', 'GRAFANA') }}
+
+zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-{{ lookup('env', 'ZOOKEEPER') }}/apache-zookeeper-{{ lookup('env', 'ZOOKEEPER') }}.tar.gz
+zookeeper_url_file_name: apache-zookeeper-{{ lookup('env', 'ZOOKEEPER') }}-bin.tar.gz
+zookeeper_file_name:  apache-zookeeper-{{ lookup('env', 'ZOOKEEPER') }}-bin
+
