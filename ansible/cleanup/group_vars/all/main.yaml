@@ -2,6 +2,8 @@
 node_prefix: node-
 
 lockbox_env: lockbox.env 
+patroni_lockbox_env: patroni_lockbox.env
+
 lockbox_dir: /etc/lockbox
 
 cert_dir: /etc/cert.d/
@@ -9,8 +11,10 @@ ca_cert_file_name: CA_cert.crt
 server_cert_file_name: server.crt
 server_key_file_name: server.key
 server_cert_key_file_name: server_crt_key.pem
-client_secret: Mfn4234D2cHizt5jUawUgqHMR9AxLuvn
 client_id: trino
+
+############################ downlaods ################
+
 
 ##########################   server name ##################
 virtual_ip: 192.168.1.4
@@ -32,10 +36,11 @@ java_home: /usr/lib/jvm/java-1.17.0-openjdk-amd64
 jceks_provider: jceks://file/usr/lib/java/secret.jceks
 tmpfs_dir: /mnt/tmpfs/
 tmpfs_size: 1M
-#passphrase: "ip route | sha1sum | cut -f 1 -d ' '"
-#passphrase: "cat /run/machine-id"
-passphrase: "blkid | grep UUID | grep sda | head -n 1 | awk -F' ' '{print $3}' |  awk -F'=' '{print $2}' | sed 's/.$//' | sed 's/^.//'"
+#passphrase: "/usr/bin/ip route | /usr/bin/sha1sum | /usr/bin/cut -f 1 -d ' '"
+#passphrase: "/usr/bin/cat /run/machine-id"
+passphrase: "/usr/sbin/blkid | /usr/bin/grep UUID | /usr/bin/grep sda | /usr/bin/head -n 1 | /usr/bin/awk -F' ' '{print $3}' |  /usr/bin/awk -F'=' '{print $2}' | /usr/bin/sed 's/.$//' | /usr/bin/sed 's/^.//'"
 application_group: application
+jceks_group: jceks
 
 ######################## podman #########################
 buildah_version: 100:1.22.3-2
@@ -43,153 +48,225 @@ podman_version:  100:3.4.2-4
 
 ############################## hadoop ##################### 
 hadoop_user: hadoop
+hadoop_group: hadoop
 hadoop_home: /opt/hadoop
 hadoop_version: 3.2.0
-hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
-hadoop_file_name: hadoop-3.2.0
+#hadoop_url: https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz
+#hadoop_file_name: hadoop-3.2.0
 hadoop_install_dir: /opt/hadoop
 
 ################### Spark #################
 spark_home: /opt/spark/
+spark_mnaster_conf_dir: /opt/spark/master_conf
 spark_user: spark
+spark_group: spark
+spark_fuse_group: spark-fuse
+spark_webui_port: 8080
+spark_webui_proxy_port: 9900
+spark_webui_haproxy_port: 9943
+spark_rpc_port: 7077
+spark_history_ui_port: 18080
 
-spark_file_url: https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
-spark_file_name: spark-3.3.2-bin-hadoop3-scala2.13
+number_of_spark_worker_per_node: 2
+
+#spark_file_url: https://dlcdn.apache.org/spark/spark-3.4.4/spark-3.4.4-bin-hadoop3-scala2.13.tgz
+#spark_file_name: spark-3.4.4-bin-hadoop3-scala2.13
 
 spark_worker_memory: 8gb                     ##  adjust it
 spark_worker_cores: 3                        ##  adjust it
 
-spark_history_location: s3a://spark/logs
+spark_deploy_defaultCores: 2                ##  adjust it
+spark_cores_max: 4                          ##  adjust it
+spark_driver_cores: 1                      ##  adjust it
+spark_driver_memory: 1g
+spark_executor_memory: 2g
+spark_executor_cores: 2
 
-hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
-hadoop_aws_file_name: hadoop-aws-3.3.2.jar
-aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
-aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-1.12.99.jar 
-iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.13/1.1.0/iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
-iceberg_spark_runtime_file_name: iceberg-spark-runtime-3.3_2.13-1.1.0.jar 
+spark_history_location: s3a://spark/logs
+spark_s3_application_bucket: spark-app
+spark_s3_data_bucket: spark-data
+spark_s3_application_dir: /var/data/spark-app
+
+#hadoop_aws_url: https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
+#hadoop_aws_file_name: hadoop-aws-3.3.2.jar
+#aws_java_sdk_bundle_url: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.99/aws-java-sdk-bundle-1.12.99.jar 
+#aws_java_sdk_bundle_file_name: aws-java-sdk-bundle-1.12.99.jar 
+#iceberg_spark_runtime_url: https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.13/1.8.0/iceberg-spark-runtime-3.5_2.13-1.8.0.jar
+#iceberg_spark_runtime_file_name:  iceberg-spark-runtime-3.5_2.13-1.8.0.jar
+#awssdk_bundle_url: https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.20.8/bundle-2.20.8.jar
+#awssdk_bundle_filename: bundle-2.20.8.jar
+#url_connection_client_url: https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.20.38/url-connection-client-2.20.38.jar
+#url_connection_client_filename: url-connection-client-2.20.38.jar
 
 #####################   Postgresql   ##################
 postgresql_version: 12
+
 #db_user: postgres                            ## pass from env 
 #db_password: postgres                        ## pass from env  
-postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
-postgresql_connector_file_name: postgresql-42.2.19.jar
+#postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.19/postgresql-42.2.19.jar
+#postgresql_connector_file_name: postgresql-42.2.19.jar
+postgresql_port: 5432
 
 ######################  minio ##############
 #minio_root_user: minioadmin
 #minio_root_password: minioadmin
-minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
-minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
+#minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
+#minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
 minio_file_name: minio
 
 minio_dir: /opt/minio
-minio_user: minio-user
-minio_home: /home/minio-user
+minio_user: minio
+minio_group: minio
+minio_home: /home/minio
 
-minio_redirectUris: \"localhost:8080\"
+#minio_redirectUris: \"localhost:8080\"
 
-fs_s3a_endpoint: http://127.0.0.1:9000
+fs_s3a_endpoint: 127.0.0.1:9000
 metastore_warehouse_dir: s3a://warehouse/
+#export S3_PROTOCOL=http
+s3_protocol: http
 #fs_s3a_access_key: minioadmin                 ##  pass from env
 #fs_s3a_secret_key: minioadmin                 ##  pass from env
 ##javax_jdo_option_ConnectionURL: jdbc:postgresql://:5432/hive
 
 ####################### hive metastore ##################
 hive_user: hive
+hive_group: hive
 hive_db_name: hive
-hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
-hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
-hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
+#hive_metastore_url: https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
+#hive_metastore_url_file_name: hive-standalone-metastore-3.0.0-bin.tar.gz
+#hive_metastore_file_name: apache-hive-metastore-3.0.0-bin
 hive_metastore_home: /opt/apache-hive-metastore
+hive_metastore_port: 9083
+
+########################## iceberg ##################
+iceberg_db_name: iceberg
 
 ######################### jupyterhub ##############
 jupyterhub_user: jupyterhub
+jupyterhub_home: /opt/jupyterhub
+jupyterhub_group: jupyterhub
+jupyterhub_fuse_group: jupyterhub-fuse
 jupyterhub_port: 9080
 jupyterhub_hub_port: 9081
 JupyterHub_api_port: 9082
+jupyterhub_s3_bucket: jupyterhub
+jupyterhub_notebook_dir: /var/data/jupyterhub
 
 ######################### Trino #####################
 trino_user: trino
-trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
-trino_file_name: trino-server-410
+trino_group: trino
+#trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/410/trino-server-410.tar.gz
+#trino_file_name: trino-server-410
 trino_home: /opt/trino
 trino_jvm_mx: Xmx1G                           ##  adjust it
 trino_data_dir: /var/trino/data
 trino_port: 7080
 trino_tls_port: 7443
-trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
-trino_cli_file: trino-cli-410-executable.jar
+#trino_cli_url: https://repo1.maven.org/maven2/io/trino/trino-cli/410/trino-cli-410-executable.jar
+#trino_cli_file: trino-cli-410-executable.jar
 shared_secret: bhujd3456ndswu5!&df
+trino_password_dir: /etc/trino/
+trino_password_file: /etc/trino/passwdfile
 
 ######################### airflow #####################
 airflow_version: 2.5.2
 airflow_user: airflow
+airflow_group: airflow
+airflow_fuse_group: airflow-fuse
 airflow_db_name: airflow
 airflow_home: /opt/airflow
 #airflow_admin_username: demo                     # change it 
 #airflow_admin_password: demo                     # chamge it
 airflow_port: 5080
+airflow_dag_dir: /var/data/airflow
+airflow_s3_bucket: airflow
 
 ######################### superset  #####################
 superset_user: superset
+superset_group: superset
 superset_db_name: superset
 superset_home: /opt/superset
+superset_port: 8088
 
 ######################### keycloak  #####################
 keycloak_user:  keycloak
+keycloak_group:  keycloak
 keycloak_db_name: keycloak
 keycloak_home: /opt/keycloak
 keycloak_http_port: 6080
 keycloak_https_port: 6443
+keycloak_devel_realm: devel
+keycloak_bi_realm: bi
 
 keycloak_admin:  admin                        ## chamge it
 keycloak_admin_psassword:  admin               ## change it
 
-keycloak_url: https://github.com/keycloak/keycloak/releases/download/21.0.1/keycloak-21.0.1.tar.gz
-keycloak_url_file_name: keycloak-21.0.1.tar.gz
+#keycloak_url: https://github.com/keycloak/keycloak/releases/download/21.0.1/keycloak-21.0.1.tar.gz
+#keycloak_url_file_name: keycloak-21.0.1.tar.gz
 keycloak_file_name: keycloak-21.0.1
 kcadm_user: kcadm
+kcadm_group: kcadm
 
 ## user uuidgen to generate uuid
 keycloak_realms_devel: devel
 keycloak_realms_bi: bi
 
-#keycloak_minio_client_id: d90e6f09-33a2-4344-af98-c9357495cf78
-#keycloak_minio_client_secret: c7372fbd-2e82-41c2-aa4e-e2dd3420c807
-
-#keycloak_jupiter_client_id: cd40a46c-ea67-46fd-ab8f-5772633f6d17
-#keycloak_jupiter_client_secret: d3439b37-e911-489c-9d28-5ee3c62141f4
-        
-
 ############################### prometheus  #########################
-prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
-prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
-prometheus_filanme: prometheus-2.43.0.linux-amd64
+#prometheus_url: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
+#prometheus_url_filanme: prometheus-2.43.0.linux-amd64.tar.gz
+#prometheus_filanme: prometheus-2.43.0.linux-amd64
 prometheus_user: prometheus
+prometheus_group: prometheus
 prometheus_home: /opt/prometheus
 prometheus_data_dir: /var/lib/prometheus/
 prometheus_port: 9090
 
 ############################### prometheus  #########################
 node_exporter_user: node_exporter
+node_exporter_group: node_exporter
 node_exporter_home: /opt/node_exporter
-node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
-node_exporter_file_name: node_exporter-1.5.0.linux-amd64
+#node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
+#node_exporter_file_name: node_exporter-1.5.0.linux-amd64
 node_exporter_port: 9200
 
 ############################### Grafana  #########################
 grafana_user: grafana
+grafana_group: grafana
+#grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
+#grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
+#grafana_file_name: grafana-9.4.3
 grafana_home: /opt/grafana
-grafana_url:  https://dl.grafana.com/oss/release/grafana-9.4.3.linux-amd64.tar.gz
-grafana_file_url_name: grafana-9.4.3.linux-amd64.tar.gz
-grafana_file_name: grafana-9.4.3
-grafana_home: /opt/grafana
-
-
 
 #############
 loki_user: loki
+loki_group: loki
 
 ############
 promtail_user: promtail
+promtail_group: promtail
 
+############# Zookeeper ################
+#zookeeper_url: https://dlcdn.apache.org/zookeeper/zookeeper-3.9.3/apache-zookeeper-3.9.3-bin.tar.gz
+#zookeeper_url_file_name: apache-zookeeper-3.9.3-bin.tar.gz
+#zookeeper_file_name:  apache-zookeeper-3.9.3-bin       
+zookeeper_user: zookeeper
+zookeeper_group: zookeeper
+zookeeper_home: /opt/zookeeper
+zookeeper_data_dir: /var/zookeeper/data/
+zookeeper_clientPort: 2181 
+
+######################## fuse ################
+
+fuse_home: /opt/fuse
+fuse_user: fuse
+fuse_group: fuse
+
+######################## patroni ################
+patroni_home: /opt/patroni
+patroni_data_dir: /var/data/patroni
+patroni_pgpass: /tmp/pgpass
+partoni_haproxy_port: 5000
+partoni_restapi_port: 8008
+patroni_url: 127.0.0.1
+airbyte: airbyte
