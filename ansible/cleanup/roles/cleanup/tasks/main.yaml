@@ -2,6 +2,15 @@
 - name: cleanup
   shell: '{{ item }}'
   loop:
+      - systemctl stop  minio.service  
+      - systemctl stop  keycloak 
+      - systemctl stop  zookeeper  
+      - systemctl stop  jupyter 
+      - systemctl stop  trino 
+      - systemctl stop  airflow 
+      - systemctl stop   spark-master
+      - systemctl stop   spark-worker-1
+      - systemctl stop   spark-worker-3
       - rm -f /etc/systemd/system/minio.service       
       - rm -f /etc/systemd/system/keycloak.service       
       - rm -f /etc/systemd/system/spark*.service       
@@ -22,4 +31,6 @@
       - 'rm -rf {{ minio_home }}/.minio'
       - 'rm -rf /usr/local/share/ca-certificates/{{ ca_cert_file_name }}'  
       - '/usr/sbin/update-ca-certificates'  
+      - umount /dev/sdb /dev/sdc /dev/sdd /dev/sde
+      - wipefs -a /dev/sdb /dev/sdc /dev/sdd /dev/sde
   ignore_errors: True      
