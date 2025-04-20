@@ -26,7 +26,8 @@ hive_metastore_file_name: apache-hive-metastore-{{ lookup('env', 'HIVE_METASTOR'
 postgresql_connector_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/{{ lookup('env', 'POSTGRESQL_CONNECTOR') }}/postgresql-{{ lookup('env', 'POSTGRESQL_CONNECTOR') }}.jar
 postgresql_connector_file_name: postgresql-{{ lookup('env', 'POSTGRESQL_CONNECTOR') }}.jar
 
-minio_url: https://dl.min.io/server/minio/release/linux-amd64/minio
+minio_url: https://dl.min.io/server/minio/release/linux-amd64/archive/minio_{{ lookup('env', 'MINIO') }}_amd64.deb
+minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
 minio_cli_url: https://dl.min.io/client/mc/release/linux-amd64/mc
 
 trino_url: https://repo1.maven.org/maven2/io/trino/trino-server/{{ lookup('env', 'TRINO') }}/trino-server-{{ lookup('env', 'TRINO') }}.jar
