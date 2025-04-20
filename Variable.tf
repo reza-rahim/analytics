@@ -17,7 +17,8 @@ variable "zone" {
 variable "os" {
   # default = "rhel-cloud/rhel-8-v20210316"
   #default = "centos-cloud/centos-7-v20200205"
-  default = "ubuntu-os-cloud/ubuntu-2004-focal-v20230302"
+  #default = "ubuntu-os-cloud/ubuntu-2004-focal-v20230302"
+  default = "ubuntu-os-cloud/ubuntu-2204-jammy-v20220420"
 }
 
 variable "vpc" {
